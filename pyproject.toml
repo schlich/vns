@@ -1,13 +1,14 @@
 [project]
-name = ""
-version = ""
+name = "vns"
+version = "0.1.0"
 description = ""
 authors = [
     {name = "Ty Schlichenmeyer", email = "t.schlic@wustl.edu"},
 ]
 dependencies = [
+    "plotly>=5.18.0",
     "ipykernel>=6.26.0",
-    "pandas>=2.1.0",
+    "pandas>=2.1.2",
 ]
 requires-python = ">=3.12,<3.13"
 readme = "README.md"

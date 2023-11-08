@@ -5,7 +5,9 @@ description = ""
 authors = [
     {name = "Ty Schlichenmeyer", email = "t.schlic@wustl.edu"},
 ]
-dependencies = []
+dependencies = [
+    "ipykernel>=6.26.0",
+]
 requires-python = ">=3.12"
 readme = "README.md"
 license = {text = "MIT"}

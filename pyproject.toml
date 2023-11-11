@@ -8,9 +8,18 @@ authors = [
 dependencies = [
     "plotly>=5.18.0",
     "ipykernel>=6.26.0",
-    "pandas>=2.1.2",
+    "pyarrow>=14.0.0",
+    "nbformat>=5.9.2",
+    "ruff>=0.1.4",
+    "dash>=2.14.1",
+    "dash-bootstrap-components>=1.5.0",
+    "ydata-profiling>=4.6.1",
 ]
-requires-python = ">=3.12,<3.13"
+requires-python = ">=3.11,<3.12"
 readme = "README.md"
 license = {text = "MIT"}
 
+[tool.ruff]
+extend-include = ["*.ipynb"]
+select = ["ALL"]
+fix = true

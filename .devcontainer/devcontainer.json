@@ -2,7 +2,11 @@
   "name": "vns",
   "image": "mcr.microsoft.com/devcontainers/python:3.11",
   "features": {
-    "ghcr.io/devcontainers-contrib/features/pdm:2": {}
+    "ghcr.io/devcontainers-contrib/features/pdm:2": {},
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "configureZshAsDefaultShell": true
+    },
+    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {}
   },
   "postStartCommand": "pdm install",
   "customizations": {

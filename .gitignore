@@ -3,3 +3,6 @@ notebooks
 __pycache__
 .pdm-python
 *.egg-info
+
+nbs/**.html
+nbs/vns_files

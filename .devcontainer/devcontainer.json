@@ -8,6 +8,7 @@
     },
     "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {}
   },
+  "postCreateCommand": "nbdev_install_hooks && pre-commit install",
   "postStartCommand": "pdm install",
   "customizations": {
     "vscode": {

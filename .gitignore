@@ -6,3 +6,10 @@ __pycache__
 
 nbs/**.html
 nbs/vns_files
+
+profile_report.html
+_modidx.py
+
+.gitconfig
+
+.quarto

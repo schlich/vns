@@ -4,14 +4,14 @@
   "features": {
     "ghcr.io/devcontainers-contrib/features/pdm:2": {},
     "ghcr.io/devcontainers/features/common-utils:2": {
-      "configureZshAsDefaultShell": true
+      "configureZshAsDefaultShell": true,
+      "installOhMyZshConfig": false
     },
     "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
       "version": "1.4.489"
     }
   },
-  "postCreateCommand": "nbdev_install_hooks && pre-commit install",
-  "postStartCommand": "pdm install",
+  "postCreateCommand": "pdm install && pdm run nbdev_install_hooks && pdm run pre-commit install",
   "customizations": {
     "vscode": {
       "settings": {
@@ -35,7 +35,9 @@
           "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
         "workbench.startupEditor": "readme",
-        "extensions.experimental.deferredStartupFinishedActivation": true
+        "extensions.experimental.deferredStartupFinishedActivation": true,
+        "editor.fontFamily": "MesloLGS NF, Consolas, 'Courier New', monospace",
+        "dotfiles.repository": "schlich/.dotfiles"
       },
       "extensions": [
         "ms-python.python",

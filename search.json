@@ -1,0 +1,9 @@
+[
+  {
+    "objectID": "vns.html",
+    "href": "vns.html",
+    "title": "Quarto Basics",
+    "section": "",
+    "text": "For a demonstration of a line plot on a polar axis, see Figure 1.\n\n\n\nCode\nimport plotly.express as px\n\nFigure 1: ?(caption)"
+  }
+]

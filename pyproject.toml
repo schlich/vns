@@ -6,17 +6,20 @@ authors = [
     {name = "Ty Schlichenmeyer", email = "t.schlic@wustl.edu"},
 ]
 dependencies = [
-    "plotly>=5.18.0",
-    "ipykernel>=6.26.0",
-    "pyarrow>=14.0.0",
+    "plotly",
+    "ipykernel",
+    "pyarrow",
     "nbformat>=5.9.2",
     "ruff>=0.1.4",
     "dash>=2.14.1",
     "dash-bootstrap-components>=1.5.0",
-    "ydata-profiling>=4.6.1",
     "nbdev>=2.3.13",
     "pre-commit>=3.5.0",
     "jupyter>=1.0.0",
+    "mat4py>=0.6.0",
+    "dbt-duckdb>=1.7.0",
+    "pandas>=2.1.3",
+    "quarto"
 ]
 requires-python = ">=3.11,<3.12"
 readme = "README.md"

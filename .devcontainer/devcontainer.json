@@ -1,17 +1,14 @@
 {
   "name": "vns",
-  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
   "features": {
-    "ghcr.io/devcontainers-contrib/features/pdm:2": {},
     "ghcr.io/devcontainers/features/common-utils:2": {
       "configureZshAsDefaultShell": true,
       "installOhMyZshConfig": false
     },
-    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
-      "version": "1.4.489"
-    }
+    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {}
   },
-  "postCreateCommand": "pdm install && pdm run nbdev_install_hooks && pdm run pre-commit install",
+  "postCreateCommand": "pip install . && nbdev_install_hooks && pre-commit install",
   "customizations": {
     "vscode": {
       "settings": {
@@ -37,7 +34,9 @@
         "workbench.startupEditor": "readme",
         "extensions.experimental.deferredStartupFinishedActivation": true,
         "editor.fontFamily": "MesloLGS NF, Consolas, 'Courier New', monospace",
-        "dotfiles.repository": "schlich/.dotfiles"
+        "dotfiles.repository": "schlich/.dotfiles",
+        "dotfiles.installCommand": "./dotfiles/dotbot/tools/git-submodule/install",
+        "dotfiles.targetPath": "~/dotfiles"
       },
       "extensions": [
         "ms-python.python",

@@ -14,3 +14,5 @@ _modidx.py
 
 .quarto
 build
+
+.venv

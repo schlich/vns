@@ -6,6 +6,7 @@ format: "dashboard"
 
 ```{python}
 import plotly.express as px
+import plotly.io as pio
 df = px.data.gapminder()
 ```
 

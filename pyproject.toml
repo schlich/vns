@@ -1,12 +1,31 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "vns"
-version = "0.1.0"
-description = ""
-authors = [{ name = "Ty Schlichenmeyer", email = "t.schlic@wustl.edu" }]
-dependencies = ["plotly", "ipywidgets", "ruff>=0.1.4", "jupyter", "quarto"]
-requires-python = ">=3.11,<3.12"
+dynamic = ["version"]
+description = "VNS analysis for the dissertation of Tyler Schlichenmeyer"
 readme = "README.md"
-license = { text = "MIT" }
+license = "GPL-3.0-or-later"
+requires-python = ">=3.11"
+authors = [{ name = "Ty Schlichenmeyer", email = "ty.schlich@gmail.com" }]
+keywords = ["jupyter", "nbdev", "notebook", "python"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3.11",
+]
+dependencies = ["pandas", "pre-commit", "ipykernel"]
+
+
+[project.urls]
+Homepage = "https://github.com/schlich/vns"
+
+[tool.hatch.version]
+path = "vns/__init__.py"
 
 [tool.ruff]
 extend-include = ["*.ipynb"]

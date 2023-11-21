@@ -1,9 +1,0 @@
-project:
-  output-dir: _docs
-
-website:
-  title: "vns"
-  site-url: "https://schlich.github.io/vns"
-  description: "VNS analysis for the dissertation of Tyler Schlichenmeyer"
-  repo-branch: main
-  repo-url: "https://github.com/schlich/vns"

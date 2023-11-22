@@ -18,7 +18,7 @@ classifiers = [
     "Natural Language :: English",
     "Programming Language :: Python :: 3.11",
 ]
-dependencies = ["pandas", "pre-commit", "ipykernel"]
+dependencies = ["pandas", "pre-commit", "ipykernel", "tables"]
 
 
 [project.urls]
@@ -31,3 +31,6 @@ path = "vns/__init__.py"
 extend-include = ["*.ipynb"]
 select = ["ALL"]
 fix = true
+
+[tool.ruff.per-file-ignores]
+"**/*.ipynb" = ["D100"]

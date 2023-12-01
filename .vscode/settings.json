@@ -1,19 +1,22 @@
 {
+  "editor.formatOnSave": true,
+  "notebook.formatOnSave.enabled": true,
+  "files.insertFinalNewline": true,
+  "[python]": {
     "editor.formatOnSave": true,
-    "notebook.formatOnSave.enabled": true,
-    "files.insertFinalNewline": true,
-    "[python]": {
-        "editor.formatOnSave": true,
-        "editor.codeActionsOnSave": {
-            "source.fixAll.ruff": "explicit",
-            "source.organizeImports.ruff": "explicit"
-        },
-        "editor.defaultFormatter": "charliermarsh.ruff"
+    "editor.codeActionsOnSave": {
+      "source.fixAll.ruff": "explicit",
+      "source.organizeImports.ruff": "explicit"
     },
-    "[json]": {
-        "editor.formatOnSave": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "workbench.startupEditor": "readme",
-    "extensions.experimental.deferredStartupFinishedActivation": true,
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "[json]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.startupEditor": "readme",
+  "extensions.experimental.deferredStartupFinishedActivation": true,
+  "python.testing.pytestArgs": ["tests"],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true
 }

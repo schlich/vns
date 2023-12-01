@@ -1,0 +1,12 @@
+name: .vns
+channels:
+  - cinpla
+  - conda-forge
+dependencies:
+  - python>=3.10
+  - pytables>=3.8.0
+  - vaex-core>=4.17.1
+  - vaex-hdf5>=0.14.1
+  - vaex-jupyter>=0.8.1
+  - vaex-viz>=0.5.4
+  - exdir

@@ -4,6 +4,6 @@
   "features": {
     "ghcr.io/mamba-org/devcontainer-features/micromamba:1": {}
   },
-  "postCreateCommand": "cp .devcontainer/.zshrc $HOME && cp .devcontainer/.p10k.zsh $HOME && micromamba create -f environment.yml"
+  "postCreateCommand": "cp .devcontainer/.zshrc $HOME && cp .devcontainer/.p10k.zsh $HOME && micromamba shell init --shell zsh --root-prefix=~/micromamba &&micromamba create -f environment.yml"
   // see GH repo: Gagandeep39/vscode-devcontainer-ohmyzsh
 }

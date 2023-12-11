@@ -1,6 +1,6 @@
 {
   "name": "VNS (micromamba)",
-  "image": "mcr.microsoft.com/devcontainers/base",
+  "image": "mcr.microsoft.com/devcontainers/python",
   "features": {
     "ghcr.io/mamba-org/devcontainer-features/micromamba:1": {
       "channels": "conda-forge",

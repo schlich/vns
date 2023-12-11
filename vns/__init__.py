@@ -1,5 +1,8 @@
 __version__ = "0.0.1"
 
+from datatree import DataTree
+import xarray as xr
+
 import vaex as vx
 
 
@@ -18,3 +21,9 @@ def mat_to_vx(mat):
 
     """
     return vx.from_arrays(time_focused=mat["PDS"].item()[0])
+
+
+
+def extinction_learning(datatree: DataTree) -> xr.DataSet:
+    """Produce extinction learning results."""
+    return xr.DataSet()

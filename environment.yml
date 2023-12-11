@@ -13,3 +13,4 @@ dependencies:
   - pandera>=0.17.2
   - xarray-datatree
   - matplotlib>=3.8.0
+prefix: /workspaces/vns/.venv

@@ -8,6 +8,13 @@
       "envName": "vns"
     }
   },
+  "postCreateCommand": "micromamba env create -n vns -f conda-lock.yml",
+  "remoteEnv": {
+    "MAMBA_ROOT_PREFIX": "${containerWorkspaceFolder}/.micromamba"
+  },
+  "containerEnv": {
+    "MAMBA_ALWAYS_YES": "true"
+  },
   "customizations": {
     "vscode": {
       "extensions": [

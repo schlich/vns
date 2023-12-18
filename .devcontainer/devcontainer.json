@@ -4,9 +4,12 @@
   "features": {
     "ghcr.io/mamba-org/devcontainer-features/micromamba:1": {
       "channels": "conda-forge",
-      "envFile": "conda-lock.yml",
+      "envFile": "environment.yml",
       "envName": "vns"
     }
+  },
+  "containerEnv": {
+    "MAMBA_ROOT_PREFIX": "/workspaces/vns/.micromamba"
   },
   "customizations": {
     "vscode": {
@@ -23,15 +26,16 @@
           "editor.codeActionsOnSave": {
             "source.fixAll.ruff": true,
             "source.organizeImports": true
-          },
-          "notebook.formatOnSave.enabled": true,
-          "notebook.codeActionsOnSave": {
-            "source.fixAll.ruff": true,
-            "source.organizeImports.ruff": true
-          },
-          "editor.defaultFormatter": "charliermarsh.ruff",
-          "dotfiles.repository": "schlich/.dotfiles"
-        }
+          }
+        },
+        "notebook.formatOnSave.enabled": true,
+        "notebook.codeActionsOnSave": {
+          "source.fixAll.ruff": true,
+          "source.organizeImports.ruff": true
+        },
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "dotfiles.repository": "schlich/.dotfiles",
+        "python.condaPath": "/usr/local/bin/micromamba"
       }
     }
   }

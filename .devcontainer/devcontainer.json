@@ -8,7 +8,6 @@
       "envName": "vns"
     }
   },
-  "updateContentCommand": "micromamba shell",
   "customizations": {
     "vscode": {
       "extensions": [

@@ -6,9 +6,11 @@
       "channels": "conda-forge",
       "envFile": "conda-lock.yml",
       "envName": "vns"
+    },
+    "ghcr.io/devcontainers-contrib/features/pipx-package:1": {
+      "package": "conda-lock"
     }
   },
-  "updateContentCommand": "pipx install conda-lock",
   "postCreateCommand": "micromamba env create -n vns -f conda-lock.yml",
   "remoteEnv": {
     "MAMBA_ROOT_PREFIX": "${containerWorkspaceFolder}/micromamba",
@@ -44,7 +46,7 @@
         "editor.defaultFormatter": "charliermarsh.ruff",
         "dotfiles.repository": "schlich/.dotfiles",
         "python.condaPath": "/usr/local/bin/micromamba",
-        "python.defaultInterpreterPath": "micromamba/envs/vns/bin/python"
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/micromamba/envs/vns/bin/python"
       }
     }
   }

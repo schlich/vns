@@ -11,7 +11,8 @@
   "updateContentCommand": "pipx install conda-lock",
   "postCreateCommand": "micromamba env create -n vns -f conda-lock.yml",
   "remoteEnv": {
-    "MAMBA_ROOT_PREFIX": "${containerWorkspaceFolder}/.micromamba"
+    "MAMBA_ROOT_PREFIX": "${containerWorkspaceFolder}/micromamba",
+    "XDG_DATA_HOME": "${containerWorkspaceFolder}/data"
   },
   "containerEnv": {
     "MAMBA_ALWAYS_YES": "true"
@@ -43,7 +44,7 @@
         "editor.defaultFormatter": "charliermarsh.ruff",
         "dotfiles.repository": "schlich/.dotfiles",
         "python.condaPath": "/usr/local/bin/micromamba",
-        "python.defaultInterpreterPath": ".micromamba/envs/vns/bin/python"
+        "python.defaultInterpreterPath": "micromamba/envs/vns/bin/python"
       }
     }
   }

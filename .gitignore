@@ -16,4 +16,4 @@ _modidx.py
 build
 
 .venv
-.micromamba
+micromamba

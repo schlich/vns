@@ -22,7 +22,8 @@
         "ms-toolsai.jupyter",
         "ms-toolsai.datawrangler",
         "tamasfe.even-better-toml",
-        "charliermarsh.ruff"
+        "charliermarsh.ruff",
+        "Evidence.evidence-vscode"
       ],
       "settings": {
         "[python]": {
@@ -39,7 +40,8 @@
         },
         "editor.defaultFormatter": "charliermarsh.ruff",
         "dotfiles.repository": "schlich/.dotfiles",
-        "python.condaPath": "/usr/local/bin/micromamba"
+        "python.condaPath": "/usr/local/bin/micromamba",
+        "python.defaultInterpreterPath": ".micromamba/envs/vns/bin/python"
       }
     }
   }

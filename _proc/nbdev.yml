@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "vns"
+  site-url: "https://schlich.github.io/vns"
+  description: "Data analysis for a VNS conditioned stimulus extinction task"
+  repo-branch: main
+  repo-url: "https://github.com/schlich/vns"

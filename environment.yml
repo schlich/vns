@@ -1,6 +1,7 @@
 name: vns
 channels:
   - conda-forge
+  - fastai
   - nodefaults
 dependencies:
   - python
@@ -18,3 +19,4 @@ dependencies:
   - jupyter
   - ydata-profiling
   - zarr
+  - nbdev

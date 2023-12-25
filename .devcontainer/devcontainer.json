@@ -9,7 +9,8 @@
     },
     "ghcr.io/devcontainers-contrib/features/pipx-package:1": {
       "package": "conda-lock"
-    }
+    },
+    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {}
   },
   "postCreateCommand": "micromamba env create -n vns -f conda-lock.yml",
   "remoteEnv": {
@@ -46,10 +47,7 @@
         "editor.defaultFormatter": "charliermarsh.ruff",
         "dotfiles.repository": "schlich/.dotfiles",
         "python.condaPath": "/usr/local/bin/micromamba",
-        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/micromamba/envs/vns/bin/python",
-        "python.analysis.extraPaths": [
-          "./micromamba/envs/vns/lib/python3.11/site-packages"
-        ]
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/micromamba/envs/vns/bin/python"
       }
     }
   }

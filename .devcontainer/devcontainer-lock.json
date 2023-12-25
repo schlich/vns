@@ -9,6 +9,11 @@
       "version": "1.2.0",
       "resolved": "ghcr.io/mamba-org/devcontainer-features/micromamba@sha256:0176fe3ea695d7c9ba4283930378b3837add37cbbf78366bb15cc8eb5aaadeca",
       "integrity": "sha256:0176fe3ea695d7c9ba4283930378b3837add37cbbf78366bb15cc8eb5aaadeca"
+    },
+    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
+      "version": "1.1.2",
+      "resolved": "ghcr.io/rocker-org/devcontainer-features/quarto-cli@sha256:5974cce8e6859f55907ed01bbe32a9b0dc9704e398b4eabeaab846b6b6bf56da",
+      "integrity": "sha256:5974cce8e6859f55907ed01bbe32a9b0dc9704e398b4eabeaab846b6b6bf56da"
     }
   }
 }

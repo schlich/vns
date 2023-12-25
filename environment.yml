@@ -14,5 +14,6 @@ dependencies:
   - nbformat
   - scipy
   - matplotlib
-  - ipykernel
+  - ipywidgets
+  - jupyter
   - ydata-profiling

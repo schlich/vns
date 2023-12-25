@@ -1,6 +1,6 @@
 {
   "name": "VNS (micromamba)",
-  "image": "mcr.microsoft.com/devcontainers/python",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
   "features": {
     "ghcr.io/mamba-org/devcontainer-features/micromamba:1": {
       "channels": "conda-forge",
@@ -8,6 +8,7 @@
       "envName": "vns"
     }
   },
+  "updateContentCommand": "pipx install conda-lock",
   "postCreateCommand": "micromamba env create -n vns -f conda-lock.yml",
   "remoteEnv": {
     "MAMBA_ROOT_PREFIX": "${containerWorkspaceFolder}/.micromamba"
@@ -23,7 +24,8 @@
         "ms-toolsai.datawrangler",
         "tamasfe.even-better-toml",
         "charliermarsh.ruff",
-        "Evidence.evidence-vscode"
+        "Evidence.evidence-vscode",
+        "GitHub.copilot"
       ],
       "settings": {
         "[python]": {

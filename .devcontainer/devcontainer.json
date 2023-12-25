@@ -46,7 +46,10 @@
         "editor.defaultFormatter": "charliermarsh.ruff",
         "dotfiles.repository": "schlich/.dotfiles",
         "python.condaPath": "/usr/local/bin/micromamba",
-        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/micromamba/envs/vns/bin/python"
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/micromamba/envs/vns/bin/python",
+        "python.analysis.extraPaths": [
+          "./micromamba/envs/vns/lib/python3.11/site-packages"
+        ]
       }
     }
   }

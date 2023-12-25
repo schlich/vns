@@ -17,3 +17,4 @@ dependencies:
   - ipywidgets
   - jupyter
   - ydata-profiling
+  - zarr

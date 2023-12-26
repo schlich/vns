@@ -7,15 +7,21 @@ dependencies:
   - pytables
   - xarray-datatree
   - pandas
+  - nbformat
+  - zarr
+  - ipympl
+  - hvplot
+  - nbdev
   - ipykernel
   - pre-commit
   - ruff
   - plotly
-  - nbformat
   - scipy
   - matplotlib
   - ipywidgets
   - jupyter
   - "ydata-profiling[notebook]"
-  - zarr
-  - ipympl
+  - nbdev
+  - dask
+platforms:
+  - linux-64

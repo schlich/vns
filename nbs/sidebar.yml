@@ -5,6 +5,7 @@ website:
       - 00_core.ipynb
       - 00_experiment.ipynb
       - 00_session.ipynb
+      - 00_trial.ipynb
       - mat2py.ipynb
       - viz.ipynb
       - vns.ipynb

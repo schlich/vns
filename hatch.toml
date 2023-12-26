@@ -1,5 +1,0 @@
-[envs.vns]
-type = "conda"
-command = "micromamba"
-conda-forge = true
-environment-file = "environment.yml"

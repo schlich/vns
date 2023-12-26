@@ -3,29 +3,127 @@
 # %% auto 0
 __all__ = ['Session']
 
-# %% ../nbs/00_session.ipynb 2
+# %% ../nbs/00_session.ipynb 3
 from pathlib import Path
 
 import pandas as pd
 import plotly.express as px
 import scipy
+import xarray as xr
+from datatree import DataTree
 
 
 class Session:
     """A group of consecutive trials."""
 
     def __init__(self, matfile_path: Path):
-        self.data = scipy.io.loadmat(
-            matfile_path,
-            squeeze_me=True,
-        )["PDS"]
+        self.matfile_path = matfile_path
 
-    def eyejoy(self):
-        eyejoy_data = pd.DataFrame.from_records(self.data["EyeJoy"].item()).rename(
+    def start_dt(self) -> pd.Timestamp:
+        return pd.to_datetime(
+            self.matfile_path.stem.split("_", maxsplit=1)[1],
+            format="%d_%m_%Y_%H_%M",
+        )
+
+    sub_arrays = (
+        "EyeJoy",
+        "onlineEye",
+        "onlineLickForce",
+        "samplesBlinkLogical",
+        "img1",
+        "imgfeedback",
+        "spikes",
+        "sptimes",
+    )
+
+    session_columns = (
+        "targetacquisitionthreshold",
+        "ITI_dur",
+    )
+
+    def mat_data(self):
+        return scipy.io.loadmat(
+            self.matfile_path,
+            squeeze_me=True,
+        )
+
+    def data_struct(self, label: str):
+        return self.mat_data()[label]
+
+    def column_measures(self):
+        return self.data_struct("PDS").dtype.names
+
+    def fractals(self) -> xr.DataArray:
+        return pd.Series(
+            self.data_struct("PDS")["fractals"].item(),
+            name="fractals",
+            dtype="category",
+        ).to_xarray()
+
+    def img(self):
+        return self.data_struct("c")
+
+    def data_array(self, struct, measure, dtype) -> xr.DataArray:
+        pds_data = self.data_struct(struct)
+        return pd.Series(
+            pds_data[measure].item(),
+            name=measure,
+            dtype=dtype,
+            index=pd.Index(pds_data["trialnumber"], name="trial"),
+        ).to_xarray()
+
+    @property
+    def dataset(self) -> xr.Dataset:
+        field_dtypes = {
+            "fractals": "category",
+            "targAngle": float,
+            "targAmp": float,
+            "goodtrial": bool,
+            "fixreq": bool,
+            "datapixxtime": float,
+            "trialstarttime": float,
+            "timefpon": float,
+            "timefpoff": float,
+            "windowchosen": bool,
+            "timetargetoff": float,
+            "feedid": "category",
+            "TrialTypeSave": "category",
+            "timefpabort": float,
+            "repeatflag": bool,
+            "monkeynotinitiated": bool,
+        }
+        return xr.Dataset(
+            data_vars={
+                field: self.data_array("PDS", field, dtype)
+                for field, dtype in field_dtypes.items()
+            },
+            coords={"trial": self.data_array("PDS", "trialnumber", int)},
+        )
+
+    @property
+    def dataframe(self) -> pd.DataFrame:
+        return self.dataset.to_dataframe()
+
+    @property
+    def datatree(self) -> DataTree:
+        return DataTree(name=self.matfile_path.stem, data=self.dataset)
+
+    def eyejoy(self) -> pd.DataFrame:
+        eyejoy_data = pd.DataFrame.from_records(
+            self.data_struct("PDS")["EyeJoy"].item(),
+        ).rename(
             columns={0: "x", 1: "y", 4: "t"},
         )
         eyejoy_data.index.name = "trial"
-        return eyejoy_data[["x", "y", "t"]].explode(column=["x", "y", "t"])
+        trial_t = eyejoy_data[["x", "y", "t"]].explode(column=["x", "y", "t"])
+        trial_t["dt"] = pd.to_timedelta(trial_t["t"], unit="s")
+        return trial_t.set_index("dt", append=True)[["x", "y"]]
 
-    def __repr__(self):
-        return px.line(self.data, x="t", y=["x", "y"])
+    def plot(self):
+        return px.line(
+            pd.DataFrame({"trial": [], "proportion_looking": []}),
+            x="trial",
+            y="proportion_looking",
+            title=self.matfile_path.stem,
+            template="plotly_white",
+        )

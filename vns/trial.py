@@ -3,10 +3,17 @@
 # %% auto 0
 __all__ = ['Trial']
 
-# %% ../nbs/00_trial.ipynb 2
+# %% ../nbs/00_trial.ipynb 3
+from matplotlib import animation
+from matplotlib import pyplot as plt
+
 from .session import Session
 
 
 class Trial:
     def __init__(self, session: Session, trial_num: int):
-        self.eyejoy = session.eyejoy.sel(trial=trial_num)
+        self.data = session.datatree.sel(trial=trial_num)
+
+    def replay(self):
+        fig, ax = plt.subplots()
+        animation.ArtistAnimation(fig, self.data.iloc[i].plot())

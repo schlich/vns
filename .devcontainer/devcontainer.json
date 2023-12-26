@@ -4,7 +4,7 @@
   "features": {
     "ghcr.io/mamba-org/devcontainer-features/micromamba:1": {
       "channels": "conda-forge",
-      "envFile": "conda-lock.yml",
+      "envFile": "environment.yml",
       "envName": "vns"
     },
     "ghcr.io/devcontainers-contrib/features/pipx-package:1": {
@@ -13,7 +13,8 @@
     "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {},
     "ghcr.io/devcontainers-contrib/features/hatch:2": {}
   },
-  "postCreateCommand": "micromamba env create -n vns -f conda-lock.yml",
+  "updateContentCommand": "micromamba env create -n vns -f environment.yml",
+  "postCreateCommand": "micromamba run -n vns nbdev_install_hooks",
   "remoteEnv": {
     "MAMBA_ROOT_PREFIX": "${containerWorkspaceFolder}/micromamba",
     "XDG_DATA_HOME": "${containerWorkspaceFolder}/data"
@@ -31,7 +32,8 @@
         "tamasfe.even-better-toml",
         "charliermarsh.ruff",
         "Evidence.evidence-vscode",
-        "GitHub.copilot"
+        "GitHub.copilot",
+        "HamelHusain.nbdev"
       ],
       "settings": {
         "[python]": {
@@ -42,16 +44,11 @@
           },
           "editor.defaultFormatter": "charliermarsh.ruff"
         },
-        "notebook.formatOnSave.enabled": true,
-        "notebook.codeActionsOnSave": {
-          "source.fixAll.ruff": true,
-          "source.organizeImports.ruff": true
-        },
-        "editor.defaultFormatter": "charliermarsh.ruff",
         "dotfiles.repository": "schlich/.dotfiles",
         "python.condaPath": "/usr/local/bin/micromamba",
         "python.defaultInterpreterPath": "${containerWorkspaceFolder}/micromamba/envs/vns/bin/python"
       }
     }
-  }
+  },
+  "forwardPorts": [8787]
 }

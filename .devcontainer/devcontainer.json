@@ -29,11 +29,11 @@
         "ms-python.python",
         "ms-toolsai.jupyter",
         "ms-toolsai.datawrangler",
-        "tamasfe.even-better-toml",
         "charliermarsh.ruff",
         "Evidence.evidence-vscode",
         "GitHub.copilot",
-        "HamelHusain.nbdev"
+        "HamelHusain.nbdev",
+        "tamasfe.even-better-toml"
       ],
       "settings": {
         "[python]": {
@@ -49,6 +49,5 @@
         "python.defaultInterpreterPath": "${containerWorkspaceFolder}/micromamba/envs/vns/bin/python"
       }
     }
-  },
-  "forwardPorts": [8787]
+  }
 }

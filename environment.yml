@@ -20,8 +20,8 @@ dependencies:
   - matplotlib
   - ipywidgets
   - jupyter
-  - "ydata-profiling[notebook]"
   - nbdev
   - dask
+  - dask-labextension
 platforms:
   - linux-64

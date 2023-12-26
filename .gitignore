@@ -17,3 +17,6 @@ build
 
 .venv
 micromamba
+
+dist
+_proc

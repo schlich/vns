@@ -13,10 +13,10 @@
 version: 1
 metadata:
   content_hash:
-    linux-64: cbeb72641bb560191e8e86a1886d0e96974d083af3a0fb5483dabb50108f88d0
-    osx-arm64: 39c7faaf2832f941790752e0ec71082dd7e94ef029677dec9eb670d11c820b50
-    osx-64: 351f5f5f43e604a0c9e33b49feabb9dab924c9758265714c46e9b05187efb116
-    win-64: d1843b08f5554e30e3f8083a11031b6209e62c13d2db6a0bb3929cb4bb95ece9
+    linux-64: 2d78224dc4af469d40091d35366216f1f49b436dd0db490f9fb0854e70990c11
+    osx-arm64: f1e2ab247e8ee87abf4669ad7e22cb70cf8429b4b19083d41786ac2c13d4494c
+    osx-64: 4cbf7803c7b74740e17e10a96bd28b5945d971f0c82785254fdedb63255fd9b7
+    win-64: 6b27c5187e3c1a1fd31d5f7124d1bc3fa3647330ee8cc6fcaf9c323dfbdc468e
   channels:
   - url: conda-forge
     used_env_vars: []
@@ -3314,6 +3314,82 @@ package:
     sha256: 7208f5ae35c321d03c71e4072c959c60f877d1b9cc2fb32d805972b54123fb95
   category: main
   optional: false
+- name: ipympl
+  version: 0.9.3
+  manager: conda
+  platform: linux-64
+  dependencies:
+    ipython: <9
+    ipython_genutils: ''
+    ipywidgets: '>=7.6.0,<9'
+    matplotlib-base: '>=2.2.0,<4'
+    numpy: ''
+    pillow: ''
+    python: '>=3.6'
+    traitlets: <6
+  url: https://conda.anaconda.org/conda-forge/noarch/ipympl-0.9.3-pyhd8ed1ab_0.conda
+  hash:
+    md5: da113e1ecd782afd5ed2f7b5187aaea8
+    sha256: a1e06242e1adbff9c2c14f135f16b9442cd8dc8a8171069f3a36e3879a38e16f
+  category: main
+  optional: false
+- name: ipympl
+  version: 0.9.3
+  manager: conda
+  platform: osx-64
+  dependencies:
+    ipython: <9
+    ipython_genutils: ''
+    ipywidgets: '>=7.6.0,<9'
+    matplotlib-base: '>=2.2.0,<4'
+    numpy: ''
+    pillow: ''
+    python: '>=3.6'
+    traitlets: <6
+  url: https://conda.anaconda.org/conda-forge/noarch/ipympl-0.9.3-pyhd8ed1ab_0.conda
+  hash:
+    md5: da113e1ecd782afd5ed2f7b5187aaea8
+    sha256: a1e06242e1adbff9c2c14f135f16b9442cd8dc8a8171069f3a36e3879a38e16f
+  category: main
+  optional: false
+- name: ipympl
+  version: 0.9.3
+  manager: conda
+  platform: osx-arm64
+  dependencies:
+    ipython: <9
+    ipython_genutils: ''
+    ipywidgets: '>=7.6.0,<9'
+    matplotlib-base: '>=2.2.0,<4'
+    numpy: ''
+    pillow: ''
+    python: '>=3.6'
+    traitlets: <6
+  url: https://conda.anaconda.org/conda-forge/noarch/ipympl-0.9.3-pyhd8ed1ab_0.conda
+  hash:
+    md5: da113e1ecd782afd5ed2f7b5187aaea8
+    sha256: a1e06242e1adbff9c2c14f135f16b9442cd8dc8a8171069f3a36e3879a38e16f
+  category: main
+  optional: false
+- name: ipympl
+  version: 0.9.3
+  manager: conda
+  platform: win-64
+  dependencies:
+    ipython: <9
+    ipython_genutils: ''
+    ipywidgets: '>=7.6.0,<9'
+    matplotlib-base: '>=2.2.0,<4'
+    numpy: ''
+    pillow: ''
+    python: '>=3.6'
+    traitlets: <6
+  url: https://conda.anaconda.org/conda-forge/noarch/ipympl-0.9.3-pyhd8ed1ab_0.conda
+  hash:
+    md5: da113e1ecd782afd5ed2f7b5187aaea8
+    sha256: a1e06242e1adbff9c2c14f135f16b9442cd8dc8a8171069f3a36e3879a38e16f
+  category: main
+  optional: false
 - name: ipython
   version: 8.19.0
   manager: conda
@@ -3408,6 +3484,54 @@ package:
   hash:
     md5: e71b62ab6b6a0ef30b53fa8937988fcd
     sha256: d68f72cd862d40fe986eeccfeffea818dbaea9d9f818db1247702c332d7f39fb
+  category: main
+  optional: false
+- name: ipython_genutils
+  version: 0.2.0
+  manager: conda
+  platform: linux-64
+  dependencies:
+    python: ''
+  url: https://conda.anaconda.org/conda-forge/noarch/ipython_genutils-0.2.0-py_1.tar.bz2
+  hash:
+    md5: 5071c982548b3a20caf70462f04f5287
+    sha256: 0fafbc60209f1d8c0b89a2f79f3ff0f7bc45589a23da1d2e5cc55bcca906707b
+  category: main
+  optional: false
+- name: ipython_genutils
+  version: 0.2.0
+  manager: conda
+  platform: osx-64
+  dependencies:
+    python: ''
+  url: https://conda.anaconda.org/conda-forge/noarch/ipython_genutils-0.2.0-py_1.tar.bz2
+  hash:
+    md5: 5071c982548b3a20caf70462f04f5287
+    sha256: 0fafbc60209f1d8c0b89a2f79f3ff0f7bc45589a23da1d2e5cc55bcca906707b
+  category: main
+  optional: false
+- name: ipython_genutils
+  version: 0.2.0
+  manager: conda
+  platform: osx-arm64
+  dependencies:
+    python: ''
+  url: https://conda.anaconda.org/conda-forge/noarch/ipython_genutils-0.2.0-py_1.tar.bz2
+  hash:
+    md5: 5071c982548b3a20caf70462f04f5287
+    sha256: 0fafbc60209f1d8c0b89a2f79f3ff0f7bc45589a23da1d2e5cc55bcca906707b
+  category: main
+  optional: false
+- name: ipython_genutils
+  version: 0.2.0
+  manager: conda
+  platform: win-64
+  dependencies:
+    python: ''
+  url: https://conda.anaconda.org/conda-forge/noarch/ipython_genutils-0.2.0-py_1.tar.bz2
+  hash:
+    md5: 5071c982548b3a20caf70462f04f5287
+    sha256: 0fafbc60209f1d8c0b89a2f79f3ff0f7bc45589a23da1d2e5cc55bcca906707b
   category: main
   optional: false
 - name: ipywidgets

@@ -1,4 +1,0 @@
-extend-include = ["*.ipynb"]
-target-version = "py312"
-select = ["ALL"]
-fix = true

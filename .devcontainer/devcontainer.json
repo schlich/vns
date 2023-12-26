@@ -10,7 +10,8 @@
     "ghcr.io/devcontainers-contrib/features/pipx-package:1": {
       "package": "conda-lock"
     },
-    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {}
+    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {},
+    "ghcr.io/devcontainers-contrib/features/hatch:2": {}
   },
   "postCreateCommand": "micromamba env create -n vns -f conda-lock.yml",
   "remoteEnv": {
@@ -18,7 +19,8 @@
     "XDG_DATA_HOME": "${containerWorkspaceFolder}/data"
   },
   "containerEnv": {
-    "MAMBA_ALWAYS_YES": "true"
+    "MAMBA_ALWAYS_YES": "true",
+    "HATCH_ENV": "vns"
   },
   "customizations": {
     "vscode": {
@@ -36,8 +38,9 @@
           "editor.formatOnSave": true,
           "editor.codeActionsOnSave": {
             "source.fixAll.ruff": true,
-            "source.organizeImports": true
-          }
+            "source.organizeImports.ruff": true
+          },
+          "editor.defaultFormatter": "charliermarsh.ruff"
         },
         "notebook.formatOnSave.enabled": true,
         "notebook.codeActionsOnSave": {

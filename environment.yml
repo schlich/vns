@@ -1,16 +1,12 @@
 name: vns
 channels:
   - conda-forge
-  - nodefaults
 dependencies:
   - python
-  - pytables
   - xarray-datatree
   - pandas
-  - nbformat
   - zarr
   - ipympl
-  - hvplot
   - nbdev
   - ipykernel
   - pre-commit
@@ -21,3 +17,4 @@ dependencies:
   - nbdev
   - dask
   - trame
+  - plotly

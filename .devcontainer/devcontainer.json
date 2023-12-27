@@ -2,21 +2,13 @@
   "name": "VNS (micromamba)",
   "image": "mcr.microsoft.com/devcontainers/python:3.12",
   "features": {
-    "ghcr.io/mamba-org/devcontainer-features/micromamba:1": {
-      "channels": "conda-forge",
-      "envFile": "conda-lock.yml",
-      "envName": "vns"
-    },
-    "ghcr.io/devcontainers-contrib/features/pipx-package:1": {
-      "package": "conda-lock"
-    },
-    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {},
+    "ghcr.io/mamba-org/devcontainer-features/micromamba:1": {},
+    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {"version": "prerelease"},
     "ghcr.io/devcontainers-contrib/features/hatch:2": {}
   },
   // "updateContentCommand": "micromamba create -n vns -f conda-lock.yml",
   // "postCreateCommand": "pip install -e . && micromamba shell init --shell zsh --root-prefix=${containerWorkspaceFolder}/micromamba",
   "remoteEnv": {
-    "MAMBA_ROOT_PREFIX": "${containerWorkspaceFolder}/.micromamba",
     "XDG_DATA_HOME": "${containerWorkspaceFolder}/data"
   },
   "containerEnv": {
@@ -38,7 +30,6 @@
         "mechatroner.rainbow-csv",
         "github.vscode-github-actions",
         "GitHub.vscode-pull-request-github",
-        "corker.vscode-micromamba",
         "eamodio.gitlens"
       ],
       "settings": {

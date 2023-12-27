@@ -14,15 +14,5 @@ fix = true
 select = ["ALL"]
 
 [tool.pyright]
-venvPath = "micromamba/envs"
+venvPath = ".micromamba/envs"
 venv = "vns"
-
-[tool.hatch.env]
-requires = [
-    "conda"
-]
-
-[tool.hatch.envs.vns]
-type = "conda"
-command = "micromamba"
-conda-forge = true

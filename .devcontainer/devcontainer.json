@@ -4,7 +4,7 @@
   "features": {
     "ghcr.io/mamba-org/devcontainer-features/micromamba:1": {
       "channels": "conda-forge",
-      "envFile": "environment.yml",
+      "envFile": "conda-lock.yml",
       "envName": "vns"
     },
     "ghcr.io/devcontainers-contrib/features/pipx-package:1": {
@@ -13,8 +13,8 @@
     "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {},
     "ghcr.io/devcontainers-contrib/features/hatch:2": {}
   },
-  "updateContentCommand": "micromamba env create -n vns -f environment.yml",
-  "postCreateCommand": "micromamba run -n vns nbdev_install_hooks && pip install -e . && micromamba shell init --shell zsh --root-prefix=${containerWorkspaceFolder}/micromamba",
+  // "updateContentCommand": "micromamba create -n vns -f conda-lock.yml",
+  // "postCreateCommand": "pip install -e . && micromamba shell init --shell zsh --root-prefix=${containerWorkspaceFolder}/micromamba",
   "remoteEnv": {
     "MAMBA_ROOT_PREFIX": "${containerWorkspaceFolder}/.micromamba",
     "XDG_DATA_HOME": "${containerWorkspaceFolder}/data"
@@ -31,7 +31,6 @@
         "ms-toolsai.jupyter",
         "ms-toolsai.datawrangler",
         "charliermarsh.ruff",
-        "Evidence.evidence-vscode",
         "GitHub.copilot",
         "HamelHusain.nbdev",
         "tamasfe.even-better-toml",

@@ -4,11 +4,6 @@
 __all__ = ['Experiment']
 
 # %% ../nbs/00_experiment.ipynb 2
-from pathlib import Path
-
-import datatree as dt
-
-
 class Experiment:
     """All data from an experiment."""
 

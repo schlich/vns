@@ -3,14 +3,15 @@
 # %% auto 0
 __all__ = ['Experiment']
 
-# %% ../nbs/00_experiment.ipynb 1
+# %% ../nbs/00_experiment.ipynb 2
 from pathlib import Path
 
 import datatree as dt
 
 
 class Experiment:
-    """A group of sessions."""
+    """All data from an experiment."""
 
-    def __init__(self, zarr_path: Path):
-        self.sessions = dt.open_datatree(zarr_path, engine="zarr")
+    def __init__(self: "Experiment", zarr_path: Path) -> None:
+        """Load data from a zarr file."""
+        self.data = dt.open_datatree(zarr_path, engine="zarr")

@@ -7,6 +7,7 @@ website:
       - 00_session.ipynb
       - 00_trial.ipynb
       - mat2py.ipynb
+      - monitor.ipynb
       - viz.ipynb
       - vns.ipynb
       - xarray.ipynb

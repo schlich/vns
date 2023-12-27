@@ -16,7 +16,7 @@ _modidx.py
 build
 
 .venv
-micromamba
+.micromamba
 
 dist
 _proc

@@ -1,6 +1,6 @@
 {
   "name": "VNS (micromamba)",
-  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
   "features": {
     "ghcr.io/mamba-org/devcontainer-features/micromamba:1": {
       "channels": "conda-forge",
@@ -14,14 +14,15 @@
     "ghcr.io/devcontainers-contrib/features/hatch:2": {}
   },
   "updateContentCommand": "micromamba env create -n vns -f environment.yml",
-  "postCreateCommand": "micromamba run -n vns nbdev_install_hooks",
+  "postCreateCommand": "micromamba run -n vns nbdev_install_hooks && pip install -e . && micromamba shell init --shell zsh --root-prefix=${containerWorkspaceFolder}/micromamba",
   "remoteEnv": {
-    "MAMBA_ROOT_PREFIX": "${containerWorkspaceFolder}/micromamba",
+    "MAMBA_ROOT_PREFIX": "${containerWorkspaceFolder}/.micromamba",
     "XDG_DATA_HOME": "${containerWorkspaceFolder}/data"
   },
   "containerEnv": {
     "MAMBA_ALWAYS_YES": "true",
-    "HATCH_ENV": "vns"
+    "HATCH_ENV": "vns",
+    "MAMBA_ROOT_PREFIX": "/workspaces/vns/.micromamba"
   },
   "customizations": {
     "vscode": {
@@ -33,7 +34,13 @@
         "Evidence.evidence-vscode",
         "GitHub.copilot",
         "HamelHusain.nbdev",
-        "tamasfe.even-better-toml"
+        "tamasfe.even-better-toml",
+        "redhat.vscode-yaml",
+        "mechatroner.rainbow-csv",
+        "github.vscode-github-actions",
+        "GitHub.vscode-pull-request-github",
+        "corker.vscode-micromamba",
+        "eamodio.gitlens"
       ],
       "settings": {
         "[python]": {
@@ -45,8 +52,9 @@
           "editor.defaultFormatter": "charliermarsh.ruff"
         },
         "dotfiles.repository": "schlich/.dotfiles",
-        "python.condaPath": "/usr/local/bin/micromamba",
-        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/micromamba/envs/vns/bin/python"
+        "python.condaPath": "/usr/local/bin/.micromamba",
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.micromamba/envs/vns/bin/python",
+        "jupyter.notebookFileRoot": "${containerWorkspaceFolder}"
       }
     }
   }

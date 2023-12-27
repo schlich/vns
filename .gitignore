@@ -21,3 +21,4 @@ micromamba
 dist
 _proc
 nbs/_docs
+.micromamba

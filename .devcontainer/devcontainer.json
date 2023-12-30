@@ -6,12 +6,6 @@
     "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {"version": "prerelease"},
     "ghcr.io/devcontainers-contrib/features/hatch:2": {}
   },
-  // "updateContentCommand": "micromamba create -n vns -f conda-lock.yml",
-  // "postCreateCommand": "pip install -e . && micromamba shell init --shell zsh --root-prefix=${containerWorkspaceFolder}/micromamba",
-  "remoteEnv": {
-    // "XDG_DATA_HOME": "${containerWorkspaceFolder}/data",
-    // "MAMBA_ROOT_PREFIX": "${containerWorkspaceFolder}/.micromamba"
-  },
   "containerEnv": {
     "MAMBA_ALWAYS_YES": "true",
     "HATCH_ENV": "dev"

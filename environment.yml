@@ -7,14 +7,12 @@ dependencies:
   - pandas
   - zarr
   - ipympl
-  - nbdev
   - ipykernel
   - pre-commit
   - ruff
   - scipy
   - matplotlib
   - ipywidgets
-  - nbdev
   - dask
-  - trame
   - plotly
+  - conda-lock

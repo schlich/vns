@@ -1,6 +1,7 @@
 website:
   sidebar:
     contents:
+      - index.html
       - index.ipynb
       - 00_core.html
       - 00_core.ipynb

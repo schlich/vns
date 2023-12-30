@@ -2,19 +2,19 @@
   "name": "VNS (micromamba)",
   "image": "mcr.microsoft.com/devcontainers/python:3.12",
   "features": {
-    "ghcr.io/mamba-org/devcontainer-features/micromamba:1": {},
+    "ghcr.io/rocker-org/devcontainer-features/miniforge:1": {},
     "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {"version": "prerelease"},
     "ghcr.io/devcontainers-contrib/features/hatch:2": {}
   },
   // "updateContentCommand": "micromamba create -n vns -f conda-lock.yml",
   // "postCreateCommand": "pip install -e . && micromamba shell init --shell zsh --root-prefix=${containerWorkspaceFolder}/micromamba",
   "remoteEnv": {
-    "XDG_DATA_HOME": "${containerWorkspaceFolder}/data"
+    // "XDG_DATA_HOME": "${containerWorkspaceFolder}/data",
+    // "MAMBA_ROOT_PREFIX": "${containerWorkspaceFolder}/.micromamba"
   },
   "containerEnv": {
     "MAMBA_ALWAYS_YES": "true",
-    "HATCH_ENV": "vns",
-    "MAMBA_ROOT_PREFIX": "/workspaces/vns/.micromamba"
+    "HATCH_ENV": "dev"
   },
   "customizations": {
     "vscode": {
@@ -41,10 +41,9 @@
           },
           "editor.defaultFormatter": "charliermarsh.ruff"
         },
-        "dotfiles.repository": "schlich/.dotfiles",
-        "python.condaPath": "/usr/local/bin/.micromamba",
-        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.micromamba/envs/vns/bin/python",
-        "jupyter.notebookFileRoot": "${containerWorkspaceFolder}"
+        "dotfiles.repository": "schlich/.dotfiles"
+        // "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.micromamba/envs/vns/bin/python",
+        // "jupyter.notebookFileRoot": "${containerWorkspaceFolder}"
       }
     }
   }

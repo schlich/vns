@@ -1,0 +1,13 @@
+---
+title: "Hybrid-Plus model"
+jupyter: python3
+---
+
+```{python}
+
+from PIL import Image
+
+im = Image.open("data/r.tif")
+im.show()
+
+```

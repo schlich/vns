@@ -4,11 +4,32 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import dask.dataframe as dd
 import plotly.express as px
+import polars as pl
 import scipy
 import xarray as xr
+import zarr
 from datatree import DataTree
 
+session_attr = (
+    "fractals",
+    "targAngle",
+    "targAmp",
+    "goodtrial",
+    "fixreq",
+    "datapixxtime",
+    "trialstarttime",
+    "timefpon",
+    "timefpoff",
+    "windowchosen",
+    "timetargetoff",
+    "feedid",
+    "TrialTypeSave",
+    "timefpabort",
+    "repeatflag",
+    "monkeynotinitiated"
+)
 
 def mat_data(path: Path) -> np.ndarray:
     return scipy.io.loadmat(
@@ -29,17 +50,18 @@ class Session:
 
     def __init__(self, matfile_path: Path):
         """Construct a Session object from a path to its .mat file."""
-        pds_data = mat_data(matfile_path)["PDS"]
-        self.pds_data = pds_data
-        self.data = pd.DataFrame(
-            {
-                "fractals": pds_data["fractals"].item(),
-            },
-            index=pd.Index(
-                pds_data["trialnumber"].item(),
-                name="Trial Number",
-            ),
-        )
+        self.start_datetime = start_dt(matfile_path)
+        self.trials = mat_data(matfile_path)["PDS"]
+
+        # self.data = pd.DataFrame(
+        #     {
+        #         "fractals": pds_data["fractals"].item(),
+        #     },
+        #     index=pd.Index(
+        #         pds_data["trialnumber"].item(),
+        #         name="Trial Number",
+        #     ),
+        # )
 
     sub_arrays = (
         "EyeJoy",
@@ -56,6 +78,21 @@ class Session:
         "targetacquisitionthreshold",
         "ITI_dur",
     )
+
+    def as_pandas(self):
+        trials = self.trials
+        return pd.DataFrame(pd.Series(trials[field].item(), name=field) for field in session_attr).T
+
+    def as_daskdf(self):
+        return dd.read_parquet(f"data/BFINAC_VNS/parquet/{self.start_datetime.strftime("%Y-%m-%d_%H_%M")}.parquet")
+
+    def to_parquet(self):
+        self.as_pandas().to_parquet(f"data/BFINAC_VNS/parquet/{self.start_datetime.strftime("%Y-%m-%d_%H_%M")}.parquet")
+
+
+    def to_polars(self):
+        trials = self.trials
+        return pl.DataFrame(pl.Series(name=field, values=trials[field].item()) for field in session_attr)
 
     def column_measures(self):
         return self.data_struct("PDS").dtype.names

@@ -7,51 +7,13 @@ import xarray as xr
 
 __all__ = ["Experiment"]
 
+from vns.session import Session
 
 class Experiment:
-    """All data from an experiment."""
 
-    def __repr__(self):
-        return "Experiment('BFINAC_VNS')"
+    def __init__(self, label, filetype="parquet"):
+        self.path = Path("data") / label / filetype
+        self.sessions = (Session(session) for session in self.path.glob(f"*.{filetype}"))
 
-    def sessions(self):
-        paths = Path("/workspaces/vns/data/BFINAC_VNS").glob("*.mat")
-        return xr.Dataset(
-            {
-                "trials": (
-                    "session",
-                    xr.DataArray(
-                        scipy.io.loadmat(
-                            "/workspaces/vns/data/BFINAC_VNS/BFnovelinac_01_02_2019_15_03.mat",
-                            squeeze_me=True,
-                        )["PDS"]["trialnumber"].item(),
-                        dims=("trial"),
-                    ),
-                ),
-            },
-            coords={
-                "session": xr.DataArray(
-                    pd.Index(
-                        sorted(
-                            [
-                                pd.to_datetime(
-                                    path.stem.split("_", maxsplit=1)[1],
-                                    format="%d_%m_%Y_%H_%M",
-                                )
-                                for path in paths
-                            ],
-                        ),
-                        name="start_date",
-                    ),
-                ),
-            },
-        )
-
-    def plot(self):
-        return px.line(
-            self.data,
-            x="Trial",
-            y="Proportion Looking",
-            template="plotly_white",
-            facet_col="Day",
-        )
+    def mat2parquet(self):
+        list(session.to_parquet() for session in self.sessions)

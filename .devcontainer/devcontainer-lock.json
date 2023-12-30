@@ -1,5 +1,10 @@
 {
   "features": {
+    "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get:1": {
+      "version": "1.0.15",
+      "resolved": "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get@sha256:276d781fc1d908d75b3bda305275ef19d948cfcac06c1d8f710da4054d5d54ab",
+      "integrity": "sha256:276d781fc1d908d75b3bda305275ef19d948cfcac06c1d8f710da4054d5d54ab"
+    },
     "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
       "version": "1.1.2",
       "resolved": "ghcr.io/rocker-org/devcontainer-features/quarto-cli@sha256:5974cce8e6859f55907ed01bbe32a9b0dc9704e398b4eabeaab846b6b6bf56da",

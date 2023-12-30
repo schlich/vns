@@ -1,13 +1,15 @@
 {
-  "name": "VNS (conda)",
+  "name": "VNS (pixi)",
   "image": "mcr.microsoft.com/devcontainers/python:3.12",
   "features": {
     "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {"version": "prerelease"},
+    "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get:1": {}
   },
   "containerEnv": {
-    "MAMBA_ALWAYS_YES": "true",
-    "HATCH_ENV": "dev"
+    "QUARTO_PYTHON": "${containerWorkspaceFolder}/.pixi/env/bin/python",
+    "TRAME_DISABLE_V3_WARNING": "1"
   },
+  "postCreateCommand": "curl -fsSL https://pixi.sh/install.sh | bash",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -32,8 +34,11 @@
           },
           "editor.defaultFormatter": "charliermarsh.ruff"
         },
-        "dotfiles.repository": "schlich/.dotfiles"
+        "python.defaultInterpreterPath": ".pixi/env/bin/python",
+        "jupyter.notebookFileRoot": "${containerWorkspaceFolder}",
+        "terminal.integrated.defaultProfile.linux": "bash"
       }
     }
-  }
+  },
+  "forwardPorts": [8000]
 }

@@ -22,3 +22,7 @@ dist
 _proc
 nbs/_docs
 .micromamba
+# pixi environments
+.pixi
+
+assets

@@ -1,1 +1,4 @@
 *.ipynb merge=nbdev-merge
+# GitHub syntax highlighting
+pixi.lock linguist-language=YAML
+

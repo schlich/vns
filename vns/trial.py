@@ -1,9 +1,10 @@
 import pandas as pd
+import zarr
 
 from vns.session import Session
 
 
-def eyejoy(pds_data):
+def _eyejoy(pds_data):
     fields = ["x", "y", "pupil", "t", "t0"]
     df = pd.DataFrame.from_records(
         pds_data["EyeJoy"].item(),
@@ -17,5 +18,9 @@ def eyejoy(pds_data):
 class Trial:
     def __init__(self, session: Session, trial_number: int):
         pds_data = session.pds_data
-        self.trial = pds_data["trialnumber"].item()[trial_number]
-        self.eyejoy = eyejoy(pds_data)
+        trial = pds_data["trialnumber"].item()
+        zarr.save("data/trial1.zarr", trial)
+        self.trial = trial
+
+    def eyejoy(self):
+        return _eyejoy(self.pds_data)

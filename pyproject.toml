@@ -5,16 +5,15 @@ build-backend = "hatchling.build"
 [project]
 name = "vns"
 version = "0.1.0"
-license = { file = "LICENSE" }
+license = { text = "GPL-3.0-or-later" }
 readme = "README.md"
-dependencies = ["trame"]
 
 [tool.ruff]
 extend-include = ["*.ipynb"]
 fix = true
 select = ["ALL"]
-ignore = ["ANN101", "ANN201", "D100", "D102", "D105", "ANN204"]
+ignore = ["ANN101", "ANN201", "D100", "D102", "D103", "D105", "ANN204"]
 
 [tool.pyright]
-venvPath = ".micromamba/envs"
-venv = "vns"
+venvPath = ".pixi"
+venv = "env"

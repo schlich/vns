@@ -1,5 +1,5 @@
 {
-  "name": "VNS (micromamba)",
+  "name": "VNS (conda)",
   "image": "mcr.microsoft.com/devcontainers/python:3.12",
   "features": {
     "ghcr.io/rocker-org/devcontainer-features/miniforge:1": {},
@@ -18,7 +18,6 @@
         "ms-toolsai.datawrangler",
         "charliermarsh.ruff",
         "GitHub.copilot",
-        "HamelHusain.nbdev",
         "tamasfe.even-better-toml",
         "redhat.vscode-yaml",
         "mechatroner.rainbow-csv",
@@ -36,8 +35,6 @@
           "editor.defaultFormatter": "charliermarsh.ruff"
         },
         "dotfiles.repository": "schlich/.dotfiles"
-        // "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.micromamba/envs/vns/bin/python",
-        // "jupyter.notebookFileRoot": "${containerWorkspaceFolder}"
       }
     }
   }

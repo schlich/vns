@@ -33,6 +33,8 @@ trame = ">=3.4.0,<3.5"
 trame-vtk = ">=2.6.3,<2.7"
 trame-plotly = ">=2.1.1,<2.2"
 trame-vuetify = ">=2.3.1,<2.4"
-
-[pypi-dependencies]
-polars = { version = "*", extras = ["numpy"] }
+vtk = ">=9.2.6,<9.3"
+numpy = ">=1.26.2,<1.27"
+pytest = ">=7.4.4,<7.5"
+ipdb = ">=0.13.13,<0.14"
+cmake = ">=3.28.1,<3.29"

@@ -1,19 +1,26 @@
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
 [project]
 name = "vns"
 version = "0.1.0"
 license = { text = "GPL-3.0-or-later" }
 readme = "README.md"
+dependencies = ["scipy", "pandas"]
 
 [tool.ruff]
+ignore = [
+    "ANN101",
+    "ANN201",
+    "ANN204",
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+    "D105",
+    "D107",
+    "S101"
+]
 extend-include = ["*.ipynb"]
 fix = true
 select = ["ALL"]
-ignore = ["ANN101", "ANN201", "D100", "D102", "D103", "D105", "ANN204"]
 
-[tool.pyright]
-venvPath = ".pixi"
-venv = "env"
+[tool.setuptools]
+packages = ["vns", "tests"]

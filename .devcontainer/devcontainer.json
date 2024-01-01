@@ -3,7 +3,8 @@
   "image": "mcr.microsoft.com/devcontainers/python:3.12",
   "features": {
     "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {"version": "prerelease"},
-    "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get:1": {}
+    "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get:1": {},
+    "ghcr.io/devcontainers/features/rust:1": {}
   },
   "containerEnv": {
     "QUARTO_PYTHON": "${containerWorkspaceFolder}/.pixi/env/bin/python",
@@ -36,9 +37,9 @@
         },
         "python.defaultInterpreterPath": ".pixi/env/bin/python",
         "jupyter.notebookFileRoot": "${containerWorkspaceFolder}",
-        "terminal.integrated.defaultProfile.linux": "bash"
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "python.condaPath": "pixi"
       }
     }
-  },
-  "forwardPorts": [8000]
+  }
 }

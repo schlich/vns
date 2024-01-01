@@ -1,0 +1,13 @@
+[package]
+name = "vns"
+version = "0.1.0"
+edition = "2021"
+
+
+[dependencies]
+evcxr_jupyter = "0.17.0"
+plotly = "0.8.4"
+
+[[bin]]
+name = "vns"
+path = "main.rs"

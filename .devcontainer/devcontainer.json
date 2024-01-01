@@ -10,7 +10,7 @@
     "QUARTO_PYTHON": "${containerWorkspaceFolder}/.pixi/env/bin/python",
     "TRAME_DISABLE_V3_WARNING": "1"
   },
-  "postCreateCommand": "curl -fsSL https://pixi.sh/install.sh | bash",
+  "postCreateCommand": "curl -fsSL https://pixi.sh/install.sh | bash && cargo install --locked evcxr_jupyter",
   "customizations": {
     "vscode": {
       "extensions": [

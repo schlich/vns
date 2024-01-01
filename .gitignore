@@ -26,3 +26,7 @@ nbs/_docs
 .pixi
 
 assets
+
+# Added by cargo
+
+/target

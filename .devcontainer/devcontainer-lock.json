@@ -10,6 +10,11 @@
       "resolved": "ghcr.io/devcontainers/features/rust@sha256:e81d6a952842a4e10d1e4dbb9cb295a1ead44befd8212522a67b8867427b929d",
       "integrity": "sha256:e81d6a952842a4e10d1e4dbb9cb295a1ead44befd8212522a67b8867427b929d"
     },
+    "ghcr.io/lumenpink/devcontainer-features/bun:0": {
+      "version": "0.0.1",
+      "resolved": "ghcr.io/lumenpink/devcontainer-features/bun@sha256:92ef26099b83fe1202123734fff18db1b51dcdbce532c6cf7a79525e163e2ce9",
+      "integrity": "sha256:92ef26099b83fe1202123734fff18db1b51dcdbce532c6cf7a79525e163e2ce9"
+    },
     "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
       "version": "1.1.2",
       "resolved": "ghcr.io/rocker-org/devcontainer-features/quarto-cli@sha256:5974cce8e6859f55907ed01bbe32a9b0dc9704e398b4eabeaab846b6b6bf56da",

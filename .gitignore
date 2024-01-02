@@ -30,3 +30,11 @@ assets
 # Added by cargo
 
 /target
+
+figures
+
+.Trash-1000
+
+.ipynb_checkpoints
+
+nbs/dash_files

@@ -5,8 +5,8 @@ edition = "2021"
 
 
 [dependencies]
-evcxr_jupyter = "0.17.0"
-plotly = "0.8.4"
+plotly = { version = "0.8.4", features = ["wasm"] }
+polars = { version = "0.35.4", features = ["parquet"] }
 
 [[bin]]
 name = "vns"

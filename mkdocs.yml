@@ -1,0 +1,14 @@
+site_name: My Docs
+
+theme:
+  name: material
+
+plugins:
+- mkdocstrings:
+    handlers:
+      python:
+        options:
+          summary: true
+          docstring_options:
+            docstring_style: "google"
+    default_handler: python

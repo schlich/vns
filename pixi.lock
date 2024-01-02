@@ -121,6 +121,18 @@ package:
   size: 554938
   timestamp: 1693607226431
 - platform: linux-64
+  name: annotated-types
+  version: 0.6.0
+  category: main
+  manager: pypi
+  requires_dist:
+  - typing-extensions >=4.0.0 ; python_version < '3.9'
+  requires_python: '>=3.8'
+  url: https://files.pythonhosted.org/packages/28/78/d31230046e58c207284c6b2c4e8d96e6d3cb4e52354721b944d3e1ee4aa5/annotated_types-0.6.0-py3-none-any.whl#sha256=0641064de18ba7a25dee8f96403ebc39113d0cb953a01429249d5c7564666a43
+  hash:
+    md5: null
+    sha256: 0641064de18ba7a25dee8f96403ebc39113d0cb953a01429249d5c7564666a43
+- platform: linux-64
   name: anyio
   version: 4.2.0
   category: main
@@ -1131,6 +1143,31 @@ package:
   size: 18746852
   timestamp: 1702578255933
 - platform: linux-64
+  name: cmasher
+  version: 1.7.2
+  category: main
+  manager: conda
+  dependencies:
+  - colorspacious >=1.1.0
+  - matplotlib-base >=3.5.0
+  - numpy >=1.19.3
+  - python >=3.9,<4.0
+  url: https://conda.anaconda.org/conda-forge/noarch/cmasher-1.7.2-pyhd8ed1ab_0.conda
+  hash:
+    md5: 4af45cf9663a92d7dbfefef3933bc677
+    sha256: 2c569dd196186af1eb50a188f916a0136c34da77416aa09a4172f1ee7872a159
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: BSD-3-Clause
+  license_family: BSD
+  noarch: python
+  size: 494319
+  timestamp: 1703192559089
+  purls:
+  - pkg:pypi/cmasher
+- platform: linux-64
   name: colorama
   version: 0.4.6
   category: main
@@ -1174,6 +1211,29 @@ package:
   timestamp: 1664843356249
   purls:
   - pkg:pypi/colorcet
+- platform: linux-64
+  name: colorspacious
+  version: 1.1.2
+  category: main
+  manager: conda
+  dependencies:
+  - numpy
+  - python
+  url: https://conda.anaconda.org/conda-forge/noarch/colorspacious-1.1.2-pyh24bf2e0_0.tar.bz2
+  hash:
+    md5: b73afa0d009a51cabd3ec99c4d2ef4f3
+    sha256: f745cb501fbd4abaecf316ff1f6376246fd4e827b34c4a62fd0d3d06d2e5c102
+  build: pyh24bf2e0_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  noarch: python
+  size: 30635
+  timestamp: 1532052989060
+  purls:
+  - pkg:pypi/colorspacious
 - platform: linux-64
   name: comm
   version: 0.1.4
@@ -1222,6 +1282,25 @@ package:
   timestamp: 1699041681603
   purls:
   - pkg:pypi/contourpy
+- platform: linux-64
+  name: cssselect
+  version: 1.2.0
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.7
+  url: https://conda.anaconda.org/conda-forge/noarch/cssselect-1.2.0-pyhd8ed1ab_0.tar.bz2
+  hash:
+    md5: a89ece27cf07711a44465fe954fb8f1c
+    sha256: be04edb6ae6fffbe891cd5acc4c755e5a69f0d0fbab0d9dbe3496f55d737b086
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: BSD 3-Clause
+  noarch: python
+  size: 21128
+  timestamp: 1666980521670
 - platform: linux-64
   name: cycler
   version: 0.12.1
@@ -2022,6 +2101,28 @@ package:
   size: 116549
   timestamp: 1594303828933
 - platform: linux-64
+  name: ghp-import
+  version: 2.1.0
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.6
+  - python-dateutil >=2.8.1
+  url: https://conda.anaconda.org/conda-forge/noarch/ghp-import-2.1.0-pyhd8ed1ab_0.tar.bz2
+  hash:
+    md5: 6d8d61116031a3f5b1f32e7899785866
+    sha256: 097d9b4c946b195800bc68f68393370049238509b08ef828c06fbf481bbc139c
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: LicenseRef-Tumbolia-Public
+  noarch: python
+  size: 15504
+  timestamp: 1651585848291
+  purls:
+  - pkg:pypi/ghp-import
+- platform: linux-64
   name: gl2ps
   version: 1.4.2
   category: main
@@ -2193,6 +2294,29 @@ package:
   license: LGPLv2
   size: 104701
   timestamp: 1604365484436
+- platform: linux-64
+  name: griffe
+  version: 0.38.1
+  category: main
+  manager: conda
+  dependencies:
+  - colorama >=0.4
+  - python >=3.8
+  url: https://conda.anaconda.org/conda-forge/noarch/griffe-0.38.1-pyhd8ed1ab_0.conda
+  hash:
+    md5: a7f00e8afb90a766122f880f98f8d182
+    sha256: a266a55657242a2dab60c6d8b5a568dcf02c979356610bf24f2527f09df78bd5
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  noarch: python
+  size: 418809
+  timestamp: 1701866604875
+  purls:
+  - pkg:pypi/griffe
 - platform: linux-64
   name: gst-plugins-base
   version: 1.22.8
@@ -2537,6 +2661,8 @@ package:
   noarch: python
   size: 11101
   timestamp: 1673103208955
+  purls:
+  - pkg:pypi/iniconfig
 - platform: linux-64
   name: ipdb
   version: 0.13.13
@@ -5119,6 +5245,26 @@ package:
   size: 705641
   timestamp: 1700244910106
 - platform: linux-64
+  name: libxslt
+  version: 1.1.37
+  category: main
+  manager: conda
+  dependencies:
+  - libgcc-ng >=12
+  - libxml2 >=2.11.3,<2.12.0a0
+  url: https://conda.anaconda.org/conda-forge/linux-64/libxslt-1.1.37-h0054252_1.conda
+  hash:
+    md5: f27960e8873abb5476e96ef33bdbdccd
+    sha256: 98739c3a7e1f6a8fb05e0bf54784fec4dfa2a640e4680ad0efc5cb65f5581cc8
+  build: h0054252_1
+  arch: x86_64
+  subdir: linux-64
+  build_number: 1
+  license: MIT
+  license_family: MIT
+  size: 254144
+  timestamp: 1684274866403
+- platform: linux-64
   name: libzip
   version: 1.10.1
   category: main
@@ -5226,6 +5372,33 @@ package:
   license_family: MIT
   size: 123004
   timestamp: 1695547510797
+  purls:
+  - pkg:pypi/loguru
+- platform: linux-64
+  name: lxml
+  version: 4.9.3
+  category: main
+  manager: conda
+  dependencies:
+  - libgcc-ng >=12
+  - libxml2 >=2.11.6,<2.12.0a0
+  - libxslt >=1.1.37,<2.0a0
+  - libzlib >=1.2.13,<1.3.0a0
+  - python >=3.12,<3.13.0a0
+  - python_abi 3.12.* *_cp312
+  url: https://conda.anaconda.org/conda-forge/linux-64/lxml-4.9.3-py312he528aba_3.conda
+  hash:
+    md5: 701aa9009ed87062a9392dd86cee4220
+    sha256: f78f6a0bf93cd1ac4741ab2e6c4c6cc30babb3d03c8b6d08bb9d6b2dbe99ef4b
+  build: py312he528aba_3
+  arch: x86_64
+  subdir: linux-64
+  build_number: 3
+  license: BSD-3-Clause and MIT-CMU
+  size: 1464921
+  timestamp: 1702644158453
+  purls:
+  - pkg:pypi/lxml
 - platform: linux-64
   name: lz4
   version: 4.3.2
@@ -5316,6 +5489,28 @@ package:
   timestamp: 1686175179621
   purls:
   - pkg:pypi/markdown-it-py
+- platform: linux-64
+  name: markdown2
+  version: 2.4.12
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.7,<4.0
+  url: https://conda.anaconda.org/conda-forge/noarch/markdown2-2.4.12-pyhd8ed1ab_0.conda
+  hash:
+    md5: 1a864a2df3117e6286adfa06b621fd6e
+    sha256: 850aa8f8540318a9692120d293b9a3956a561501262dcbfbf72b007dd3469f7d
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  noarch: python
+  size: 43080
+  timestamp: 1702914203246
+  purls:
+  - pkg:pypi/markdown2
 - platform: linux-64
   name: markupsafe
   version: 2.1.3
@@ -5470,6 +5665,26 @@ package:
   purls:
   - pkg:pypi/mdurl
 - platform: linux-64
+  name: mergedeep
+  version: 1.3.4
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.6
+  url: https://conda.anaconda.org/conda-forge/noarch/mergedeep-1.3.4-pyhd8ed1ab_0.tar.bz2
+  hash:
+    md5: 1a160a3cab5cb6bd46264b52cd6f69a2
+    sha256: 41ad8c16876820981adfc6e17a62935c950214bd9a9bb092e6aaefdc89a33f0b
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  noarch: python
+  size: 9598
+  timestamp: 1612711404414
+- platform: linux-64
   name: mistune
   version: 3.0.2
   category: main
@@ -5491,6 +5706,183 @@ package:
   timestamp: 1698947249750
   purls:
   - pkg:pypi/mistune
+- platform: linux-64
+  name: mkdocs
+  version: 1.5.3
+  category: main
+  manager: conda
+  dependencies:
+  - click >=7.0
+  - colorama >=0.4
+  - ghp-import >=1.0
+  - importlib-metadata >=4.3
+  - jinja2 >=2.11.1
+  - markdown >=3.2.1
+  - markupsafe >=2.0.1
+  - mergedeep >=1.3.4
+  - packaging >=20.5
+  - pathspec >=0.11.1
+  - platformdirs >=2.2.0
+  - python >=3.7
+  - pyyaml >=5.1
+  - pyyaml-env-tag >=0.1
+  - typing-extensions >=3.10
+  - watchdog >=2.0
+  url: https://conda.anaconda.org/conda-forge/noarch/mkdocs-1.5.3-pyhd8ed1ab_0.conda
+  hash:
+    md5: 1e432aebaa009b030cce33a554939d8e
+    sha256: cd57f3805a38bc3b3356a37d4bd9af7e227972286f61eae3c88d356216bc7159
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  constrains:
+  - babel >=2.9.0
+  license: BSD-2-Clause
+  license_family: BSD
+  noarch: python
+  size: 2862150
+  timestamp: 1695086687269
+  purls:
+  - pkg:pypi/mkdocs
+- platform: linux-64
+  name: mkdocs-autorefs
+  version: 0.5.0
+  category: main
+  manager: conda
+  dependencies:
+  - markdown >=3.3
+  - mkdocs >=1.1
+  - python >=3.8,<4.0
+  url: https://conda.anaconda.org/conda-forge/noarch/mkdocs-autorefs-0.5.0-pyhd8ed1ab_0.conda
+  hash:
+    md5: fa5f6051b6a581ad70702f33594840cb
+    sha256: 9bf6a455ebeff9e58e8cb1467844be87066e0a05f4b53dcab132552968739957
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: ISC
+  noarch: python
+  size: 17631
+  timestamp: 1691023192300
+  purls:
+  - pkg:pypi/mkdocs-autorefs
+- platform: linux-64
+  name: mkdocs-material
+  version: 9.3.1
+  category: main
+  manager: conda
+  dependencies:
+  - babel >=2.10.3
+  - colorama >=0.4
+  - jinja2 >=3.0
+  - lxml >=4.6
+  - markdown >=3.2
+  - mkdocs >=1.5.2
+  - mkdocs-material-extensions >=1.1
+  - paginate >=0.5.6
+  - pygments >=2.14
+  - pymdown-extensions >=9.9.1
+  - python >=3.7
+  - readtime >=2.0
+  - regex >=2022.4.24
+  - requests >=2.26
+  url: https://conda.anaconda.org/conda-forge/noarch/mkdocs-material-9.3.1-pyhd8ed1ab_0.conda
+  hash:
+    md5: ceddc243ac3aeedaf93e0457ede440c2
+    sha256: 0c2f17f54c37361ec7dc37e7766f526fb453f4e1a218d23e0226d9a80578ece3
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  noarch: python
+  size: 4697131
+  timestamp: 1694476507417
+  purls:
+  - pkg:pypi/mkdocs-material
+- platform: linux-64
+  name: mkdocs-material-extensions
+  version: 1.3.1
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.8
+  url: https://conda.anaconda.org/conda-forge/noarch/mkdocs-material-extensions-1.3.1-pyhd8ed1ab_0.conda
+  hash:
+    md5: 6e7e399b351756b9d181c64a362bdcb5
+    sha256: e01a349f4816ba7513f8b230ca2c4f703a7ccc7f7d78535076f9215ca766ec78
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  constrains:
+  - mkdocs-material >=5.0.0
+  license: MIT
+  license_family: MIT
+  noarch: python
+  size: 16011
+  timestamp: 1700695213251
+  purls:
+  - pkg:pypi/mkdocs-material-extensions
+- platform: linux-64
+  name: mkdocstrings
+  version: 0.24.0
+  category: main
+  manager: conda
+  dependencies:
+  - click >=7.0
+  - importlib-metadata >=4.6
+  - jinja2 >=2.11.1
+  - markdown >=3.3
+  - markupsafe >=1.1
+  - mkdocs >=1.4
+  - mkdocs-autorefs >=0.3.1
+  - platformdirs >=2.2.0
+  - pymdown-extensions >=6.3
+  - python >=3.8,<4.0
+  - typing-extensions >=4.1
+  url: https://conda.anaconda.org/conda-forge/noarch/mkdocstrings-0.24.0-pyhd8ed1ab_0.conda
+  hash:
+    md5: 93518968bd9397812df938dd0b049cc0
+    sha256: ae22b6842432e26df296c75877ac08709a311c5e93d0787d9035c0f222d6a784
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  noarch: python
+  size: 29334
+  timestamp: 1700010977
+  purls:
+  - pkg:pypi/mkdocstrings
+- platform: linux-64
+  name: mkdocstrings-python
+  version: 1.7.5
+  category: main
+  manager: conda
+  dependencies:
+  - griffe >=0.37
+  - mkdocstrings >=0.20
+  - python >=3.8
+  url: https://conda.anaconda.org/conda-forge/noarch/mkdocstrings-python-1.7.5-pyhd8ed1ab_0.conda
+  hash:
+    md5: 2d9ae5ec30f34b3d70209086a2b67505
+    sha256: 8ef3c9447d24bad0a0730a41608ff53b51e6205706fdd840d96fb3c79d816e8a
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  noarch: python
+  size: 34608
+  timestamp: 1700583521654
+  purls:
+  - pkg:pypi/mkdocstrings-python
 - platform: linux-64
   name: more-itertools
   version: 10.1.0
@@ -5579,6 +5971,16 @@ package:
   size: 60974
   timestamp: 1696716220695
 - platform: linux-64
+  name: multimethod
+  version: '1.10'
+  category: main
+  manager: pypi
+  requires_python: '>=3.8'
+  url: https://files.pythonhosted.org/packages/7f/bd/750245e47e7f307d9f94d4fa84727f4ed9956005dfa671d58be1d531a0f6/multimethod-1.10-py3-none-any.whl#sha256=afd84da9c3d0445c84f827e4d63ad42d17c6d29b122427c6dee9032ac2d2a0d4
+  hash:
+    md5: null
+    sha256: afd84da9c3d0445c84f827e4d63ad42d17c6d29b122427c6dee9032ac2d2a0d4
+- platform: linux-64
   name: munkres
   version: 1.1.4
   category: main
@@ -5598,6 +6000,16 @@ package:
   noarch: python
   size: 12452
   timestamp: 1600387789153
+- platform: linux-64
+  name: mypy-extensions
+  version: 1.0.0
+  category: main
+  manager: pypi
+  requires_python: '>=3.5'
+  url: https://files.pythonhosted.org/packages/2a/e2/5d3f6ada4297caebe1a2add3b126fe800c96f56dbe5d1988a2cbe0b267aa/mypy_extensions-1.0.0-py3-none-any.whl#sha256=4392f6c0eb8a5668a69e23d168ffa70f0be9ccfd32b5cc2d26a34ae5b844552d
+  hash:
+    md5: null
+    sha256: 4392f6c0eb8a5668a69e23d168ffa70f0be9ccfd32b5cc2d26a34ae5b844552d
 - platform: linux-64
   name: mysql-common
   version: 8.0.33
@@ -5870,6 +6282,32 @@ package:
   noarch: python
   size: 34358
   timestamp: 1683893151613
+- platform: linux-64
+  name: nodejs
+  version: 20.9.0
+  category: main
+  manager: conda
+  dependencies:
+  - __glibc >=2.17,<3.0.a0
+  - icu >=73.2,<74.0a0
+  - libgcc-ng >=12
+  - libstdcxx-ng >=12
+  - libuv >=1.46.0,<1.47.0a0
+  - libzlib >=1.2.13,<1.3.0a0
+  - openssl >=3.1.4,<4.0a0
+  - zlib
+  url: https://conda.anaconda.org/conda-forge/linux-64/nodejs-20.9.0-hb753e55_0.conda
+  hash:
+    md5: ddfcb003b0a6804fabe7dfbf1be16651
+    sha256: 4d35f8151f83bc561e4bcb41b46dcf77ec708c88eb333d1376f37371288f46ad
+  build: hb753e55_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  size: 17141416
+  timestamp: 1700390394425
 - platform: linux-64
   name: notebook
   version: 7.0.6
@@ -6174,6 +6612,28 @@ package:
   purls:
   - pkg:pypi/packaging
 - platform: linux-64
+  name: paginate
+  version: 0.5.6
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.4
+  url: https://conda.anaconda.org/conda-forge/noarch/paginate-0.5.6-pyhd8ed1ab_0.conda
+  hash:
+    md5: 5d454974a1b5c6f4d468f91812331d53
+    sha256: 8d9d18c2892d49c33fab3e215cdbc55a2ba30a28c1f52e5e5d61cb435803726b
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  noarch: python
+  size: 18537
+  timestamp: 1693246970487
+  purls:
+  - pkg:pypi/paginate
+- platform: linux-64
   name: pandas
   version: 2.1.4
   category: main
@@ -6199,6 +6659,72 @@ package:
   license_family: BSD
   size: 14679642
   timestamp: 1702057691853
+- platform: linux-64
+  name: pandas-stubs
+  version: 2.1.4.231227
+  category: main
+  manager: pypi
+  requires_dist:
+  - numpy >=1.26.0 ; python_version < '3.13'
+  - types-pytz >=2022.1.1
+  requires_python: '>=3.9'
+  url: https://files.pythonhosted.org/packages/c0/6d/c5c23926fcc7526a5df32a8f3b3540948be8dd4c25f4a097f9091d40535c/pandas_stubs-2.1.4.231227-py3-none-any.whl#sha256=211fc23e6ae87073bdf41dbf362c4a4d85e1e3477cb078dbac3da6c7fdaefba8
+  hash:
+    md5: null
+    sha256: 211fc23e6ae87073bdf41dbf362c4a4d85e1e3477cb078dbac3da6c7fdaefba8
+- platform: linux-64
+  name: pandera
+  version: 0.18.0
+  category: main
+  manager: pypi
+  requires_dist:
+  - multimethod
+  - numpy >=1.19.0
+  - packaging >=20.0
+  - pandas >=1.2.0
+  - pydantic
+  - typeguard >=3.0.2
+  - typing-inspect >=0.6.0
+  - wrapt
+  - typing-extensions >=3.7.4.3 ; python_version < '3.8'
+  - black ; extra == 'all'
+  - pyyaml >=5.1 ; extra == 'all'
+  - hypothesis >=5.41.1 ; extra == 'all'
+  - shapely ; extra == 'all'
+  - scipy ; extra == 'all'
+  - pyspark >=3.2.0 ; extra == 'all'
+  - pandas-stubs ; extra == 'all'
+  - fastapi ; extra == 'all'
+  - ray ; extra == 'all'
+  - dask ; extra == 'all'
+  - geopandas ; extra == 'all'
+  - frictionless <=4.40.8 ; extra == 'all'
+  - modin ; extra == 'all'
+  - dask ; extra == 'dask'
+  - fastapi ; extra == 'fastapi'
+  - geopandas ; extra == 'geopandas'
+  - shapely ; extra == 'geopandas'
+  - scipy ; extra == 'hypotheses'
+  - pyyaml >=5.1 ; extra == 'io'
+  - black ; extra == 'io'
+  - frictionless <=4.40.8 ; extra == 'io'
+  - modin ; extra == 'modin'
+  - ray ; extra == 'modin'
+  - dask ; extra == 'modin'
+  - modin ; extra == 'modin-dask'
+  - dask ; extra == 'modin-dask'
+  - modin ; extra == 'modin-ray'
+  - ray ; extra == 'modin-ray'
+  - pandas-stubs ; extra == 'mypy'
+  - pyspark >=3.2.0 ; extra == 'pyspark'
+  - hypothesis >=5.41.1 ; extra == 'strategies'
+  requires_python: '>=3.7'
+  extras:
+  - mypy
+  url: https://files.pythonhosted.org/packages/f5/2b/c01ef6aad281332f2628a4ae9c3cd8ba6fd632e547e9a645ffe18aeaa94f/pandera-0.18.0-py3-none-any.whl#sha256=fe2da835a16df5a7e49fbfb828f1eeaea9d6f4534f124630957e64fef53e7e73
+  hash:
+    md5: null
+    sha256: fe2da835a16df5a7e49fbfb828f1eeaea9d6f4534f124630957e64fef53e7e73
 - platform: linux-64
   name: pandoc
   version: 3.1.3
@@ -6345,6 +6871,28 @@ package:
   purls:
   - pkg:pypi/partd
 - platform: linux-64
+  name: pathspec
+  version: 0.12.1
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.7
+  url: https://conda.anaconda.org/conda-forge/noarch/pathspec-0.12.1-pyhd8ed1ab_0.conda
+  hash:
+    md5: 17064acba08d3686f1135b5ec1b32b12
+    sha256: 4e534e66bfe8b1e035d2169d0e5b185450546b17e36764272863e22e0370be4d
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: MPL-2.0
+  license_family: MOZILLA
+  noarch: python
+  size: 41173
+  timestamp: 1702250135032
+  purls:
+  - pkg:pypi/pathspec
+- platform: linux-64
   name: patsy
   version: 0.5.5
   category: main
@@ -6463,6 +7011,30 @@ package:
   size: 46418602
   timestamp: 1697423804634
 - platform: linux-64
+  name: pip
+  version: 23.3.2
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.7
+  - setuptools
+  - wheel
+  url: https://conda.anaconda.org/conda-forge/noarch/pip-23.3.2-pyhd8ed1ab_0.conda
+  hash:
+    md5: 8591c748f98dcc02253003533bc2e4b1
+    sha256: 29096d1d53c61aeef518729add2f405df86b3629d1d738a35b15095e6a02eeed
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  noarch: python
+  size: 1395000
+  timestamp: 1702822023465
+  purls:
+  - pkg:pypi/pip
+- platform: linux-64
   name: pixman
   version: 0.42.2
   category: main
@@ -6569,6 +7141,8 @@ package:
   noarch: python
   size: 22548
   timestamp: 1693086745921
+  purls:
+  - pkg:pypi/pluggy
 - platform: linux-64
   name: ply
   version: '3.11'
@@ -6967,6 +7541,34 @@ package:
   purls:
   - pkg:pypi/pyct
 - platform: linux-64
+  name: pydantic
+  version: 2.5.3
+  category: main
+  manager: pypi
+  requires_dist:
+  - annotated-types >=0.4.0
+  - importlib-metadata ; python_version == '3.7'
+  - pydantic-core ==2.14.6
+  - typing-extensions >=4.6.1
+  - email-validator >=2.0.0 ; extra == 'email'
+  requires_python: '>=3.7'
+  url: https://files.pythonhosted.org/packages/dd/b7/9aea7ee6c01fe3f3c03b8ca3c7797c866df5fecece9d6cb27caa138db2e2/pydantic-2.5.3-py3-none-any.whl#sha256=d0caf5954bee831b6bfe7e338c32b9e30c85dfe080c843680783ac2b631673b4
+  hash:
+    md5: null
+    sha256: d0caf5954bee831b6bfe7e338c32b9e30c85dfe080c843680783ac2b631673b4
+- platform: linux-64
+  name: pydantic-core
+  version: 2.14.6
+  category: main
+  manager: pypi
+  requires_dist:
+  - typing-extensions >=4.6.0, !=4.7.0
+  requires_python: '>=3.7'
+  url: https://files.pythonhosted.org/packages/f3/62/076e6c43735950e911d80c6edf215314a8cf9b8adefe9613b72b09ccb1ee/pydantic_core-2.14.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl#sha256=e4ace1e220b078c8e48e82c081e35002038657e4b37d403ce940fa679e57113b
+  hash:
+    md5: null
+    sha256: e4ace1e220b078c8e48e82c081e35002038657e4b37d403ce940fa679e57113b
+- platform: linux-64
   name: pygments
   version: 2.17.2
   category: main
@@ -6988,6 +7590,28 @@ package:
   timestamp: 1700608076927
   purls:
   - pkg:pypi/pygments
+- platform: linux-64
+  name: pymdown-extensions
+  version: '10.7'
+  category: main
+  manager: conda
+  dependencies:
+  - markdown >=3.5
+  - python >=3.7
+  - pyyaml
+  url: https://conda.anaconda.org/conda-forge/noarch/pymdown-extensions-10.7-pyhd8ed1ab_0.conda
+  hash:
+    md5: 164cd3ba52e9c802a3034b39964281ec
+    sha256: a47aafadd17844c3166f47200e146e317f1b729a08557ce40156cc6ac12aaf90
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  noarch: python
+  size: 158711
+  timestamp: 1703983150106
 - platform: linux-64
   name: pyparsing
   version: 3.1.1
@@ -7063,6 +7687,30 @@ package:
   size: 85809
   timestamp: 1695418132533
 - platform: linux-64
+  name: pyquery
+  version: 2.0.0
+  category: main
+  manager: conda
+  dependencies:
+  - cssselect >=1.2.0
+  - lxml >=2.1
+  - python >=3.7
+  url: https://conda.anaconda.org/conda-forge/noarch/pyquery-2.0.0-pyhd8ed1ab_0.conda
+  hash:
+    md5: 9e4c3e498902146a499d0284136dc05f
+    sha256: 78cf1745b21202dcf944594643764f8318158a67049fb1c08879ac0ce5260bb6
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: BSD-3-Clause
+  license_family: BSD
+  noarch: python
+  size: 25970
+  timestamp: 1672255067553
+  purls:
+  - pkg:pypi/pyquery
+- platform: linux-64
   name: pysocks
   version: 1.7.1
   category: main
@@ -7112,6 +7760,8 @@ package:
   noarch: python
   size: 244564
   timestamp: 1704035308916
+  purls:
+  - pkg:pypi/pytest
 - platform: linux-64
   name: python
   version: 3.12.1
@@ -7325,6 +7975,29 @@ package:
   size: 196583
   timestamp: 1695373632212
 - platform: linux-64
+  name: pyyaml-env-tag
+  version: '0.1'
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.6
+  - pyyaml
+  url: https://conda.anaconda.org/conda-forge/noarch/pyyaml-env-tag-0.1-pyhd8ed1ab_0.tar.bz2
+  hash:
+    md5: 626ed9060ddeb681ddc42bcad89156ab
+    sha256: 900319483135730d9836855a807822f0500b1a239520749103e9ef9b7ba9f246
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  noarch: python
+  size: 7473
+  timestamp: 1624389117412
+  purls:
+  - pkg:pypi/pyyaml-env-tag
+- platform: linux-64
   name: pyzmq
   version: 25.1.2
   category: main
@@ -7465,6 +8138,24 @@ package:
   purls:
   - pkg:pypi/qtpy
 - platform: linux-64
+  name: ratinabox
+  version: 1.11.4
+  category: main
+  manager: pypi
+  requires_dist:
+  - numpy
+  - matplotlib
+  - scipy
+  - shapely
+  - pettingzoo >=1.23.0 ; extra == 'gymnasium'
+  - pytest ; extra == 'test'
+  - scikit-learn ; extra == 'test'
+  requires_python: '>=3.7'
+  url: https://files.pythonhosted.org/packages/73/da/dc97856fa66664647eb5330d81fed59d4a279533e5bd97576f1ae492676a/ratinabox-1.11.4-py3-none-any.whl#sha256=c5a2f1a0a2b961745a209787cc99b2d18bd2a8a470c5b56350e934dfaffaf3eb
+  hash:
+    md5: null
+    sha256: c5a2f1a0a2b961745a209787cc99b2d18bd2a8a470c5b56350e934dfaffaf3eb
+- platform: linux-64
   name: rdma-core
   version: '49.0'
   category: main
@@ -7526,6 +8217,31 @@ package:
   size: 281456
   timestamp: 1679532220005
 - platform: linux-64
+  name: readtime
+  version: 3.0.0
+  category: main
+  manager: conda
+  dependencies:
+  - beautifulsoup4 >=4.0.1
+  - markdown2 >=2.4.3
+  - pyquery >=1.2
+  - python >=3.8
+  url: https://conda.anaconda.org/conda-forge/noarch/readtime-3.0.0-pyhd8ed1ab_0.conda
+  hash:
+    md5: a65aacefffb0e4133f92c2496bb037ed
+    sha256: 23f53bbabc190e8c72b9c72bdcb378587774a0998e463bec61f178d8199d77dd
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: BSD-2-Clause
+  license_family: BSD
+  noarch: python
+  size: 12030
+  timestamp: 1692732640820
+  purls:
+  - pkg:pypi/readtime
+- platform: linux-64
   name: referencing
   version: 0.32.0
   category: main
@@ -7549,6 +8265,29 @@ package:
   timestamp: 1701974590156
   purls:
   - pkg:pypi/referencing
+- platform: linux-64
+  name: regex
+  version: 2023.12.25
+  category: main
+  manager: conda
+  dependencies:
+  - libgcc-ng >=12
+  - python >=3.12,<3.13.0a0
+  - python_abi 3.12.* *_cp312
+  url: https://conda.anaconda.org/conda-forge/linux-64/regex-2023.12.25-py312h98912ed_0.conda
+  hash:
+    md5: 58e9dcddb832981ce9263fdeb71f6343
+    sha256: 69312e8b8134e9bf2e94d5968edb06ad9e2a2b928e3b33e7110ef504a885f8a8
+  build: py312h98912ed_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: Python-2.0
+  license_family: PSF
+  size: 398588
+  timestamp: 1703393640402
+  purls:
+  - pkg:pypi/regex
 - platform: linux-64
   name: requests
   version: 2.31.0
@@ -7826,6 +8565,25 @@ package:
   timestamp: 1694548452441
   purls:
   - pkg:pypi/setuptools
+- platform: linux-64
+  name: shapely
+  version: 2.0.2
+  category: main
+  manager: pypi
+  requires_dist:
+  - numpy >=1.14
+  - numpydoc ==1.1.* ; extra == 'docs'
+  - matplotlib ; extra == 'docs'
+  - sphinx ; extra == 'docs'
+  - sphinx-book-theme ; extra == 'docs'
+  - sphinx-remove-toctrees ; extra == 'docs'
+  - pytest ; extra == 'test'
+  - pytest-cov ; extra == 'test'
+  requires_python: '>=3.7'
+  url: https://files.pythonhosted.org/packages/29/b7/754f971ebbcb747ef38147949f90b30d2232ee5b9af9daacd558cc1705e2/shapely-2.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl#sha256=a5533a925d8e211d07636ffc2fdd9a7f9f13d54686d00577eeb11d16f00be9c4
+  hash:
+    md5: null
+    sha256: a5533a925d8e211d07636ffc2fdd9a7f9f13d54686d00577eeb11d16f00be9c4
 - platform: linux-64
   name: sip
   version: 6.7.12
@@ -8673,6 +9431,25 @@ package:
   purls:
   - pkg:pypi/trame-vuetify
 - platform: linux-64
+  name: typeguard
+  version: 4.1.5
+  category: main
+  manager: pypi
+  requires_dist:
+  - importlib-metadata >=3.6 ; python_version < '3.10'
+  - typing-extensions >=4.7.0 ; python_version < '3.12'
+  - packaging ; extra == 'doc'
+  - Sphinx >=7 ; extra == 'doc'
+  - sphinx-autodoc-typehints >=1.2.0 ; extra == 'doc'
+  - coverage[toml] >=7 ; extra == 'test'
+  - pytest >=7 ; extra == 'test'
+  - mypy >=1.2.0 ; platform_python_implementation != 'PyPy' and extra == 'test'
+  requires_python: '>=3.8'
+  url: https://files.pythonhosted.org/packages/18/01/5fc45558268ced46d86292763477996a3cdd505567cd590a688e8cdc386e/typeguard-4.1.5-py3-none-any.whl#sha256=8923e55f8873caec136c892c3bed1f676eae7be57cdb94819281b3d3bc9c0953
+  hash:
+    md5: null
+    sha256: 8923e55f8873caec136c892c3bed1f676eae7be57cdb94819281b3d3bc9c0953
+- platform: linux-64
   name: types-python-dateutil
   version: 2.8.19.14
   category: main
@@ -8691,6 +9468,15 @@ package:
   noarch: python
   size: 21474
   timestamp: 1689883066161
+- platform: linux-64
+  name: types-pytz
+  version: 2023.3.1.1
+  category: main
+  manager: pypi
+  url: https://files.pythonhosted.org/packages/79/4f/58c28f50233612d9890cc2b068aee977ef3f7d6434ef4debf98162e34152/types_pytz-2023.3.1.1-py3-none-any.whl#sha256=1999a123a3dc0e39a2ef6d19f3f8584211de9e6a77fe7a0259f04a524e90a5cf
+  hash:
+    md5: null
+    sha256: 1999a123a3dc0e39a2ef6d19f3f8584211de9e6a77fe7a0259f04a524e90a5cf
 - platform: linux-64
   name: typing-extensions
   version: 4.9.0
@@ -8711,6 +9497,19 @@ package:
   noarch: python
   size: 10191
   timestamp: 1702176301116
+- platform: linux-64
+  name: typing-inspect
+  version: 0.9.0
+  category: main
+  manager: pypi
+  requires_dist:
+  - mypy-extensions >=0.3.0
+  - typing-extensions >=3.7.4
+  - typing >=3.7.4 ; python_version < '3.5'
+  url: https://files.pythonhosted.org/packages/65/f3/107a22063bf27bdccf2024833d3445f4eea42b2e598abfbd46f6a63b6cb0/typing_inspect-0.9.0-py3-none-any.whl#sha256=9ee6fc59062311ef8547596ab6b955e1b8aa46242d854bfc78f4f6b0eff35f9f
+  hash:
+    md5: null
+    sha256: 9ee6fc59062311ef8547596ab6b955e1b8aa46242d854bfc78f4f6b0eff35f9f
 - platform: linux-64
   name: typing_extensions
   version: 4.9.0
@@ -9033,6 +9832,27 @@ package:
   size: 72000
   timestamp: 1702972671946
 - platform: linux-64
+  name: watchdog
+  version: 3.0.0
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.12.0rc3,<3.13.0a0
+  - python_abi 3.12.* *_cp312
+  - pyyaml >=3.10
+  url: https://conda.anaconda.org/conda-forge/linux-64/watchdog-3.0.0-py312h7900ff3_1.conda
+  hash:
+    md5: 6efb26e8a58a6a56f4fee7f21f892532
+    sha256: 4cdaa1b5553412f9c2b9ecfe580154ede063f8b9b103e6d39c5a407741d75cc4
+  build: py312h7900ff3_1
+  arch: x86_64
+  subdir: linux-64
+  build_number: 1
+  license: Apache-2.0
+  license_family: APACHE
+  size: 134413
+  timestamp: 1695395379159
+- platform: linux-64
   name: wcwidth
   version: 0.2.12
   category: main
@@ -9119,6 +9939,28 @@ package:
   purls:
   - pkg:pypi/websocket-client
 - platform: linux-64
+  name: wheel
+  version: 0.42.0
+  category: main
+  manager: conda
+  dependencies:
+  - python >=3.7
+  url: https://conda.anaconda.org/conda-forge/noarch/wheel-0.42.0-pyhd8ed1ab_0.conda
+  hash:
+    md5: 1cdea58981c5cbc17b51973bcaddcea7
+    sha256: 80be0ccc815ce22f80c141013302839b0ed938a2edb50b846cf48d8a8c1cfa01
+  build: pyhd8ed1ab_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  noarch: python
+  size: 57553
+  timestamp: 1701013309664
+  purls:
+  - pkg:pypi/wheel
+- platform: linux-64
   name: widgetsnbextension
   version: 4.0.9
   category: main
@@ -9140,6 +9982,16 @@ package:
   timestamp: 1694598840024
   purls:
   - pkg:pypi/widgetsnbextension
+- platform: linux-64
+  name: wrapt
+  version: 1.16.0
+  category: main
+  manager: pypi
+  requires_python: '>=3.6'
+  url: https://files.pythonhosted.org/packages/62/62/30ca2405de6a20448ee557ab2cd61ab9c5900be7cbd18a2639db595f0b98/wrapt-1.16.0-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl#sha256=98b5e1f498a8ca1858a1cdbffb023bfd954da4e3fa2c0cb5853d40014557248b
+  hash:
+    md5: null
+    sha256: 98b5e1f498a8ca1858a1cdbffb023bfd954da4e3fa2c0cb5853d40014557248b
 - platform: linux-64
   name: wslink
   version: 1.12.4

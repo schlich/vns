@@ -8,14 +8,23 @@ import os
 from pathlib import Path
 from typing import TYPE_CHECKING
 
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import pandera as pa
 import plotly.express as px
 import scipy
 import xarray as xr
+from matplotlib import animation
+from matplotlib.collections import LineCollection
 
 if TYPE_CHECKING:
     from datatree import DataTree
+    from pandera.typing import DataFrame, Index, Series
+
+# class Cursor:
+
+#     def __init__(self, agent: .DataFrame, x_line: matplotlib.lines.Line2D, y_line: matplotlib.lines.Line2D):
 
 
 def mat_data(path: Path) -> np.ndarray:
@@ -25,9 +34,39 @@ def mat_data(path: Path) -> np.ndarray:
     )
 
 
+class EyeJoy(pa.DataFrameModel):
+    x: Series[float]
+    y: Series[float]
+    t: Index[float] = pa.Field(ge=0, check_name=True)
+
+
 class Trial:
-    def __init__(self, eyejoy_data: pd.DataFrame | None = None):
-        self.eyejoy = eyejoy_data or pd.read_parquet("data/xy_1.parquet")
+    def __init__(self, eyejoy: DataFrame[EyeJoy] | None = None):
+        if eyejoy is None:
+            eyejoy = pd.read_parquet("/workspaces/vns/data/xy_1_1.parquet")
+        self.eyejoy = eyejoy
+
+    def plot(self):
+        eyejoy = self.eyejoy.reset_index()
+        return px.line(
+            eyejoy,
+            x="t",
+            y=["x", "y"],
+            template="plotly_white",
+        )
+
+    def animate(self):
+        fig, ax = plt.subplots()
+        data = self.eyejoy
+
+        def anim_func(current_t: int):
+            return ax.add_collection(LineCollection(segments=[line(x, 10)]))
+
+        return animation.FuncAnimation(
+            fig,
+            anim_func,
+            blit=True,
+        ).save("data/ANIMATE.html", writer="html")
 
 
 class Session:
@@ -41,7 +80,7 @@ class Session:
             Path(matfile_path).stem.split("_", maxsplit=1)[1],
             format="%d_%m_%Y_%H_%M",
         )
-        self.trials = trials
+        self.trials = trials or self.get_trials()
 
     def matfile_path(self) -> Path:
         return Path(
@@ -53,18 +92,31 @@ class Session:
             f"data/BFINAC_VNS/parquet/BFnovelinac_{self.start_time.strftime('%d_%m_%Y_%H_%M')}.parquet",
         )
 
-    def trials(self):
-        parquet_path = self.parquet_path()
-        if parquet_path.exists():
-            return pd.read_parquet(parquet_path)
+    def get_trials(self):
+        # parquet_path = self.parquet_path()
+        # if parquet_path.exists():
+        #     return pd.read_parquet(parquet_path)
         data = mat_data(self.matfile_path())["PDS"]
-        pandas_df = pd.DataFrame(
-            pd.Series(data["fractals"], index=data["trialnumber"], dtype=str),
-        ).to_parquet(parquet_path)
-        return Trial(data=pandas_df)
+        return pd.DataFrame(
+            pd.Series(
+                data["fractals"],
+                name="fractal",
+                index=data["trialnumber"],
+                dtype=str,
+            ),
+            pd.Series(
+                data["targAngle"],
+                name="targAngle",
+                index=data["trialnumber"],
+                dtype=float,
+            ),
+        )
+
+    def to_parquet(self):
+        self.trials().to_parquet(self.parquet_path())
 
     def __repr__(self):
-        return f"<Session {self.start_time.isoformat()}>"
+        return f"<Session {self.start_time.strftime("%Y-%m-%d %H:%M")}>"
 
     def __lt__(self, other: Session):
         return self.start_time < other.start_time
@@ -75,6 +127,14 @@ class Session:
 
 
 class Experiment:
+    """A collection of sessions from a single experiment.
+
+    Attributes
+    ----------
+        sessions: A list of sessions objects from the experiment.
+
+    """
+
     def __init__(
         self,
         label: str | None = None,
@@ -94,6 +154,7 @@ class Experiment:
                 for matfile_path in Path(exp_data).glob("*.mat")
             )
         self.sessions = sessions
+        self.label = label
 
     def __repr__(self):
         return f"<Experiment {self.label}>"

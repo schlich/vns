@@ -15,7 +15,8 @@
 		},
 		{
 			"path": "/home/vscode/dotfiles",
-			"name": "dotfiles"
+			"name": "dotfiles",
+			"detectSubmodules": false
 		},
 		{
 			"name": ".hatch",

@@ -12,6 +12,10 @@
 		{
 			"name": ".hatch",
 			"path": "/workspaces/vns/.hatch"
+		},
+		{
+			"name": ".cache",
+			"path": "/workspaces/vns/.cache"
 		}
 	]
 }

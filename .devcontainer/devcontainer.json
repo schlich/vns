@@ -35,7 +35,24 @@
           },
           "editor.defaultFormatter": "charliermarsh.ruff"
         },
+        "python.defaultInterpreterPath": "/workspaces/vns/.hatch/vns/bin/python",
+        "python.analysis.typeCheckingMode": "strict",
+        "python.analysis.diagnosticSeverityOverrides": {
+          "reportUnusedFunction": "none"
+        },
+        "dotfiles.repository": "schlich/.dotfiles",
         "jupyter.notebookFileRoot": "${containerWorkspaceFolder}",
+        "notebook.formatOnCellExecution": true,
+        "notebook.formatOnSave.enabled": true,
+        "notebook.scrolling.revealNextCellOnExecute": "firstLine",
+        "notebook.cellToolbarLocation": {
+          "default": "hidden"
+        },
+        "notebook.lineNumbers": "on",
+        "notebook.codeActionsOnSave": {
+          "notebook.source.fixAll": true,
+          "notebook.source.organizeImports": true
+        },
         "yaml.schemas": {
           "https://squidfunk.github.io/mkdocs-material/schema.json": "mkdocs.yml"
         },
@@ -47,17 +64,8 @@
           "tag:yaml.org,2002:python/name:material.extensions.emoji.twemoji",
           "tag:yaml.org,2002:python/name:pymdownx.superfences.fence_code_format"
         ],
-        "python.analysis.typeCheckingMode": "strict",
-        "python.analysis.diagnosticSeverityOverrides": {
-              "reportUnusedFunction": "none"
-          },
-        "dotfiles.repository": "schlich/.dotfiles",
         "terminal.integrated.defaultProfile.linux": "zsh",
-        "notebook.formatOnSave.enabled": true,
-        "notebook.codeActionsOnSave": {
-          "notebook.source.fixAll": true,
-          "notebook.source.organizeImports": true
-        }
+	      "terminal.integrated.smoothScrolling": true
       }
     }
   }

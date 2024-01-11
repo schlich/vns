@@ -7,19 +7,39 @@
 		},
 		{
 			"path": "/workspaces/vns/data",
-			"name": "Data"
+			"name": "data"
 		},
 		{
-			"path": "/home/vscode",
-			"name": "~"
+			"path": "/home/vscode/.zshrc",
+			"name": ".zshrc"
+		},
+		{
+			"path": "/home/vscode/dotfiles",
+			"name": "dotfiles"
 		},
 		{
 			"name": ".hatch",
 			"path": "/workspaces/vns/.hatch"
 		},
 		{
-			"name": ".cache",
+			"name": "proj cache",
 			"path": "/workspaces/vns/.cache"
+		},
+		{
+			"name": "local cache",
+			"path": "/home/vscode/.cache"
+		},
+		{
+			"name": "Hatch config",
+			"path": "/home/vscode/.config/hatch"
+		},
+		{
+			"name": "Oh My Zsh!",
+			"path": "/home/vscode/.oh-my-zsh/custom"
+		},
+		{
+			"name": "IPython",
+			"path": "/home/vscode/.ipython"
 		}
 	]
 }

@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": ".",
+			"name": "VNS",
+
+		},
+		{
+			"path": "/home/vscode",
+			"name": "~"
+		},
+		{
+			"name": ".hatch",
+			"path": "/workspaces/vns/.hatch"
+		}
+	]
+}

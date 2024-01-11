@@ -22,7 +22,6 @@ dist
 _proc
 nbs/_docs
 .micromamba
-# pixi environments
 .pixi
 
 assets
@@ -38,3 +37,7 @@ figures
 .ipynb_checkpoints
 
 nbs/dash_files
+
+.hatch
+.cache
+.local

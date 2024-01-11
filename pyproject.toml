@@ -3,7 +3,23 @@ name = "vns"
 version = "0.1.0"
 license = { text = "GPL-3.0-or-later" }
 readme = "README.md"
-dependencies = ["ratinabox"]
+dependencies = [
+    "ratinabox",
+    "pandas",
+    "pandera[mypy]",
+    "plotly",
+    "xarray",
+    "seaborn",
+    "shiny @ git+https://github.com/posit-dev/py-shiny",
+    "htmltools @ git+https://github.com/posit-dev/py-htmltools",
+    "polars",
+]
+requires-python = ">=3.12"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.envs.vns]
 
 [tool.ruff]
 ignore = [
@@ -16,14 +32,15 @@ ignore = [
     "D103",
     "D105",
     "D107",
-    "S101"
+    "S101",
 ]
 extend-include = ["*.ipynb"]
 fix = true
 select = ["ALL"]
 
-[tool.setuptools]
-packages = ["vns", "tests"]
-
 [tool.mypy]
 plugins = "pandera.mypy"
+
+[tool.pyright]
+venvPath = ".hatch"
+venv = "vns"

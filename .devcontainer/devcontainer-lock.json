@@ -5,6 +5,11 @@
       "resolved": "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get@sha256:276d781fc1d908d75b3bda305275ef19d948cfcac06c1d8f710da4054d5d54ab",
       "integrity": "sha256:276d781fc1d908d75b3bda305275ef19d948cfcac06c1d8f710da4054d5d54ab"
     },
+    "ghcr.io/devcontainers-contrib/features/hatch:2": {
+      "version": "2.0.17",
+      "resolved": "ghcr.io/devcontainers-contrib/features/hatch@sha256:01caa800a7e20eaf23e73ea6cccecfbc44ab44ab3d421056d113a5c42a101085",
+      "integrity": "sha256:01caa800a7e20eaf23e73ea6cccecfbc44ab44ab3d421056d113a5c42a101085"
+    },
     "ghcr.io/devcontainers/features/node:1": {
       "version": "1.3.1",
       "resolved": "ghcr.io/devcontainers/features/node@sha256:7d31b83459dd5110c37e7f5acb2920335cb1e5ebf014326d7eb6a0b290cc820a",

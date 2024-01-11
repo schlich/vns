@@ -1,1 +1,4 @@
 /.quarto/
+*.ipynb
+!rust.ipynb
+dash_files

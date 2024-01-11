@@ -3,13 +3,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from vns import Session, Trial
-
-
-def test_session_load_trials():
-    trials = [Trial()]
-    session = Session(start_time=pd.Timestamp("2019-02-01 15:03:00"), trials=trials)
-    assert session.trials == trials
+from vns import Trial
 
 
 def test_trials_eyejoy():

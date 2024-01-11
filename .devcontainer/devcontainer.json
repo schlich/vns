@@ -2,7 +2,6 @@
   "name": "VNS (hatch)",
   "image": "mcr.microsoft.com/devcontainers/python",
   "features": {
-    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {"version": "prerelease"},
     "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get:1": {},
     "ghcr.io/devcontainers-contrib/features/hatch:2": {}
   },

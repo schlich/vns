@@ -14,6 +14,11 @@
       "version": "2.3.2",
       "resolved": "ghcr.io/devcontainers/features/common-utils@sha256:c5fecdd9a372a69c8c869e6f9c62fb815ed0b04cbe1485613c8dce5d9264ecb4",
       "integrity": "sha256:c5fecdd9a372a69c8c869e6f9c62fb815ed0b04cbe1485613c8dce5d9264ecb4"
+    },
+    "ghcr.io/lumenpink/devcontainer-features/bun:0": {
+      "version": "0.0.1",
+      "resolved": "ghcr.io/lumenpink/devcontainer-features/bun@sha256:92ef26099b83fe1202123734fff18db1b51dcdbce532c6cf7a79525e163e2ce9",
+      "integrity": "sha256:92ef26099b83fe1202123734fff18db1b51dcdbce532c6cf7a79525e163e2ce9"
     }
   }
 }

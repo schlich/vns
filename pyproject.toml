@@ -13,12 +13,15 @@ dependencies = [
     "shiny @ git+https://github.com/posit-dev/py-shiny",
     "htmltools @ git+https://github.com/posit-dev/py-htmltools",
     "polars",
-    "numpy"
+    "pyarrow",
 ]
 requires-python = ">=3.12"
 
 [tool.hatch.metadata]
 allow-direct-references = true
+
+[tool.hatch.envs.vns.scripts]
+dash = "shiny run app.py"
 
 [tool.hatch.envs.vns]
 

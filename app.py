@@ -21,5 +21,6 @@ def txt():
 
 @render.plot
 def plot():
-    eyejoy = pd.read_parquet("eyejoy.parquet")
+    eyejoy = pd.read_parquet("data/eyejoy.parquet")
+    print(eyejoy.columns)
     plt.scatter(eyejoy["t"], eyejoy["x"])

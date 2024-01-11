@@ -47,12 +47,17 @@
           "tag:yaml.org,2002:python/name:material.extensions.emoji.twemoji",
           "tag:yaml.org,2002:python/name:pymdownx.superfences.fence_code_format"
         ],
-        "python.analysis.typeCheckingMode": "basic",
+        "python.analysis.typeCheckingMode": "strict",
         "python.analysis.diagnosticSeverityOverrides": {
               "reportUnusedFunction": "none"
           },
         "dotfiles.repository": "schlich/.dotfiles",
-        "terminal.integrated.defaultProfile.linux": "zsh"
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "notebook.formatOnSave.enabled": true,
+        "notebook.codeActionsOnSave": {
+          "notebook.source.fixAll": true,
+          "notebook.source.organizeImports": true
+        }
       }
     }
   }

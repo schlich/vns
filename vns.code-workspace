@@ -6,6 +6,10 @@
 
 		},
 		{
+			"path": "/workspaces/vns/data",
+			"name": "Data"
+		},
+		{
 			"path": "/home/vscode",
 			"name": "~"
 		},

@@ -5,7 +5,8 @@
     "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get:1": {},
     "ghcr.io/devcontainers-contrib/features/hatch:2": {},
     "ghcr.io/devcontainers/features/common-utils:2": {
-      "configureZshAsDefaultShell": true
+      "configureZshAsDefaultShell": true,
+      "installOhMyZshConfig": false
     }
   },
   "customizations": {

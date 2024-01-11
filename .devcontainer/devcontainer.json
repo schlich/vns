@@ -3,13 +3,13 @@
   "image": "mcr.microsoft.com/devcontainers/python",
   "features": {
     "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get:1": {},
-    "ghcr.io/devcontainers-contrib/features/hatch:2": {},
     "ghcr.io/devcontainers/features/common-utils:2": {
       "configureZshAsDefaultShell": true,
       "installOhMyZshConfig": false
     },
     "ghcr.io/lumenpink/devcontainer-features/bun:0": {}
   },
+  "postAttachCommand": "pipx install hatch",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -25,7 +25,8 @@
         "GitHub.vscode-pull-request-github",
         "Posit.shiny-python",
         "GitHub.github-vscode-theme",
-        "ms-python.mypy-type-checker"
+        "ms-python.mypy-type-checker",
+        "oven.bun-vscode"
       ],
       "settings": {
         "[python]": {
@@ -36,16 +37,9 @@
           },
           "editor.defaultFormatter": "charliermarsh.ruff"
         },
-        "python.defaultInterpreterPath": "/workspaces/vns/.venv/vns/bin/python",
+        "python.defaultInterpreterPath": "/workspaces/vns/.hatch/vns/bin/python",
         "python.analysis.typeCheckingMode": "strict",
-        "python.testing.pytestArgs": [
-            "tests"
-        ],
-        "python.testing.pytestPath": "/workspaces/vns/.venv/vns/bin/pytest",
-        "python.testing.unittestEnabled": false,
-        "python.testing.pytestEnabled": true,
         "dotfiles.repository": "schlich/.dotfiles",
-        "explorer.excludeGitIgnore": true,
         "jupyter.notebookFileRoot": "${containerWorkspaceFolder}",
         "notebook.formatOnCellExecution": true,
         "notebook.formatOnSave.enabled": true,

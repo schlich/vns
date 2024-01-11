@@ -44,3 +44,5 @@ nbs/dash_files
 .docker
 
 node_modules
+
+.report.json

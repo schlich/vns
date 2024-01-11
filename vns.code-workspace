@@ -1,10 +1,11 @@
 {
-
+	"settings": {
+		"workbench.colorTheme": "Red"
+	},
 	"folders": [
 		{
 			"path": ".",
 			"name": "vns",
-
 		},
 		{
 			"path": "/workspaces/vns/data",
@@ -20,8 +21,8 @@
 			"detectSubmodules": false
 		},
 		{
-			"name": ".hatch",
-			"path": "/workspaces/vns/.hatch"
+			"name": "virtual envs",
+			"path": "/workspaces/vns/.hatch/"
 		},
 		{
 			"name": "proj cache",
@@ -45,6 +46,10 @@
 		},
 		{
 			"path": "node_modules"
+		},
+		{
+			"name": "Test Results",
+			"path": "/workspaces/vns/.report.json"
 		}
 	]
 }

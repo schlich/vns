@@ -3,6 +3,9 @@ name = "vns"
 version = "0.1.0"
 license = { text = "GPL-3.0-or-later" }
 readme = "README.md"
+authors = [
+  { name = "Ty Schlichenmeyer", email = "t.schlic@wustl.edu" },
+]
 dependencies = [
     "ratinabox",
     "pandas",
@@ -17,8 +20,18 @@ dependencies = [
     "ipykernel",
     "hvplot",
     "xarray-datatree",
+    "watchdog",
 ]
 requires-python = ">=3.12"
+description = ""
+
+[tool.hatch.env]
+requires = [
+    "hatch-mkdocs",
+]
+
+[tool.hatch.env.collectors.mkdocs.docs]
+path = "mkdocs.yml"
 
 [tool.hatch.metadata]
 allow-direct-references = true
@@ -26,10 +39,13 @@ allow-direct-references = true
 [tool.hatch.envs.vns.scripts]
 dash = "shiny run app.py"
 
+[tool.hatch.envs.test]
+extra-dependencies = ["pytest", "pytest-watcher", "pytest-json-report"]
 
 [tool.hatch.envs.test.scripts]
-extra-dependencies = "pytest"
-test = "pytest"
+test = "pytest --json-report --json-report-summary"
+watch = "ptw ."
+
 
 [tool.ruff]
 ignore = [
@@ -54,3 +70,7 @@ plugins = "pandera.mypy"
 [tool.pyright]
 venvPath = ".hatch"
 venv = "vns"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

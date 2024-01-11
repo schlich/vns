@@ -3,9 +3,11 @@
   "image": "mcr.microsoft.com/devcontainers/python",
   "features": {
     "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get:1": {},
-    "ghcr.io/devcontainers-contrib/features/hatch:2": {}
+    "ghcr.io/devcontainers-contrib/features/hatch:2": {},
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "configureZshAsDefaultShell": true
+    }
   },
-  "postCreateCommand": "omz theme set powerlevel10k/powerlevel10k",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -33,7 +35,6 @@
           "editor.defaultFormatter": "charliermarsh.ruff"
         },
         "jupyter.notebookFileRoot": "${containerWorkspaceFolder}",
-        "terminal.integrated.defaultProfile.linux": "zsh",
         "yaml.schemas": {
           "https://squidfunk.github.io/mkdocs-material/schema.json": "mkdocs.yml"
         },
@@ -49,7 +50,8 @@
         "python.analysis.diagnosticSeverityOverrides": {
               "reportUnusedFunction": "none"
           },
-        "dotfiles.repository": "schlich/.dotfiles"
+        "dotfiles.repository": "schlich/.dotfiles",
+        "terminal.integrated.defaultProfile.linux": "zsh"
       }
     }
   }

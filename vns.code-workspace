@@ -1,8 +1,9 @@
 {
+
 	"folders": [
 		{
 			"path": ".",
-			"name": "VNS",
+			"name": "vns",
 
 		},
 		{
@@ -41,6 +42,9 @@
 		{
 			"name": "IPython",
 			"path": "/home/vscode/.ipython"
+		},
+		{
+			"path": "node_modules"
 		}
 	]
 }

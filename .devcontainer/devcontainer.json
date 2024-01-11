@@ -53,7 +53,7 @@
           },
         "dotfiles.repository": "schlich/.dotfiles",
         "terminal.integrated.defaultProfile.linux": "zsh",
-        "terminal.integrated.cwd": "{containerWorkspaceFolder}"
+        "terminal.integrated.cwd": "${containerWorkspaceFolder}"
       }
     }
   }

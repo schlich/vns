@@ -38,10 +38,14 @@
         },
         "python.defaultInterpreterPath": "/workspaces/vns/.venv/vns/bin/python",
         "python.analysis.typeCheckingMode": "strict",
-        "python.analysis.diagnosticSeverityOverrides": {
-          "reportUnusedFunction": "none"
-        },
+        "python.testing.pytestArgs": [
+            "tests"
+        ],
+        "python.testing.pytestPath": "/workspaces/vns/.venv/vns/bin/pytest",
+        "python.testing.unittestEnabled": false,
+        "python.testing.pytestEnabled": true,
         "dotfiles.repository": "schlich/.dotfiles",
+        "explorer.excludeGitIgnore": true,
         "jupyter.notebookFileRoot": "${containerWorkspaceFolder}",
         "notebook.formatOnCellExecution": true,
         "notebook.formatOnSave.enabled": true,

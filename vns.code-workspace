@@ -18,7 +18,7 @@
 		{
 			"path": "/home/vscode/dotfiles",
 			"name": "dotfiles",
-			"detectSubmodules": false
+			"detectSubmodules": "false"
 		},
 		{
 			"name": "virtual envs",

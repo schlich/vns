@@ -2,7 +2,6 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-
 from vns import Trial
 
 
@@ -12,8 +11,8 @@ def test_trials_eyejoy():
     pd.testing.assert_frame_equal(eyejoy, trial.eyejoy)
 
 
-def test_trial_load_numpy(tmpdir):
-    trial_np_dir = Path(tmpdir)
+def test_trial_load_numpy(tmp_path: Path):
+    trial_np_dir = Path(tmp_path)
     eyejoy = pd.DataFrame(
         {
             "x": [9, 8, 7],

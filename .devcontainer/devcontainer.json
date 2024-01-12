@@ -26,7 +26,8 @@
         "Posit.shiny-python",
         "GitHub.github-vscode-theme",
         "ms-python.mypy-type-checker",
-        "oven.bun-vscode"
+        "oven.bun-vscode",
+        "seatonjiang.gitmoji-vscode"
       ],
       "settings": {
         "[python]": {

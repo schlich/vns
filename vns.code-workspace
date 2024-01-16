@@ -8,7 +8,7 @@
 			"name": "vns",
 		},
 		{
-			"path": "/workspaces/vns/data",
+			"path": "./data",
 			"name": "data"
 		},
 		{
@@ -22,11 +22,11 @@
 		},
 		{
 			"name": "virtual envs",
-			"path": "/workspaces/vns/.hatch/"
+			"path": "./.hatch/"
 		},
 		{
 			"name": "proj cache",
-			"path": "/workspaces/vns/.cache"
+			"path": "./.cache"
 		},
 		{
 			"name": "local cache",
@@ -49,7 +49,7 @@
 		},
 		{
 			"name": "Test Results",
-			"path": "/workspaces/vns/.report.json"
+			"path": "./.report.json"
 		}
 	]
 }

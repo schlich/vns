@@ -11,5 +11,5 @@ def pytest_sessionfinish(exitstatus: int) -> None:
         data = json.load(file)
 
     data["settings"]["workbench.colorTheme"] = test_result
-    with Path.open(workspace) as file:
+    with Path.open(workspace, "w") as file:
         json.dump(data, file)

@@ -10,6 +10,11 @@
     "ghcr.io/lumenpink/devcontainer-features/bun:0": {}
   },
   "postAttachCommand": "pipx install hatch",
+  "containerEnv": {
+    "HATCH_CONFIG": "/workspaces/vns/.config/hatch/config.toml",
+    "HATCH_CACHE_HOME": "/workspaces/vns/.cache",
+    "HATCH_DATA_HOME": "/workspaces/vns/.local/share"
+  },
   "customizations": {
     "vscode": {
       "extensions": [
@@ -27,7 +32,8 @@
         "GitHub.github-vscode-theme",
         "ms-python.mypy-type-checker",
         "oven.bun-vscode",
-        "seatonjiang.gitmoji-vscode"
+        "seatonjiang.gitmoji-vscode",
+        "TheNuProjectContributors.vscode-nushell-lang"
       ],
       "settings": {
         "[python]": {

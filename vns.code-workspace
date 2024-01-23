@@ -1,6 +1,7 @@
 {
 	"settings": {
-		"workbench.colorTheme": "Red"
+		"workbench.colorTheme": "Red",
+		"explorer.excludeGitIgnore": true,
 	},
 	"folders": [
 		{

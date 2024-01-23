@@ -1,19 +1,9 @@
 {
   "features": {
-    "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get:1": {
-      "version": "1.0.15",
-      "resolved": "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get@sha256:276d781fc1d908d75b3bda305275ef19d948cfcac06c1d8f710da4054d5d54ab",
-      "integrity": "sha256:276d781fc1d908d75b3bda305275ef19d948cfcac06c1d8f710da4054d5d54ab"
-    },
-    "ghcr.io/devcontainers/features/common-utils:2": {
-      "version": "2.3.2",
-      "resolved": "ghcr.io/devcontainers/features/common-utils@sha256:c5fecdd9a372a69c8c869e6f9c62fb815ed0b04cbe1485613c8dce5d9264ecb4",
-      "integrity": "sha256:c5fecdd9a372a69c8c869e6f9c62fb815ed0b04cbe1485613c8dce5d9264ecb4"
-    },
-    "ghcr.io/lumenpink/devcontainer-features/bun:0": {
-      "version": "0.0.1",
-      "resolved": "ghcr.io/lumenpink/devcontainer-features/bun@sha256:92ef26099b83fe1202123734fff18db1b51dcdbce532c6cf7a79525e163e2ce9",
-      "integrity": "sha256:92ef26099b83fe1202123734fff18db1b51dcdbce532c6cf7a79525e163e2ce9"
+    "ghcr.io/devcontainers-contrib/features/hatch:2": {
+      "version": "2.0.17",
+      "resolved": "ghcr.io/devcontainers-contrib/features/hatch@sha256:01caa800a7e20eaf23e73ea6cccecfbc44ab44ab3d421056d113a5c42a101085",
+      "integrity": "sha256:01caa800a7e20eaf23e73ea6cccecfbc44ab44ab3d421056d113a5c42a101085"
     }
   }
 }

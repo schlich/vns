@@ -6,22 +6,6 @@ readme = "README.md"
 authors = [
   { name = "Ty Schlichenmeyer", email = "t.schlic@wustl.edu" },
 ]
-dependencies = [
-    "ratinabox",
-    "pandas",
-    "pandera[mypy]",
-    "plotly",
-    "xarray",
-    "seaborn",
-    "shiny @ git+https://github.com/posit-dev/py-shiny",
-    "htmltools @ git+https://github.com/posit-dev/py-htmltools",
-    "polars",
-    "pyarrow",
-    "ipykernel",
-    "hvplot",
-    "xarray-datatree",
-    "watchdog",
-]
 requires-python = ">=3.12"
 description = ""
 

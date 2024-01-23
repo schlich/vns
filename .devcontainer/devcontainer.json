@@ -2,14 +2,8 @@
   "name": "VNS (hatch)",
   "image": "mcr.microsoft.com/devcontainers/python",
   "features": {
-    "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get:1": {},
-    "ghcr.io/devcontainers/features/common-utils:2": {
-      "configureZshAsDefaultShell": true,
-      "installOhMyZshConfig": false
-    },
-    "ghcr.io/lumenpink/devcontainer-features/bun:0": {}
+    "ghcr.io/devcontainers-contrib/features/hatch:2": {}
   },
-  "postAttachCommand": "pipx install hatch",
   "containerEnv": {
     "HATCH_CONFIG": "/workspaces/vns/.config/hatch/config.toml",
     "HATCH_CACHE_HOME": "/workspaces/vns/.cache",
@@ -26,12 +20,9 @@
         "tamasfe.even-better-toml",
         "redhat.vscode-yaml",
         "mechatroner.rainbow-csv",
-        "github.vscode-github-actions",
-        "GitHub.vscode-pull-request-github",
         "Posit.shiny-python",
         "GitHub.github-vscode-theme",
         "ms-python.mypy-type-checker",
-        "oven.bun-vscode",
         "seatonjiang.gitmoji-vscode",
         "TheNuProjectContributors.vscode-nushell-lang"
       ],
@@ -70,7 +61,6 @@
           "tag:yaml.org,2002:python/name:material.extensions.emoji.twemoji",
           "tag:yaml.org,2002:python/name:pymdownx.superfences.fence_code_format"
         ],
-        "terminal.integrated.defaultProfile.linux": "zsh",
 	      "terminal.integrated.smoothScrolling": true,
         "jupyter.disableJupyterAutoStart": true
       }

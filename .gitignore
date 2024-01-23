@@ -46,3 +46,6 @@ nbs/dash_files
 node_modules
 
 .report.json
+# pixi environments
+.pixi
+

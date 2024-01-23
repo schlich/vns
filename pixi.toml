@@ -1,0 +1,23 @@
+[project]
+name = "vns"
+version = "0.1.0"
+description = "Add a short description here"
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+[tasks]
+
+[dependencies]
+python = ">=3.12.1,<3.13"
+scipy = ">=1.11.4,<1.12"
+icecream = ">=2.1.3,<2.2"
+python-graphviz = ">=0.20.1,<0.21"
+pip = ">=23.3.2,<23.4"
+ipython = ">=8.20.0,<8.21"
+dask = ">=2024.1.0,<2024.2"
+ipywidgets = ">=8.1.1,<8.2"
+matplotlib = ">=3.8.2,<3.9"
+pandera = ">=0.18.0,<0.19"
+plotly = ">=5.18.0,<5.19"
+xarray = ">=2023.12.0,<2023.13"
+ipykernel = ">=6.29.0,<6.30"

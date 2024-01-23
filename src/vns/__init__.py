@@ -21,11 +21,32 @@ if TYPE_CHECKING:
     from datatree import DataTree
     from pandera.typing import DataFrame, Index, Series
 
+
+fields = {
+    "fractals": str,
+    "targAngle": float,
+    "targAmp": float,
+    "goodtrial": bool,
+    "fixreq": bool,
+    "datapixxtime": float,
+    "trialstarttime": float,
+    "timefpon": float,
+    "timefpoff": float,
+    "windowchosen": bool,
+    "timetargetoff": float,
+    "feedid": str,
+    "TrialTypeSave": str,
+    "timefpabort": float,
+    "repeatflag": bool,
+    "monkeynotinitiated": bool,
+}
+
+
 def mat_data(path: Path) -> np.ndarray:
     return scipy.io.loadmat(
         path,
         squeeze_me=True,
-    )
+    )["PDS"]
 
 
 class EyeJoy(pa.DataFrameModel):
@@ -108,24 +129,7 @@ class Session:
         data = mat_data(self.matfile_path())["PDS"]
 
         def extract_fields(data: DataFrame) -> DataFrame:
-            fields = {
-                "fractals": "category",
-                "targAngle": float,
-                "targAmp": float,
-                "goodtrial": bool,
-                "fixreq": bool,
-                "datapixxtime": float,
-                "trialstarttime": float,
-                "timefpon": float,
-                "timefpoff": float,
-                "windowchosen": bool,
-                "timetargetoff": float,
-                "feedid": "category",
-                "TrialTypeSave": "category",
-                "timefpabort": float,
-                "repeatflag": bool,
-                "monkeynotinitiated": bool,
-            }
+
             return pd.DataFrame(
                 {
                     field_name: pd.Series(

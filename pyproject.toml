@@ -9,28 +9,6 @@ authors = [
 requires-python = ">=3.12"
 description = ""
 
-[tool.hatch.env]
-requires = [
-    "hatch-mkdocs",
-]
-
-[tool.hatch.env.collectors.mkdocs.docs]
-path = "mkdocs.yml"
-
-[tool.hatch.metadata]
-allow-direct-references = true
-
-[tool.hatch.envs.vns.scripts]
-dash = "shiny run app.py"
-
-[tool.hatch.envs.test]
-extra-dependencies = ["pytest", "pytest-watcher", "pytest-json-report"]
-
-[tool.hatch.envs.test.scripts]
-test = "pytest --json-report --json-report-summary"
-watch = "ptw ."
-
-
 [tool.ruff]
 ignore = [
     "ANN101",
@@ -52,8 +30,7 @@ select = ["ALL"]
 plugins = "pandera.mypy"
 
 [tool.pyright]
-venvPath = ".hatch"
-venv = "vns"
+python.pythonPath = ".venv/bin/python"
 
 [build-system]
 requires = ["hatchling"]

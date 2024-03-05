@@ -42,13 +42,6 @@ fields = {
 }
 
 
-def mat_data(path: Path) -> np.ndarray:
-    return scipy.io.loadmat(
-        path,
-        squeeze_me=True,
-    )["PDS"]
-
-
 class EyeJoy(pa.DataFrameModel):
     x: Series[float]
     y: Series[float]

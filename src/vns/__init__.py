@@ -5,7 +5,7 @@ __version__ = "0.0.1"
 import datetime
 import os
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -15,8 +15,9 @@ import plotly.express as px
 import scipy.io as scipy_io
 import xarray as xr
 from matplotlib import animation
-from matplotlib.collections import LineCollection
+from matplotlib.patches import Ellipse
 from pandera.typing import DataFrame
+from pydantic import BaseModel
 
 if TYPE_CHECKING:
     from datatree import DataTree
@@ -54,86 +55,80 @@ class ExperimentSchema(pa.DataFrameModel):
     n_trials: Series[int]
 
 
-class Trial:
-    def __init__(self, eyejoy: DataFrame[EyeJoy] | None = None):
-        if eyejoy is None:
-            eyejoy = pd.read_parquet("/workspaces/vns/data/xy_1_1.parquet")
-        self.eyejoy = eyejoy
-
-    def plot(self):
-        eyejoy = self.eyejoy.reset_index()
-        return px.line(
-            eyejoy,
-            x="t",
-            y=["x", "y"],
-            template="plotly_white",
-        )
+class Trial(BaseModel):
+    session: Session
+    id: int
 
     def animate(self):
-        fig, ax = plt.subplots()
+        eyejoy = self.session.get_trials()["EyeJoy"]
 
-        def anim_func(current_t: int):
-            return ax.add_collection(LineCollection(segments=[line(x, 10)]))
+        t_trial = DataFrame[EyeJoy](eyejoy.item()[self.id]).T.rename(
+            columns={0: "x", 1: "y", 4: "t"},
+        )[["x", "y", "t"]]
+        df = t_trial.reset_index().rename(columns={"index": "i"})
+        downsampled = df.groupby(df.index // 100).mean()
+
+        fig, ax = plt.subplots(nrows=1, ncols=1)
+        ax.set_box_aspect(1)
+        ax.set_title(f"Session={self.session.label}, Trial={self.id}")
+
+        ax.set_xlim([-6, 6])
+        ax.set_ylim([-6, 6])
+
+        t_display = ax.text(2, -5.5, "t=0.0s")
+
+        fixation_point = Ellipse((0, 0), 0.5, 0.5, color="black", alpha=0.3)
+
+        fp = ax.add_patch(fixation_point)
+
+        scat = ax.scatter(
+            downsampled.loc[0, "x"],
+            downsampled.loc[0, "y"],
+        )
+
+        def update(frame: int) -> tuple[Any, Any, Any]:
+            time_fp_on = 0.758133
+            time_fp_off = 2.041467
+            scat.set_offsets((downsampled.loc[frame, "x"], downsampled.loc[frame, "y"]))
+            t_display.set_text(f"time={frame/10}s")
+            r = 0 if frame / 10 < time_fp_on or frame / 10 > time_fp_off else 0.5
+            fp.set_width(r)
+            fp.set_height(r)
+
+            return (scat, t_display, fp)
 
         return animation.FuncAnimation(
             fig,
-            anim_func,
-            blit=True,
-        ).save("data/animations/animate.gif", writer="pillow")
+            update,
+            frames=len(downsampled) - 1,
+            repeat=True,
+        )
 
 
-class Session:
-    def __init__(
-        self,
-        data_file: Path,
-    ):
-        self.data_file = data_file
+class Session(BaseModel):
+    data_filepath: Path
+    # trials = list[Trial]
+
+    @property
+    def filetype(self):
+        return self.data_filepath.suffix
+
+    @property
+    def label(self):
+        return self.data_filepath.stem
 
     @property
     def start_time(self) -> pd.Timestamp:
-        """The start time of the session.
-
-        Returns
-        -------
-            pd.Timestamp: The start time of the session.
-
-        """
         return pd.to_datetime(
-            Path(self.data_file).stem.split("_", maxsplit=1)[1],
+            Path(self.data_filepath).stem.split("_", maxsplit=1)[1],
             format="%d_%m_%Y_%H_%M",
         )
 
-    @property
-    def source_filetype(self) -> str:
-        return self.data_file.suffix
-
-    def matfile_path(self) -> Path:
-        return Path(
-            f"data/BFINAC_VNS/mat/BFnovelinac_{self.start_time.strftime('%d_%m_%Y_%H_%M')}.mat",
-        )
-
-    def parquet_path(self) -> Path:
-        return Path(
-            f"data/BFINAC_VNS/parquet/BFnovelinac_{self.start_time.strftime('%d_%m_%Y_%H_%M')}.parquet",
-        )
-
-    def n_trials(self) -> int:
-        return len(self.trials)
-
     def get_trials(self):
-        return scipy_io.loadmat(self.data_file, squeeze_me=True)["PDS"]
-
-    def to_parquet(self):
-        self.trials().to_parquet(self.parquet_path())
-
-    def __repr__(self):
-        return f"<Session {self.start_time.strftime('%Y-%m-%d %H:%M')}>"
+        return scipy_io.loadmat(str(self.data_filepath), squeeze_me=True)["PDS"]
 
     def __lt__(self, other: Session):
         return self.start_time < other.start_time
-
-    def plot(self):
-        return px.bar(self.trials())
 
 
 class Experiment:

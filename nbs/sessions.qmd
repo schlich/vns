@@ -9,14 +9,14 @@ server: shiny
 import os
 from pathlib import Path
 import matplotlib.pyplot as plt
-
+from shiny import render, ui, reactive
 ```
+
 
 ## {.toolbar}
 
 ```{python}
 from pathlib import Path
-from shiny import render, ui, reactive
 
 from vns import Session
 
@@ -29,18 +29,26 @@ mat_files = [path.stem for path in Path(f"../data/BFINAC_VNS").glob("*.mat")]
 ui.input_select("session", "Session", choices=mat_files
 , selected=mat_files[0])
 
-ui.input_select("trial", "Trial", choices=[1], selected=1)
 
 @reactive.effect
 def _():
-    mat_files = [path.stem for path in Path(f"../data/{input.experiment()}").glob("*.mat")]
+    data_path = Path('../data')
+    mat_files = [path.stem for path in Path(data_path / input.experiment()).glob("*.mat")]
     ui.update_select("session", choices=mat_files)
-    trials = Session(f"../data/BFINAC_VNS/{input.session()}.mat").get_trials()
+    trials = Session(data_filepath=Path(data_path / input.experiment() / input.session())).get_trials()
     trial_numbers = [str(trial_number) for trial_number in list(trials["trialnumber"].item())]
     ui.update_select("trial", choices=trial_numbers)
 ```
 
 ## Row
+
+### {.sidebar}
+
+```{python}
+ui.input_select("trial", "Trial", choices=[1], selected=1)
+```
+
+### Column
 
 ```{python}
 import matplotlib.animation as animation
@@ -50,24 +58,32 @@ from matplotlib.patches import Ellipse, Rectangle
 from shiny import render
 import pandas as pd
 
+from vns import EyeJoy
 
-@render.image
+
+@render.ui
 def trial_animation():
-    eyejoy = Session(f"../data/BFINAC_VNS/{input.session()}.mat").get_trials()["EyeJoy"].item()
+    data_path = Path("../data") / input.experiment() / input.session()
+    session = Session(data_filepath=data_path)
+    eyejoy = session.get_trials()["EyeJoy"].item()
+    trial_num = input.trial()
 
-    t_trial = pd.DataFrame(eyejoy[0]).T.rename(
-        columns={0: "x", 1: "y", 4: "t", 2: "x2", 3: "y2"},
-    )
+    def initialize_trial(id: int):
+        return pd.DataFrame(eyejoy[int(id)]).T.rename(
+            columns={0: "x", 1: "y", 4: "t"}
+        )[["x", "y", "t"]]
 
+    t_trial = initialize_trial(input.trial())
     df = t_trial.reset_index().rename(columns={"index": "i"})
 
     downsampled = df.groupby(df.index // 100).mean()
+
     fig, ax = plt.subplots()
     ax.set_box_aspect(1)
+    ax.set_title(f"Session={data_path.stem}, Trial={trial_num}")
 
     ax.set_xlim([-6, 6])
     ax.set_ylim([-6, 6])
-
     t_display = ax.text(2, -5.5, "t=0.0s")
 
     fixation_point = Ellipse((0, 0), 0.5, 0.5, color="black", alpha=0.3)
@@ -79,7 +95,7 @@ def trial_animation():
         downsampled.loc[0, "y"],
     )
 
-    def update(frame: int):
+    def update(frame: int) -> tuple[Any, Any, Any]:
         time_fp_on = 0.758133
         time_fp_off = 2.041467
         scat.set_offsets((downsampled.loc[frame, "x"], downsampled.loc[frame, "y"]))
@@ -89,14 +105,13 @@ def trial_animation():
         fp.set_height(r)
 
         return (scat, t_display, fp)
-
-    
-    writer = animation.PillowWriter(fps=100)
-    animation.FuncAnimation(
+        
+    ani = animation.FuncAnimation(
         fig,
         update,
-        frames=len(downsampled) - 1
-    ).save(f"../data/animations/{input.session()}-{input.trial()}.gif", writer=writer)
-    return {"src": f"../data/animations/{input.session()}-{input.trial()}.gif", "width": "500px"}  
+        frames=len(downsampled) - 1,
+        repeat=True,
+    )
+    return ui.HTML(ani.to_jshtml(fps=15))
 
 ```

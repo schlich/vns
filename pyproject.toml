@@ -22,6 +22,7 @@ dependencies = [
     "xarray>=2024.2.0",
     "jupyter>=1.0.0",
     "ipykernel>=6.29.3",
+    "pydantic>=2.6.4",
 ]
 
 [tool]

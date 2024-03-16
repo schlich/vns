@@ -1,0 +1,102 @@
+---
+title: "VNS Analysis"
+author: "Tyler Schlichenmeyer"
+format: dashboard
+server: shiny
+---
+
+```{python}
+import os
+from pathlib import Path
+import matplotlib.pyplot as plt
+
+```
+
+## {.toolbar}
+
+```{python}
+from pathlib import Path
+from shiny import render, ui, reactive
+
+from vns import Session
+
+
+ui.input_select("experiment", "Experiment Label", choices=["BFINAC_VNS"], selected="BFINAC_VNS")
+
+
+mat_files = [path.stem for path in Path(f"../data/BFINAC_VNS").glob("*.mat")]
+
+ui.input_select("session", "Session", choices=mat_files
+, selected=mat_files[0])
+
+ui.input_select("trial", "Trial", choices=[1], selected=1)
+
+@reactive.effect
+def _():
+    mat_files = [path.stem for path in Path(f"../data/{input.experiment()}").glob("*.mat")]
+    ui.update_select("session", choices=mat_files)
+    trials = Session(f"../data/BFINAC_VNS/{input.session()}.mat").get_trials()
+    trial_numbers = [str(trial_number) for trial_number in list(trials["trialnumber"].item())]
+    ui.update_select("trial", choices=trial_numbers)
+```
+
+## Row
+
+```{python}
+import matplotlib.animation as animation
+import matplotlib.pyplot as plt
+from matplotlib.collections import PatchCollection
+from matplotlib.patches import Ellipse, Rectangle
+from shiny import render
+import pandas as pd
+
+
+@render.image
+def trial_animation():
+    eyejoy = Session(f"../data/BFINAC_VNS/{input.session()}.mat").get_trials()["EyeJoy"].item()
+
+    t_trial = pd.DataFrame(eyejoy[0]).T.rename(
+        columns={0: "x", 1: "y", 4: "t", 2: "x2", 3: "y2"},
+    )
+
+    df = t_trial.reset_index().rename(columns={"index": "i"})
+
+    downsampled = df.groupby(df.index // 100).mean()
+    fig, ax = plt.subplots()
+    ax.set_box_aspect(1)
+
+    ax.set_xlim([-6, 6])
+    ax.set_ylim([-6, 6])
+
+    t_display = ax.text(2, -5.5, "t=0.0s")
+
+    fixation_point = Ellipse((0, 0), 0.5, 0.5, color="black", alpha=0.3)
+
+    fp = ax.add_patch(fixation_point)
+
+    scat = ax.scatter(
+        downsampled.loc[0, "x"],
+        downsampled.loc[0, "y"],
+    )
+
+    def update(frame: int):
+        time_fp_on = 0.758133
+        time_fp_off = 2.041467
+        scat.set_offsets((downsampled.loc[frame, "x"], downsampled.loc[frame, "y"]))
+        t_display.set_text(f"time={frame/10}s")
+        r = 0 if frame / 10 < time_fp_on or frame / 10 > time_fp_off else 0.5
+        fp.set_width(r)
+        fp.set_height(r)
+
+        return (scat, t_display, fp)
+
+    
+    writer = animation.PillowWriter(fps=100)
+    animation.FuncAnimation(
+        fig,
+        update,
+        frames=len(downsampled) - 1
+    ).save(f"../data/animations/{input.session()}-{input.trial()}.gif", writer=writer)
+    return {"src": f"../data/animations/{input.session()}-{input.trial()}.gif", "width": "500px"}  
+
+```

@@ -1,13 +1,13 @@
 {
-  "name": "VNS (hatch)",
+  "name": "VNS",
   "image": "mcr.microsoft.com/devcontainers/python",
   "features": {
-    "ghcr.io/devcontainers-contrib/features/hatch:2": {}
-  },
-  "containerEnv": {
-    "HATCH_CONFIG": "/workspaces/vns/.config/hatch/config.toml",
-    "HATCH_CACHE_HOME": "/workspaces/vns/.cache",
-    "HATCH_DATA_HOME": "/workspaces/vns/.local/share"
+    "ghcr.io/julialang/devcontainer-features/julia:1": {},
+    "ghcr.io/schlich/devcontainer-features/rye:1.1.8": {},
+    "ghcr.io/eitsupi/devcontainer-features/nushell:0": {},
+    "ghcr.io/schlich/devcontainer-features/pigz:0": {},
+    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {},
+    "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get:1": {}
   },
   "customizations": {
     "vscode": {
@@ -22,9 +22,9 @@
         "mechatroner.rainbow-csv",
         "Posit.shiny-python",
         "GitHub.github-vscode-theme",
-        "ms-python.mypy-type-checker",
         "seatonjiang.gitmoji-vscode",
-        "TheNuProjectContributors.vscode-nushell-lang"
+        "TheNuProjectContributors.vscode-nushell-lang",
+        "quarto.quarto"
       ],
       "settings": {
         "[python]": {
@@ -35,9 +35,8 @@
           },
           "editor.defaultFormatter": "charliermarsh.ruff"
         },
-        "python.defaultInterpreterPath": "/workspaces/vns/.hatch/vns/bin/python",
+        "python.defaultInterpreterPath": ".venv/bin/python",
         "python.analysis.typeCheckingMode": "strict",
-        "dotfiles.repository": "schlich/.dotfiles",
         "jupyter.notebookFileRoot": "${containerWorkspaceFolder}",
         "notebook.formatOnCellExecution": true,
         "notebook.formatOnSave.enabled": true,

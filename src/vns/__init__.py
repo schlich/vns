@@ -12,14 +12,15 @@ import numpy as np
 import pandas as pd
 import pandera as pa
 import plotly.express as px
-import scipy
+import scipy.io as scipy_io
 import xarray as xr
 from matplotlib import animation
 from matplotlib.collections import LineCollection
+from pandera.typing import DataFrame
 
 if TYPE_CHECKING:
     from datatree import DataTree
-    from pandera.typing import DataFrame, Index, Series
+    from pandera.typing import Index, Series
 
 
 fields = {
@@ -52,6 +53,7 @@ class ExperimentSchema(pa.DataFrameModel):
     start_time: Index[datetime.datetime]
     n_trials: Series[int]
 
+
 class Trial:
     def __init__(self, eyejoy: DataFrame[EyeJoy] | None = None):
         if eyejoy is None:
@@ -69,7 +71,6 @@ class Trial:
 
     def animate(self):
         fig, ax = plt.subplots()
-        data = self.eyejoy
 
         def anim_func(current_t: int):
             return ax.add_collection(LineCollection(segments=[line(x, 10)]))
@@ -78,7 +79,7 @@ class Trial:
             fig,
             anim_func,
             blit=True,
-        ).save("data/ANIMATE.html", writer="html")
+        ).save("data/animations/animate.gif", writer="pillow")
 
 
 class Session:
@@ -95,6 +96,7 @@ class Session:
         Returns
         -------
             pd.Timestamp: The start time of the session.
+
         """
         return pd.to_datetime(
             Path(self.data_file).stem.split("_", maxsplit=1)[1],
@@ -119,25 +121,7 @@ class Session:
         return len(self.trials)
 
     def get_trials(self):
-        data = mat_data(self.matfile_path())["PDS"]
-
-        def extract_fields(data: DataFrame) -> DataFrame:
-
-            return pd.DataFrame(
-                {
-                    field_name: pd.Series(
-                        data[field_name],
-                        index=data["trialnumber"],
-                        dtype=field_dtype,
-                    )
-                    for field_name, field_dtype in fields.items()
-                },
-            )
-
-        return {
-            "data": extract_fields(data),
-            # "trials": (Trial(session=session) for session in sessions),
-        }
+        return scipy_io.loadmat(self.data_file, squeeze_me=True)["PDS"]
 
     def to_parquet(self):
         self.trials().to_parquet(self.parquet_path())
@@ -149,12 +133,7 @@ class Session:
         return self.start_time < other.start_time
 
     def plot(self):
-        trials = self.trials()
-        return px.bar(trials)
-
-    @classmethod
-    def matpath2date(cls, matfile_path: Path) -> datetime.datetime:
-        return
+        return px.bar(self.trials())
 
 
 class Experiment:
@@ -177,7 +156,6 @@ class Experiment:
     def __repr__(self):
         return f"<Experiment {self.label}>"
 
-
     def sessions(self):
         return sorted(
             Session(matfile_path=matfile_path) for matfile_path in self.mat_files
@@ -195,11 +173,14 @@ class Experiment:
             [
                 pd.Series(
                     [session.n_trials() for session in sessions],
-                    index = pd.Index([session.start_time for session in sessions], name="start_time"),
+                    index=pd.Index(
+                        [session.start_time for session in sessions],
+                        name="start_time",
+                    ),
                     name="n_trials",
                     dtype=int,
                 ),
-            ]
+            ],
         ).pipe(DataFrame[ExperimentSchema])
 
     def summary(self):
@@ -234,6 +215,7 @@ def date_from_filename(filepath: Path) -> datetime.datetime:
     Returns:
     -------
         datetime.datetime: The converted datetime object.
+
     """
     return pd.Timestamp(
         datetime.datetime.strptime(
@@ -253,6 +235,7 @@ def session_attrs(filename: str) -> dict:
     Returns:
     -------
         dict: The extracted session attributes.
+
     """
     c = scipy.io.loadmat(
         "data/BFINAC_VNS/" + filename,

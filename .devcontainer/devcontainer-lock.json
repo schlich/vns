@@ -1,9 +1,42 @@
 {
   "features": {
-    "ghcr.io/devcontainers-contrib/features/hatch:2": {
-      "version": "2.0.17",
-      "resolved": "ghcr.io/devcontainers-contrib/features/hatch@sha256:01caa800a7e20eaf23e73ea6cccecfbc44ab44ab3d421056d113a5c42a101085",
-      "integrity": "sha256:01caa800a7e20eaf23e73ea6cccecfbc44ab44ab3d421056d113a5c42a101085"
+    "ghcr.io/devcontainers-contrib/features/apt-get-packages:1": {
+      "version": "1.0.6",
+      "resolved": "ghcr.io/devcontainers-contrib/features/apt-get-packages@sha256:e978f0cd0b621d9ad5efec334408e5a6d3d2a65c99a9a60613115168e186d2c9",
+      "integrity": "sha256:e978f0cd0b621d9ad5efec334408e5a6d3d2a65c99a9a60613115168e186d2c9"
+    },
+    "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get:1": {
+      "version": "1.0.15",
+      "resolved": "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get@sha256:276d781fc1d908d75b3bda305275ef19d948cfcac06c1d8f710da4054d5d54ab",
+      "integrity": "sha256:276d781fc1d908d75b3bda305275ef19d948cfcac06c1d8f710da4054d5d54ab"
+    },
+    "ghcr.io/eitsupi/devcontainer-features/nushell:0": {
+      "version": "0.1.1",
+      "resolved": "ghcr.io/eitsupi/devcontainer-features/nushell@sha256:c35933c78369ee4a9936041c75a3363414c5fd332d95a2b2c7c4cb1b179cd176",
+      "integrity": "sha256:c35933c78369ee4a9936041c75a3363414c5fd332d95a2b2c7c4cb1b179cd176"
+    },
+    "ghcr.io/julialang/devcontainer-features/julia:1": {
+      "version": "1.1.1",
+      "resolved": "ghcr.io/julialang/devcontainer-features/julia@sha256:70e6e63f6f6334c0440901cc9ddfeed3327fa879b6008668aad5d0a013428953",
+      "integrity": "sha256:70e6e63f6f6334c0440901cc9ddfeed3327fa879b6008668aad5d0a013428953"
+    },
+    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
+      "version": "1.1.2",
+      "resolved": "ghcr.io/rocker-org/devcontainer-features/quarto-cli@sha256:5974cce8e6859f55907ed01bbe32a9b0dc9704e398b4eabeaab846b6b6bf56da",
+      "integrity": "sha256:5974cce8e6859f55907ed01bbe32a9b0dc9704e398b4eabeaab846b6b6bf56da"
+    },
+    "ghcr.io/schlich/devcontainer-features/pigz:0": {
+      "version": "0.1.0",
+      "resolved": "ghcr.io/schlich/devcontainer-features/pigz@sha256:89d456c336b4aebd6a57684956da98f8787178b1adae9bb25e5fc7aa56c2b39c",
+      "integrity": "sha256:89d456c336b4aebd6a57684956da98f8787178b1adae9bb25e5fc7aa56c2b39c",
+      "dependsOn": [
+        "ghcr.io/devcontainers-contrib/features/apt-get-packages:1"
+      ]
+    },
+    "ghcr.io/schlich/devcontainer-features/rye:1.1.8": {
+      "version": "1.1.8",
+      "resolved": "ghcr.io/schlich/devcontainer-features/rye@sha256:047516048f29772a762482706c6b265ee2e9e22db31d6f49b773fdfc7ada9dd6",
+      "integrity": "sha256:047516048f29772a762482706c6b265ee2e9e22db31d6f49b773fdfc7ada9dd6"
     }
   }
 }

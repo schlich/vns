@@ -1,4 +1,5 @@
 /.quarto/
 *.ipynb
 !rust.ipynb
-dash_files
+*_files
+app.py

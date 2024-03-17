@@ -16,36 +16,53 @@ from shiny import render, ui, reactive
 ## {.toolbar}
 
 ```{python}
+from datetime import datetime
 from pathlib import Path
 
-from vns import Session
+from vns import Session, get_sessions
 
+matfiles = Path("../data/BFINAC_VNS").glob("*.mat")
 
-ui.input_select("experiment", "Experiment Label", choices=["BFINAC_VNS"], selected="BFINAC_VNS")
+sessions = get_sessions(matfiles)
+first_session = next(iter(sessions))
 
+ui.input_select("session", "Session", choices=sessions, selected=first_session,)
 
-mat_files = [path.stem for path in Path(f"../data/BFINAC_VNS").glob("*.mat")]
+trials = Session(
+    datetime=datetime.fromisoformat(first_session)
+).get_trials()
 
-ui.input_select("session", "Session", choices=mat_files
-, selected=mat_files[0])
+ui.input_select("trial", "Trial", choices=list(trials["trialnumber"]), selected=1)
 
-
-@reactive.effect
-def _():
-    data_path = Path('../data')
-    mat_files = [path.stem for path in Path(data_path / input.experiment()).glob("*.mat")]
-    ui.update_select("session", choices=mat_files)
-    trials = Session(data_filepath=Path(data_path / input.experiment() / input.session())).get_trials()
-    trial_numbers = [str(trial_number) for trial_number in list(trials["trialnumber"].item())]
-    ui.update_select("trial", choices=trial_numbers)
 ```
 
 ## Row
 
-### {.sidebar}
+```{python}
+
+from datetime import datetime
+
+from vns import Trial
+
+@reactive.effect
+def _():
+    session = input.session()
+    trials = Session(
+        datetime=datetime.fromisoformat(session)
+    ).get_trials()
+    ui.update_select("trial", choices=list(trials["trialnumber"]))
+
+```
+
+## Row
+
+### Column
 
 ```{python}
-ui.input_select("trial", "Trial", choices=[1], selected=1)
+
+@render.text
+def fractal():
+    return Trial(id = input.trial(), fractal=6118).fractal
 ```
 
 ### Column
@@ -57,30 +74,23 @@ from matplotlib.collections import PatchCollection
 from matplotlib.patches import Ellipse, Rectangle
 from shiny import render
 import pandas as pd
+import polars as pl
+from datetime import datetime
 
-from vns import EyeJoy
-
+from vns import Session
 
 @render.ui
 def trial_animation():
-    data_path = Path("../data") / input.experiment() / input.session()
-    session = Session(data_filepath=data_path)
-    eyejoy = session.get_trials()["EyeJoy"].item()
-    trial_num = input.trial()
-
-    def initialize_trial(id: int):
-        return pd.DataFrame(eyejoy[int(id)]).T.rename(
-            columns={0: "x", 1: "y", 4: "t"}
-        )[["x", "y", "t"]]
-
-    t_trial = initialize_trial(input.trial())
-    df = t_trial.reset_index().rename(columns={"index": "i"})
-
-    downsampled = df.groupby(df.index // 100).mean()
+    session = Session(
+        datetime = input.session()
+    )
+    trial_data = session.get_trials()
+    trial_id = input.trial()
+    trial = Trial(id=trial_id, fractal=trial_data[int(trial_id), "fractals"])
 
     fig, ax = plt.subplots()
     ax.set_box_aspect(1)
-    ax.set_title(f"Session={data_path.stem}, Trial={trial_num}")
+    ax.set_title(f"Session={session.datetime.isoformat()}, Trial={trial_id}")
 
     ax.set_xlim([-6, 6])
     ax.set_ylim([-6, 6])
@@ -90,28 +100,30 @@ def trial_animation():
 
     fp = ax.add_patch(fixation_point)
 
+    df = trial.eyejoy()
+
     scat = ax.scatter(
-        downsampled.loc[0, "x"],
-        downsampled.loc[0, "y"],
+        df[0, "x"],
+        df[0, "y"],
     )
 
     def update(frame: int) -> tuple[Any, Any, Any]:
         time_fp_on = 0.758133
         time_fp_off = 2.041467
-        scat.set_offsets((downsampled.loc[frame, "x"], downsampled.loc[frame, "y"]))
-        t_display.set_text(f"time={frame/10}s")
+        scat.set_offsets((df[frame, "x"], df[frame, "y"]))
+        t_display.set_text(f"time={frame/1000}s")
         r = 0 if frame / 10 < time_fp_on or frame / 10 > time_fp_off else 0.5
         fp.set_width(r)
         fp.set_height(r)
 
         return (scat, t_display, fp)
-        
+
     ani = animation.FuncAnimation(
         fig,
         update,
-        frames=len(downsampled) - 1,
+        frames=len(df) - 1,
         repeat=True,
     )
-    return ui.HTML(ani.to_jshtml(fps=15))
+    return ui.HTML(ani.to_jshtml(fps=1000))
 
 ```

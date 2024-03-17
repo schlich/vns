@@ -63,9 +63,9 @@ croniter==2.0.2
     # via dagster
 cycler==0.12.1
     # via matplotlib
-dagster==1.6.9
+dagster==1.6.11
     # via vns
-dagster-pipes==1.6.9
+dagster-pipes==1.6.11
     # via dagster
 debugpy==1.8.1
     # via ipykernel
@@ -236,6 +236,7 @@ numpy==1.26.4
     # via pandas
     # via pandas-stubs
     # via pandera
+    # via pyarrow
     # via scipy
     # via vns
     # via xarray
@@ -259,14 +260,16 @@ pandas==2.2.1
     # via pandera
     # via vns
     # via xarray
-pandas-stubs==2.2.0.240218
+pandas-stubs==2.2.1.240316
     # via pandera
-pandera==0.18.2
+pandera==0.19.0b0
     # via vns
 pandocfilters==1.5.1
     # via nbconvert
 parso==0.8.3
     # via jedi
+patito==0.6.1
+    # via vns
 pendulum==3.0.0
     # via dagster
 pexpect==4.9.0
@@ -275,7 +278,11 @@ pillow==10.2.0
     # via matplotlib
 platformdirs==4.2.0
     # via jupyter-core
-plotly==5.19.0
+plotly==5.20.0
+    # via vns
+polars==0.20.15
+    # via pandera
+    # via patito
     # via vns
 prometheus-client==0.20.0
     # via jupyter-server
@@ -293,11 +300,14 @@ ptyprocess==0.7.0
     # via terminado
 pure-eval==0.2.2
     # via stack-data
+pyarrow==15.0.1
+    # via vns
 pycparser==2.21
     # via cffi
 pydantic==2.6.4
     # via dagster
     # via pandera
+    # via patito
     # via vns
 pydantic-core==2.16.3
     # via pydantic
@@ -442,6 +452,7 @@ typing-extensions==4.10.0
     # via alembic
     # via dagster
     # via htmltools
+    # via patito
     # via pydantic
     # via pydantic-core
     # via shiny

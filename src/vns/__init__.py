@@ -3,51 +3,52 @@ from __future__ import annotations
 __version__ = "0.0.1"
 
 import datetime
-import os
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-import pandera as pa
-import plotly.express as px
-import scipy.io as scipy_io
-import xarray as xr
+import pandera.polars as pa
+import polars as pl
+import scipy
 from matplotlib import animation
 from matplotlib.patches import Ellipse
-from pandera.typing import DataFrame
 from pydantic import BaseModel
 
 if TYPE_CHECKING:
-    from datatree import DataTree
     from pandera.typing import Index, Series
 
 
 fields = {
+    "trialnumber": int,
     "fractals": str,
     "targAngle": float,
     "targAmp": float,
     "goodtrial": bool,
     "fixreq": bool,
-    "datapixxtime": float,
-    "trialstarttime": float,
+    # "datapixxtime": float,
+    # "trialstarttime": float,
     "timefpon": float,
     "timefpoff": float,
-    "windowchosen": bool,
+    # "windowchosen": bool,
     "timetargetoff": float,
-    "feedid": str,
+    # "feedid": str,
     "TrialTypeSave": str,
     "timefpabort": float,
     "repeatflag": bool,
-    "monkeynotinitiated": bool,
+    # "monkeynotinitiated": bool,
 }
 
 
 class EyeJoy(pa.DataFrameModel):
-    x: Series[float]
-    y: Series[float]
-    t: Index[float] = pa.Field(ge=0, check_name=True)
+    x: float
+    y: float
+    t: float
+
+
+class CursorSample(BaseModel):
+    x: float
+    y: float
+    t: float
 
 
 class ExperimentSchema(pa.DataFrameModel):
@@ -56,21 +57,22 @@ class ExperimentSchema(pa.DataFrameModel):
 
 
 class Trial(BaseModel):
-    session: Session
     id: int
+    fractal: int
+
+    def eyejoy(self) -> EyeJoy:
+        return (
+            pl.read_parquet(
+                f"../data/BFINAC_VNS/BFnovelinac_31_01_2019_16_11/{self.id}.parquet",
+            )
+            .rename({"column_0": "x", "column_1": "y"})
+            .select(["x", "y"])
+        )
 
     def animate(self):
-        eyejoy = self.session.get_trials()["EyeJoy"]
-
-        t_trial = DataFrame[EyeJoy](eyejoy.item()[self.id]).T.rename(
-            columns={0: "x", 1: "y", 4: "t"},
-        )[["x", "y", "t"]]
-        df = t_trial.reset_index().rename(columns={"index": "i"})
-        downsampled = df.groupby(df.index // 100).mean()
-
         fig, ax = plt.subplots(nrows=1, ncols=1)
         ax.set_box_aspect(1)
-        ax.set_title(f"Session={self.session.label}, Trial={self.id}")
+        ax.set_title(f"Trial={self.id}")
 
         ax.set_xlim([-6, 6])
         ax.set_ylim([-6, 6])
@@ -82,16 +84,18 @@ class Trial(BaseModel):
         fp = ax.add_patch(fixation_point)
 
         scat = ax.scatter(
-            downsampled.loc[0, "x"],
-            downsampled.loc[0, "y"],
+            self.eyejoy.loc[0, "x"],
+            self.eyejoy.loc[0, "y"],
         )
 
         def update(frame: int) -> tuple[Any, Any, Any]:
             time_fp_on = 0.758133
             time_fp_off = 2.041467
-            scat.set_offsets((downsampled.loc[frame, "x"], downsampled.loc[frame, "y"]))
-            t_display.set_text(f"time={frame/10}s")
-            r = 0 if frame / 10 < time_fp_on or frame / 10 > time_fp_off else 0.5
+            x = self.eyejoy.loc[frame, "x"]
+            y = self.eyejoy.loc[frame, "y"]
+            scat.set_offsets((x, y))
+            t_display.set_text(f"time={frame/10000}s")
+            r = 0 if frame / 10000 < time_fp_on or frame / 10000 > time_fp_off else 0.5
             fp.set_width(r)
             fp.set_height(r)
 
@@ -100,160 +104,72 @@ class Trial(BaseModel):
         return animation.FuncAnimation(
             fig,
             update,
-            frames=len(downsampled) - 1,
+            frames=len(self.eyejoy) - 1,
             repeat=True,
         )
 
 
-class Session(BaseModel):
-    data_filepath: Path
-    # trials = list[Trial]
-
-    @property
-    def filetype(self):
-        return self.data_filepath.suffix
-
-    @property
-    def label(self):
-        return self.data_filepath.stem
-
-    @property
-    def start_time(self) -> pd.Timestamp:
-        return pd.to_datetime(
-            Path(self.data_filepath).stem.split("_", maxsplit=1)[1],
-            format="%d_%m_%Y_%H_%M",
-        )
-
-    def get_trials(self):
-        return scipy_io.loadmat(str(self.data_filepath), squeeze_me=True)["PDS"]
-
-    def __lt__(self, other: Session):
-        return self.start_time < other.start_time
+def parse_filename(label: str):
+    return datetime.datetime.strptime(
+        label.split("_", maxsplit=1)[1],
+        "%d_%m_%Y_%H_%M",
+    ).astimezone()
 
 
-class Experiment:
-    """A collection of sessions from a single experiment.
-
-    Attributes
-    ----------
-        sessions: A list of sessions objects from the experiment.
-
-    """
-
-    def __init__(
-        self,
-        sessions: list[Session],
-    ):
-        exp_data = data_dir / label / "mat"
-        self.mat_files = Path(exp_data).glob("*.mat")
-        self.label = label
-
-    def __repr__(self):
-        return f"<Experiment {self.label}>"
-
-    def sessions(self):
-        return sorted(
-            Session(matfile_path=matfile_path) for matfile_path in self.mat_files
-        )
-
-    def start_times(self):
-        return [session.start_time for session in self.sessions()]
-
-    def trial_counts(self):
-        return [len(session.n_trials()) for session in self.sessions()]
-
-    def data(self) -> DataFrame[ExperimentSchema]:
-        sessions = self.sessions()
-        return pd.DataFrame(
-            [
-                pd.Series(
-                    [session.n_trials() for session in sessions],
-                    index=pd.Index(
-                        [session.start_time for session in sessions],
-                        name="start_time",
-                    ),
-                    name="n_trials",
-                    dtype=int,
-                ),
-            ],
-        ).pipe(DataFrame[ExperimentSchema])
-
-    def summary(self):
-        return pd.DataFrame(
-            {
-                "start_time": [session.start_time for session in self.sessions()],
-                "n_trials": [len(session.trials()) for session in self.sessions()],
-            },
-        )
-
-    def plot(self):
-        return px.scatter(
-            self.summary(),
-            x="start_time",
-            y="n_trials",
-            template="plotly_white",
-        )
-
-
-def extinction_learning(datatree: DataTree) -> xr.Dataset:
-    """Produce extinction learning results."""
-    return xr.DataArray(data=np.ndarray(shape=(3)), dims=("Trial"))
-
-
-def date_from_filename(filepath: Path) -> datetime.datetime:
-    """Convert filename to datetime object.
-
-    Args:
-    ----
-        filename (str): The filename to convert.
-
-    Returns:
-    -------
-        datetime.datetime: The converted datetime object.
-
-    """
-    return pd.Timestamp(
-        datetime.datetime.strptime(
-            str(Path(filepath).stem)[12:],
-            "%d_%m_%Y_%H_%M",
-        ),
-    )
-
-
-def session_attrs(filename: str) -> dict:
-    """Extract session attributes from a file.
-
-    Args:
-    ----
-        filename (str): The name of the file.
-
-    Returns:
-    -------
-        dict: The extracted session attributes.
-
-    """
-    c = scipy.io.loadmat(
-        "data/BFINAC_VNS/" + filename,
-        squeeze_me=True,
-    )["c"]
+def get_sessions(matfiles: list[Path]):
     return {
-        field_name: data
-        for field_name, data in {
-            field_name: c.item()[i] for i, field_name in enumerate(c.dtype.names)
-        }.items()
-        if not isinstance(data, np.ndarray)
+        parse_filename(path.stem).isoformat(): parse_filename(path.stem).strftime(
+            "%Y-%m-%d %H:%M",
+        )
+        for path in matfiles
     }
 
 
-def sessions() -> pd.DataFrame:
-    """Retrieve session data as a DataFrame."""
-    return pd.DataFrame.from_records(
-        [session_attrs(filename) for filename in os.listdir("data/BFINAC_VNS")],
-        index=pd.Index(
-            [
-                date_from_filename(filename)
-                for filename in os.listdir("data/BFINAC_VNS")
-            ],
-            name="datetime",
-        ),
-    )
+def mat2parquet(mat_path: Path, remove: bool | None = None):
+    new_folder = Path(mat_path.parent / mat_path.stem)
+    new_folder.mkdir(exist_ok=True)
+    parquet_path = new_folder / "trials.parquet"
+    if not parquet_path.exists():
+        pds_data = scipy.io.loadmat(str(mat_path), squeeze_me=True)["PDS"]
+        trials = pl.DataFrame(
+            pl.Series(
+                name=field,
+                values=pds_data[field].item(),
+            )
+            for field in fields
+        )
+        trials.write_parquet(parquet_path)
+    else:
+        trials = pl.read_parquet(parquet_path)
+    for trial_id in trials["trialnumber"]:
+        eyejoy_path = new_folder / f"{trial_id}.parquet"
+        if not eyejoy_path.exists():
+            pl.DataFrame(
+                scipy.io.loadmat(
+                    mat_path,
+                    squeeze_me=True,
+                )["PDS"]["EyeJoy"]
+                .item()[trial_id - 1]
+                .T,
+            ).rename({"column_0": "x", "column_1": "y"}).select(
+                ["x", "y"],
+            ).write_parquet(
+                eyejoy_path,
+            )
+    if remove:
+        mat_path.unlink()
+
+
+class Session(BaseModel):
+    datetime: datetime.datetime
+
+    def get_trials(self) -> pl.DataFrame:
+        base_path = Path("/workspaces/vns/data/BFINAC_VNS")
+        session_simpledate = self.datetime.strftime("%Y-%m-%d_%H-%M")
+        parquet_path = Path(base_path / session_simpledate).with_suffix(".parquet")
+        return pl.read_parquet(parquet_path)
+
+
+class Experiment(BaseModel):
+    label: str
+    sessions: list[Session]

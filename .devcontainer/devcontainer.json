@@ -64,5 +64,6 @@
         "jupyter.disableJupyterAutoStart": true
       }
     }
-  }
+  },
+  "forwardPorts": [8787]
 }

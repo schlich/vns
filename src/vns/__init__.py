@@ -147,7 +147,7 @@ class Trial(BaseModel):
         return animation.FuncAnimation(
             fig,
             update,
-            frames=len(self.eyejoy()) - 1,
+            frames=len(self.eyejoy().count().collect()) - 1,
             repeat=True,
         )
 
@@ -155,12 +155,12 @@ class Trial(BaseModel):
 class Session(BaseModel):
     path: Path
 
-    def get_trials(self) -> pl.DataFrame:
-        return pl.read_parquet(self.path / "trials.parquet")
+    def get_trials(self) -> pl.LazyFrame:
+        return pl.scan_parquet(self.path / "trials.parquet")
 
     @property
     def datetime(self) -> datetime:
-        datetime.strptime(
+        return datetime.strptime(
             str(self.path).split("_", maxsplit=1)[1],
             "%d_%m_%Y_%H_%M",
         ).astimezone()

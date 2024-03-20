@@ -17,6 +17,7 @@ from shiny import render, ui, reactive
 
 ```{python}
 from pathlib import Path
+import polars as pl
 
 from vns import Session
 
@@ -28,7 +29,11 @@ ui.input_select("session", "Session", choices=[str(session.path) for session in 
 
 trials = Session(path=first_session.path).get_trials()
 
-ui.input_select("trial", "Trial", choices=list(trials["trialnumber"]), selected=1)
+ui.input_select("trial", "Trial", choices=trials.select("trialnumber").collect()["trialnumber"].to_list(), selected=1)
+
+@render.text(inline=True)
+def trial_count():
+    return "Test"
 
 ```
 
@@ -40,10 +45,14 @@ from pathlib import Path
 
 from vns import Trial
 
+@render.data_frame
+def session_trials():
+    return trials.group_by("fractals").collect()
+
 @reactive.effect
-def _():
-    trials = Session(path=Path(input.session())).get_trials()
-    ui.update_select("trial", choices=list(trials["trialnumber"]))
+def trial_dropdown():
+    ui.update_select("trial", choices=trials.select("trialnumber"))
+
 
 ```
 
@@ -93,9 +102,7 @@ def trial_animation():
     fp = ax.add_patch(fixation_point)
  
     trial.trim_trailing_zeros()
-    t_0 = datetime.datetime(2000,1,1,0,0)
-    df = trial.eyejoy().with_columns(datetime.datetime.now() + pl.col("t").cast(pl.Duration)).sort("t").group_by_dynamic("t", every='200ms').mean().collect()
-
+    df = trial.eyejoy()
     scat = ax.scatter(
         df[0, "x"],
         df[0, "y"],

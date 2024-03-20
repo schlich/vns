@@ -228,8 +228,6 @@ notebook==7.1.2
 notebook-shim==0.2.4
     # via jupyterlab
     # via notebook
-np==1.0.2
-    # via vns
 numpy==1.26.4
     # via contourpy
     # via matplotlib
@@ -238,7 +236,6 @@ numpy==1.26.4
     # via pandera
     # via pyarrow
     # via scipy
-    # via vns
     # via xarray
 overrides==7.7.0
     # via jupyter-server
@@ -268,8 +265,6 @@ pandocfilters==1.5.1
     # via nbconvert
 parso==0.8.3
     # via jedi
-patito==0.6.1
-    # via vns
 pendulum==3.0.0
     # via dagster
 pexpect==4.9.0
@@ -282,7 +277,6 @@ plotly==5.20.0
     # via vns
 polars==0.20.16
     # via pandera
-    # via patito
     # via vns
 prometheus-client==0.20.0
     # via jupyter-server
@@ -307,7 +301,6 @@ pycparser==2.21
 pydantic==2.6.4
     # via dagster
     # via pandera
-    # via patito
     # via vns
 pydantic-core==2.16.3
     # via pydantic
@@ -452,7 +445,6 @@ typing-extensions==4.10.0
     # via alembic
     # via dagster
     # via htmltools
-    # via patito
     # via pydantic
     # via pydantic-core
     # via shiny

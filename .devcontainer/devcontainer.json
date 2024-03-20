@@ -10,7 +10,7 @@
     "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get:1": {},
     "ghcr.io/devcontainers-contrib/features/starship:1": {}
   },
-  "postCreateCommand": "echo \"eval '$(starship init bash)'\" >> ~/.bashrc",
+  "postCreateCommand": "echo \"eval '$(starship init bash)'\" >> ~/.bashrc && rye sync",
   "customizations": {
     "vscode": {
       "extensions": [

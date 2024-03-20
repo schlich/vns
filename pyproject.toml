@@ -13,8 +13,6 @@ dependencies = [
     "shiny>=0.8.1",
     "shinywidgets>=0.3.1",
     "matplotlib>=3.8.3",
-    "np>=1.0.2",
-    "numpy>=1.26.4",
     "pandas>=2.2.1",
     "pandera[polars,mypy]>=0.19.0b0",
     "plotly>=5.20.0",
@@ -25,7 +23,6 @@ dependencies = [
     "pydantic>=2.6.4",
     "polars>=0.20.15",
     "pyarrow>=15.0.1",
-    "patito>=0.6.1",
 ]
 
 [tool]

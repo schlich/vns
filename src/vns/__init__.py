@@ -2,8 +2,7 @@ from __future__ import annotations
 
 __version__ = "0.0.1"
 
-import datetime
-from pathlib import Path
+from datetime import datetime, timedelta
 from typing import TYPE_CHECKING, Any
 
 import matplotlib.pyplot as plt
@@ -15,8 +14,7 @@ from matplotlib.patches import Ellipse
 from pydantic import BaseModel
 
 if TYPE_CHECKING:
-    from pandera.typing import Index, Series
-
+    from pathlib import Path
 
 fields = {
     "trialnumber": int,
@@ -48,26 +46,71 @@ class EyeJoy(pa.DataFrameModel):
 class CursorSample(BaseModel):
     x: float
     y: float
-    t: float
 
-
-class ExperimentSchema(pa.DataFrameModel):
-    start_time: Index[datetime.datetime]
-    n_trials: Series[int]
+    def t(
+        self,
+        session_start: datetime,
+        trial_number: int,
+        sample_number: int,
+    ) -> datetime:
+        return session_start + timedelta(
+            seconds=trial_number * 10 + sample_number / 1000,
+        )
 
 
 class Trial(BaseModel):
-    id: int
-    fractal: int
+    path: Path
 
-    def eyejoy(self) -> EyeJoy:
-        return (
-            pl.read_parquet(
-                f"../data/BFINAC_VNS/BFnovelinac_31_01_2019_16_11/{self.id}.parquet",
-            )
-            .rename({"column_0": "x", "column_1": "y"})
-            .select(["x", "y"])
+    @property
+    def id(self) -> int:
+        return int(self.path.stem)
+
+    def eyejoy(self):
+        return pl.scan_parquet(self.path.with_suffix(".parquet"))
+
+    def replace_cursor_data(self):
+        mat_path = self.path.parent.with_suffix(".mat")
+        matfile = scipy.io.loadmat(
+            mat_path,
+            squeeze_me=True,
         )
+        eyejoy = pl.DataFrame(matfile["PDS"]["EyeJoy"].item()[self.id].T).rename(
+            {
+                "column_0": "x",
+                "column_1": "y",
+                "column_2": "d",
+                "column_3": "?",
+                "column_4": "t",
+            },
+        )
+        eyejoy.write_parquet(self.path.with_suffix(".parquet"))
+
+    def trim_trailing_zeros(self):
+        eyejoy = pl.read_parquet(self.path.with_suffix(".parquet")).filter(
+            pl.col("t") != 0.0,
+        )
+        eyejoy.write_parquet(self.path.with_suffix(".parquet"))
+
+    def get_column(self, *, column: str):
+        return pl.DataFrame(
+            scipy.io.loadmat(
+                self.path.parent.with_suffix(".mat"),
+                squeeze_me=True,
+            )["PDS"][column].item(),
+        )
+
+    def add_column_to_parquet(self, column_to_append: pl.DataFrame):
+        old_df = pl.read_parquet(self.path / "trials.parquet")
+        new_df = pl.concat([old_df, column_to_append], how="horizontal")
+        new_df.write_parquet(self.path / "trials.parquet")
+
+    def drop_column_from_parquet(self, column_to_drop: str):
+        parquet_path = self.path.with_suffix(".parquet")
+        data = pl.read_parquet(parquet_path)
+        if column_to_drop in data.columns:
+            pl.read_parquet(parquet_path).drop([column_to_drop]).write_parquet(
+                parquet_path,
+            )
 
     def animate(self):
         fig, ax = plt.subplots(nrows=1, ncols=1)
@@ -84,15 +127,15 @@ class Trial(BaseModel):
         fp = ax.add_patch(fixation_point)
 
         scat = ax.scatter(
-            self.eyejoy.loc[0, "x"],
-            self.eyejoy.loc[0, "y"],
+            self.eyejoy()[0, "x"],
+            self.eyejoy()[0, "y"],
         )
 
         def update(frame: int) -> tuple[Any, Any, Any]:
             time_fp_on = 0.758133
             time_fp_off = 2.041467
-            x = self.eyejoy.loc[frame, "x"]
-            y = self.eyejoy.loc[frame, "y"]
+            x = self.eyejoy()[frame, "x"]
+            y = self.eyejoy()[frame, "y"]
             scat.set_offsets((x, y))
             t_display.set_text(f"time={frame/10000}s")
             r = 0 if frame / 10000 < time_fp_on or frame / 10000 > time_fp_off else 0.5
@@ -104,70 +147,23 @@ class Trial(BaseModel):
         return animation.FuncAnimation(
             fig,
             update,
-            frames=len(self.eyejoy) - 1,
+            frames=len(self.eyejoy()) - 1,
             repeat=True,
         )
 
 
-def parse_filename(label: str):
-    return datetime.datetime.strptime(
-        label.split("_", maxsplit=1)[1],
-        "%d_%m_%Y_%H_%M",
-    ).astimezone()
-
-
-def get_sessions(matfiles: list[Path]):
-    return {
-        parse_filename(path.stem).isoformat(): parse_filename(path.stem).strftime(
-            "%Y-%m-%d %H:%M",
-        )
-        for path in matfiles
-    }
-
-
-def mat2parquet(mat_path: Path, remove: bool | None = None):
-    new_folder = Path(mat_path.parent / mat_path.stem)
-    new_folder.mkdir(exist_ok=True)
-    parquet_path = new_folder / "trials.parquet"
-    if not parquet_path.exists():
-        pds_data = scipy.io.loadmat(str(mat_path), squeeze_me=True)["PDS"]
-        trials = pl.DataFrame(
-            pl.Series(
-                name=field,
-                values=pds_data[field].item(),
-            )
-            for field in fields
-        )
-        trials.write_parquet(parquet_path)
-    else:
-        trials = pl.read_parquet(parquet_path)
-    for trial_id in trials["trialnumber"]:
-        eyejoy_path = new_folder / f"{trial_id}.parquet"
-        if not eyejoy_path.exists():
-            pl.DataFrame(
-                scipy.io.loadmat(
-                    mat_path,
-                    squeeze_me=True,
-                )["PDS"]["EyeJoy"]
-                .item()[trial_id - 1]
-                .T,
-            ).rename({"column_0": "x", "column_1": "y"}).select(
-                ["x", "y"],
-            ).write_parquet(
-                eyejoy_path,
-            )
-    if remove:
-        mat_path.unlink()
-
-
 class Session(BaseModel):
-    datetime: datetime.datetime
+    path: Path
 
     def get_trials(self) -> pl.DataFrame:
-        base_path = Path("/workspaces/vns/data/BFINAC_VNS")
-        session_simpledate = self.datetime.strftime("%Y-%m-%d_%H-%M")
-        parquet_path = Path(base_path / session_simpledate).with_suffix(".parquet")
-        return pl.read_parquet(parquet_path)
+        return pl.read_parquet(self.path / "trials.parquet")
+
+    @property
+    def datetime(self) -> datetime:
+        datetime.strptime(
+            str(self.path).split("_", maxsplit=1)[1],
+            "%d_%m_%Y_%H_%M",
+        ).astimezone()
 
 
 class Experiment(BaseModel):

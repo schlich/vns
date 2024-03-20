@@ -16,21 +16,17 @@ from shiny import render, ui, reactive
 ## {.toolbar}
 
 ```{python}
-from datetime import datetime
 from pathlib import Path
 
-from vns import Session, get_sessions
+from vns import Session
 
-matfiles = Path("../data/BFINAC_VNS").glob("*.mat")
+sessions = [Session(path=path) for path in Path("../data/BFINAC_VNS").iterdir()]
 
-sessions = get_sessions(matfiles)
 first_session = next(iter(sessions))
 
-ui.input_select("session", "Session", choices=sessions, selected=first_session,)
+ui.input_select("session", "Session", choices=[str(session.path) for session in sessions], selected=first_session,)
 
-trials = Session(
-    datetime=datetime.fromisoformat(first_session)
-).get_trials()
+trials = Session(path=first_session.path).get_trials()
 
 ui.input_select("trial", "Trial", choices=list(trials["trialnumber"]), selected=1)
 
@@ -40,16 +36,13 @@ ui.input_select("trial", "Trial", choices=list(trials["trialnumber"]), selected=
 
 ```{python}
 
-from datetime import datetime
+from pathlib import Path
 
 from vns import Trial
 
 @reactive.effect
 def _():
-    session = input.session()
-    trials = Session(
-        datetime=datetime.fromisoformat(session)
-    ).get_trials()
+    trials = Session(path=Path(input.session())).get_trials()
     ui.update_select("trial", choices=list(trials["trialnumber"]))
 
 ```
@@ -60,14 +53,16 @@ def _():
 
 ```{python}
 
-@render.text
-def fractal():
-    return Trial(id = input.trial(), fractal=6118).fractal
+@render.data_frame
+def session_data():
+    return Session(path=Path(input.session())).get_trials()
+
 ```
 
 ### Column
 
 ```{python}
+import datetime
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 from matplotlib.collections import PatchCollection
@@ -75,22 +70,19 @@ from matplotlib.patches import Ellipse, Rectangle
 from shiny import render
 import pandas as pd
 import polars as pl
-from datetime import datetime
 
 from vns import Session
 
 @render.ui
 def trial_animation():
-    session = Session(
-        datetime = input.session()
-    )
+    session = Session(path=Path(input.session()))
     trial_data = session.get_trials()
     trial_id = input.trial()
-    trial = Trial(id=trial_id, fractal=trial_data[int(trial_id), "fractals"])
+    trial = Trial(path=session.path / trial_id)
 
     fig, ax = plt.subplots()
     ax.set_box_aspect(1)
-    ax.set_title(f"Session={session.datetime.isoformat()}, Trial={trial_id}")
+    ax.set_title(f"Session={session.path}, Trial={trial_id}")
 
     ax.set_xlim([-6, 6])
     ax.set_ylim([-6, 6])
@@ -99,8 +91,10 @@ def trial_animation():
     fixation_point = Ellipse((0, 0), 0.5, 0.5, color="black", alpha=0.3)
 
     fp = ax.add_patch(fixation_point)
-
-    df = trial.eyejoy()
+ 
+    trial.trim_trailing_zeros()
+    t_0 = datetime.datetime(2000,1,1,0,0)
+    df = trial.eyejoy().with_columns(datetime.datetime.now() + pl.col("t").cast(pl.Duration)).sort("t").group_by_dynamic("t", every='200ms').mean().collect()
 
     scat = ax.scatter(
         df[0, "x"],
@@ -111,7 +105,7 @@ def trial_animation():
         time_fp_on = 0.758133
         time_fp_off = 2.041467
         scat.set_offsets((df[frame, "x"], df[frame, "y"]))
-        t_display.set_text(f"time={frame/1000}s")
+        t_display.set_text(f"time={frame/200}s")
         r = 0 if frame / 10 < time_fp_on or frame / 10 > time_fp_off else 0.5
         fp.set_width(r)
         fp.set_height(r)
@@ -124,6 +118,6 @@ def trial_animation():
         frames=len(df) - 1,
         repeat=True,
     )
-    return ui.HTML(ani.to_jshtml(fps=1000))
-
+    return ui.HTML(ani.to_jshtml())
+    
 ```

@@ -7,8 +7,10 @@
     "ghcr.io/eitsupi/devcontainer-features/nushell:0": {},
     "ghcr.io/schlich/devcontainer-features/pigz:0": {},
     "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {},
-    "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get:1": {}
+    "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get:1": {},
+    "ghcr.io/devcontainers-contrib/features/starship:1": {}
   },
+  "postCreateCommand": "echo \"eval '$(starship init bash)'\" >> ~/.bashrc",
   "customizations": {
     "vscode": {
       "extensions": [

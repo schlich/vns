@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 __version__ = "0.0.1"
-
+import os
+import tarfile
 from datetime import datetime, timedelta
 from typing import TYPE_CHECKING, Any
 
+import httpx
 import matplotlib.pyplot as plt
 import polars as pl
 import scipy
@@ -39,36 +41,21 @@ fields = {
 }
 
 
-class EyeJoy(DataFrameModel):
+
+class CursorSample(DataFrameModel):
     x: float
     y: float
-    t: float
-
-
-class CursorSample(BaseModel):
-    x: float
-    y: float
-
-    def t(
-        self,
-        session_start: datetime,
-        trial_number: int,
-        sample_number: int,
-    ) -> datetime:
-        return session_start + timedelta(
-            seconds=trial_number * 10 + sample_number / 1000,
-        )
+    t: datetime
 
 
 class Trial(BaseModel):
     path: Path
 
-    @property
     def id(self) -> int:
         return int(self.path.stem)
 
-    def eyejoy(self):
-        return pl.scan_parquet(self.path.with_suffix(".parquet"))
+    def cursor(self):
+        return pl.scan_parquet(self.path)
 
     def replace_cursor_data(self):
         mat_path = self.path.parent.with_suffix(".mat")
@@ -128,12 +115,9 @@ class Trial(BaseModel):
 
         fp = ax.add_patch(fixation_point)
 
-        eyejoy = self.eyejoy()
-
-        ic(eyejoy)
 
         downsampled_eyejoy = (
-            eyejoy
+            self.cursor()
             .sort(by="t")
             .collect()
             .group_by_dynamic(index_column="t", every="100ms")
@@ -170,7 +154,7 @@ class Trial(BaseModel):
         return animation.FuncAnimation(
             fig,
             update,
-            frames=len(self.eyejoy().count().collect()) - 1,
+            frames=len(self.cursor().count().collect()) - 1,
             repeat=True,
         )
 
@@ -178,25 +162,52 @@ class Trial(BaseModel):
 class Session(BaseModel):
     path: Path
 
-    def get_trials(self) -> pl.LazyFrame:
+    def trials(self):
         return pl.scan_parquet(self.path / "trials.parquet")
 
-    @property
-    def datetime(self) -> datetime:
+    def datetime(self):
         return datetime.strptime(
-            str(self.path).split("_", maxsplit=1)[1],
+            str(self.path.stem).split("_", maxsplit=1)[1],
             "%d_%m_%Y_%H_%M",
-        ).astimezone()
+        ).astimezone().strftime("%Y-%m-%d %H:%M")
 
 
 class Experiment(BaseModel):
-    label: str
-    sessions: list[Session]
+    path: Path
+
+    def sessions(self):
+        return (Session(path=session) for session in self.path.glob("*/trials.parquet"))
+
+
+@asset
+def raw_data():
+    
+    with open(os.environ["XDG_DATA_HOME"], mode="wb") as tar:
+        tar.write(
+            httpx.get(
+                'https://wustl.box.com/shared/static/2jmet2tj9jfkfyrsgb2cvxx3wof4zo4f.gz'
+            ).content
+        )
+
+@asset
+def matlab_files(raw_data):
+    with tarfile.open(raw_data, "r:gz") as tar:
+        tar.extractall(filter="data")
+    matlab_filepaths = Path(os.environ["XDG_DATA_HOME"]).glob("*.mat")
+    return (scipy.io.loadmat(path) for path in matlab_filepaths)
 
 @asset
 def trials() -> pl.DataFrame:
     return pl.read_parquet("data/trials.parquet")
 
+@asset
+def sessions() -> pl.DataFrame:
+    return pl.concat(
+        [
+            pl.read_parquet(session / "trials.parquet") for session in Path("data/BFINAC_VNS").glob("*.")
+        ]
+    )
+
 definitions = Definitions(
-    assets=[trials]
+    assets=[raw_data, matlab_files, trials, sessions]
 )

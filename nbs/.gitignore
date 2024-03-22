@@ -1,5 +1,0 @@
-/.quarto/
-*.ipynb
-!rust.ipynb
-*_files
-app.py

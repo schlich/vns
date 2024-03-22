@@ -50,3 +50,5 @@ node_modules
 .pixi
 
 tmp*
+
+nbs

@@ -11,6 +11,9 @@
     "ghcr.io/devcontainers-contrib/features/starship:1": {}
   },
   "postCreateCommand": "echo \"eval '$(starship init bash)'\" >> ~/.bashrc && rye sync",
+  "containerEnv": {
+    "DAGSTER_HOME": "/workspaces/vns/data/dagster"
+  },
   "customizations": {
     "vscode": {
       "extensions": [
@@ -38,7 +41,7 @@
           "editor.defaultFormatter": "charliermarsh.ruff"
         },
         "python.defaultInterpreterPath": ".venv/bin/python",
-        "python.analysis.typeCheckingMode": "strict",
+        "python.analysis.typeCheckingMode": "standard",
         "jupyter.notebookFileRoot": "${containerWorkspaceFolder}",
         "notebook.formatOnCellExecution": true,
         "notebook.formatOnSave.enabled": true,

@@ -23,7 +23,7 @@ argon2-cffi-bindings==21.2.0
     # via argon2-cffi
 arrow==1.3.0
     # via isoduration
-asgiref==3.7.2
+asgiref==3.8.0
     # via shiny
 asttokens==2.4.1
     # via stack-data
@@ -184,7 +184,7 @@ mypy-extensions==1.0.0
     # via typing-inspect
 nbclient==0.10.0
     # via nbconvert
-nbconvert==7.16.2
+nbconvert==7.16.3
     # via jupyter
     # via jupyter-server
 nbformat==5.10.3
@@ -378,7 +378,7 @@ uri-template==1.3.0
     # via jsonschema
 urllib3==2.2.1
     # via requests
-uvicorn==0.28.0
+uvicorn==0.29.0
     # via shiny
 watchfiles==0.21.0
     # via shiny

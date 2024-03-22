@@ -6,12 +6,10 @@
     "ghcr.io/eitsupi/devcontainer-features/nushell:0": {},
     "ghcr.io/schlich/devcontainer-features/pigz:0": {},
     "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {},
-    "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get:1": {},
-    "ghcr.io/devcontainers-contrib/features/starship:1": {}
+    "ghcr.io/schlich/devcontainer-features/starship:0": {}
   },
-  "postCreateCommand": "echo \"eval '$(starship init bash)'\" >> ~/.bashrc && rye sync",
   "containerEnv": {
-    "DAGSTER_HOME": "/workspaces/vns/data/dagster"
+    "DAGSTER_HOME": "${containerWorkspaceFolder}/data/dagster"
   },
   "customizations": {
     "vscode": {
@@ -68,6 +66,5 @@
         "jupyter.disableJupyterAutoStart": true
       }
     }
-  },
-  "forwardPorts": [8787]
+  }
 }

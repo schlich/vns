@@ -5,16 +5,6 @@
       "resolved": "ghcr.io/devcontainers-contrib/features/apt-get-packages@sha256:e978f0cd0b621d9ad5efec334408e5a6d3d2a65c99a9a60613115168e186d2c9",
       "integrity": "sha256:e978f0cd0b621d9ad5efec334408e5a6d3d2a65c99a9a60613115168e186d2c9"
     },
-    "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get:1": {
-      "version": "1.0.15",
-      "resolved": "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get@sha256:276d781fc1d908d75b3bda305275ef19d948cfcac06c1d8f710da4054d5d54ab",
-      "integrity": "sha256:276d781fc1d908d75b3bda305275ef19d948cfcac06c1d8f710da4054d5d54ab"
-    },
-    "ghcr.io/devcontainers-contrib/features/starship:1": {
-      "version": "1.0.9",
-      "resolved": "ghcr.io/devcontainers-contrib/features/starship@sha256:4153cda991512b68c670fc92db017c22f57eb55142525b231050549394772ce6",
-      "integrity": "sha256:4153cda991512b68c670fc92db017c22f57eb55142525b231050549394772ce6"
-    },
     "ghcr.io/eitsupi/devcontainer-features/nushell:0": {
       "version": "0.1.1",
       "resolved": "ghcr.io/eitsupi/devcontainer-features/nushell@sha256:c35933c78369ee4a9936041c75a3363414c5fd332d95a2b2c7c4cb1b179cd176",
@@ -37,6 +27,11 @@
       "version": "1.1.8",
       "resolved": "ghcr.io/schlich/devcontainer-features/rye@sha256:047516048f29772a762482706c6b265ee2e9e22db31d6f49b773fdfc7ada9dd6",
       "integrity": "sha256:047516048f29772a762482706c6b265ee2e9e22db31d6f49b773fdfc7ada9dd6"
+    },
+    "ghcr.io/schlich/devcontainer-features/starship:0": {
+      "version": "0.1.5",
+      "resolved": "ghcr.io/schlich/devcontainer-features/starship@sha256:328c5de9cb33c1c410322730cf0d78a430bbfc120b3fa7d7435d604b2fc5fb4e",
+      "integrity": "sha256:328c5de9cb33c1c410322730cf0d78a430bbfc120b3fa7d7435d604b2fc5fb4e"
     }
   }
 }

@@ -6,11 +6,13 @@ from datetime import datetime, timedelta
 from typing import TYPE_CHECKING, Any
 
 import matplotlib.pyplot as plt
-import pandera.polars as pa
 import polars as pl
 import scipy
+from dagster import Definitions, asset
+from icecream import ic
 from matplotlib import animation
 from matplotlib.patches import Ellipse
+from pandera.api.polars.model import DataFrameModel
 from pydantic import BaseModel
 
 if TYPE_CHECKING:
@@ -23,21 +25,21 @@ fields = {
     "targAmp": float,
     "goodtrial": bool,
     "fixreq": bool,
-    # "datapixxtime": float,
-    # "trialstarttime": float,
+    "datapixxtime": float,
+    "trialstarttime": float,
     "timefpon": float,
     "timefpoff": float,
-    # "windowchosen": bool,
+    "windowchosen": bool,
     "timetargetoff": float,
-    # "feedid": str,
+    "feedid": str,
     "TrialTypeSave": str,
     "timefpabort": float,
     "repeatflag": bool,
-    # "monkeynotinitiated": bool,
+    "monkeynotinitiated": bool,
 }
 
 
-class EyeJoy(pa.DataFrameModel):
+class EyeJoy(DataFrameModel):
     x: float
     y: float
     t: float
@@ -126,19 +128,40 @@ class Trial(BaseModel):
 
         fp = ax.add_patch(fixation_point)
 
+        eyejoy = self.eyejoy()
+
+        ic(eyejoy)
+
+        downsampled_eyejoy = (
+            eyejoy
+            .sort(by="t")
+            .collect()
+            .group_by_dynamic(index_column="t", every="100ms")
+            .agg(
+                    pl.col("x").mean(),
+                    pl.col("y").mean(),
+                )
+        )
+
         scat = ax.scatter(
-            self.eyejoy()[0, "x"],
-            self.eyejoy()[0, "y"],
+            downsampled_eyejoy[0, "x"],
+            downsampled_eyejoy[0, "y"],
         )
 
         def update(frame: int) -> tuple[Any, Any, Any]:
-            time_fp_on = 0.758133
-            time_fp_off = 2.041467
-            x = self.eyejoy()[frame, "x"]
-            y = self.eyejoy()[frame, "y"]
-            scat.set_offsets((x, y))
-            t_display.set_text(f"time={frame/10000}s")
-            r = 0 if frame / 10000 < time_fp_on or frame / 10000 > time_fp_off else 0.5
+            fixation_point_interval = (0.758133, 2.041467)
+            scat.set_offsets(
+                (
+                    downsampled_eyejoy[frame, "x"],
+                    downsampled_eyejoy[frame, "y"],
+                ),
+            )
+            t_frame = frame/10
+            t_display.set_text(f"time={t_frame}s")
+            if fixation_point_interval[0] < t_frame < fixation_point_interval[1]:
+                r = 0
+            else:
+                r = 0.5
             fp.set_width(r)
             fp.set_height(r)
 
@@ -169,3 +192,11 @@ class Session(BaseModel):
 class Experiment(BaseModel):
     label: str
     sessions: list[Session]
+
+@asset
+def trials() -> pl.DataFrame:
+    return pl.read_parquet("data/trials.parquet")
+
+definitions = Definitions(
+    assets=[trials]
+)

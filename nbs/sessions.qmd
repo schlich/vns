@@ -3,6 +3,8 @@ title: "VNS Analysis"
 author: "Tyler Schlichenmeyer"
 format: dashboard
 server: shiny
+execute: 
+  keep-ipynb: true
 ---
 
 ```{python}
@@ -25,50 +27,13 @@ sessions = [Session(path=path) for path in Path("../data/BFINAC_VNS").iterdir()]
 
 first_session = next(iter(sessions))
 
-ui.input_select("session", "Session", choices=[str(session.path) for session in sessions], selected=first_session,)
-
+ui.input_select("session", "Session", choices={str(session.path): session.path.stem for session in sessions}, selected=first_session,)
 trials = Session(path=first_session.path).get_trials()
 
-ui.input_select("trial", "Trial", choices=trials.select("trialnumber").collect()["trialnumber"].to_list(), selected=1)
-
-@render.text(inline=True)
-def trial_count():
-    return "Test"
+ui.input_select("trial", "Trial", choices=trials.select("trialnumber").collect().get_column("trialnumber").to_list())
 
 ```
 
-## Row
-
-```{python}
-
-from pathlib import Path
-
-from vns import Trial
-
-@render.data_frame
-def session_trials():
-    return trials.group_by("fractals").collect()
-
-@reactive.effect
-def trial_dropdown():
-    ui.update_select("trial", choices=trials.select("trialnumber"))
-
-
-```
-
-## Row
-
-### Column
-
-```{python}
-
-@render.data_frame
-def session_data():
-    return Session(path=Path(input.session())).get_trials()
-
-```
-
-### Column
 
 ```{python}
 import datetime
@@ -80,7 +45,7 @@ from shiny import render
 import pandas as pd
 import polars as pl
 
-from vns import Session
+from vns import Trial
 
 @render.ui
 def trial_animation():
@@ -89,42 +54,8 @@ def trial_animation():
     trial_id = input.trial()
     trial = Trial(path=session.path / trial_id)
 
-    fig, ax = plt.subplots()
-    ax.set_box_aspect(1)
-    ax.set_title(f"Session={session.path}, Trial={trial_id}")
-
-    ax.set_xlim([-6, 6])
-    ax.set_ylim([-6, 6])
-    t_display = ax.text(2, -5.5, "t=0.0s")
-
-    fixation_point = Ellipse((0, 0), 0.5, 0.5, color="black", alpha=0.3)
-
-    fp = ax.add_patch(fixation_point)
- 
-    trial.trim_trailing_zeros()
-    df = trial.eyejoy()
-    scat = ax.scatter(
-        df[0, "x"],
-        df[0, "y"],
-    )
-
-    def update(frame: int) -> tuple[Any, Any, Any]:
-        time_fp_on = 0.758133
-        time_fp_off = 2.041467
-        scat.set_offsets((df[frame, "x"], df[frame, "y"]))
-        t_display.set_text(f"time={frame/200}s")
-        r = 0 if frame / 10 < time_fp_on or frame / 10 > time_fp_off else 0.5
-        fp.set_width(r)
-        fp.set_height(r)
-
-        return (scat, t_display, fp)
-
-    ani = animation.FuncAnimation(
-        fig,
-        update,
-        frames=len(df) - 1,
-        repeat=True,
-    )
-    return ui.HTML(ani.to_jshtml())
+    ani = trial.animate()
+    
+    return ui.HTML(ani.to_jshtml(fps=10))
     
 ```

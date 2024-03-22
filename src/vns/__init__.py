@@ -3,7 +3,7 @@ from __future__ import annotations
 __version__ = "0.0.1"
 import os
 import tarfile
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import TYPE_CHECKING, Any
 
 import httpx
@@ -11,7 +11,6 @@ import matplotlib.pyplot as plt
 import polars as pl
 import scipy
 from dagster import Definitions, asset
-from icecream import ic
 from matplotlib import animation
 from matplotlib.patches import Ellipse
 from pandera.api.polars.model import DataFrameModel

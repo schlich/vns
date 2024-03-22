@@ -2,7 +2,6 @@
   "name": "VNS",
   "image": "mcr.microsoft.com/devcontainers/python",
   "features": {
-    "ghcr.io/julialang/devcontainer-features/julia:1": {},
     "ghcr.io/schlich/devcontainer-features/rye:1.1.8": {},
     "ghcr.io/eitsupi/devcontainer-features/nushell:0": {},
     "ghcr.io/schlich/devcontainer-features/pigz:0": {},

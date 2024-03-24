@@ -5,6 +5,11 @@
       "resolved": "ghcr.io/devcontainers-contrib/features/apt-get-packages@sha256:e978f0cd0b621d9ad5efec334408e5a6d3d2a65c99a9a60613115168e186d2c9",
       "integrity": "sha256:e978f0cd0b621d9ad5efec334408e5a6d3d2a65c99a9a60613115168e186d2c9"
     },
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "version": "1.0.11",
+      "resolved": "ghcr.io/devcontainers/features/github-cli@sha256:464564228ccdd6028f01f8a62a3cfbaf76e9ba7953b29ac0e53ba2c262604312",
+      "integrity": "sha256:464564228ccdd6028f01f8a62a3cfbaf76e9ba7953b29ac0e53ba2c262604312"
+    },
     "ghcr.io/eitsupi/devcontainer-features/nushell:0": {
       "version": "0.1.1",
       "resolved": "ghcr.io/eitsupi/devcontainer-features/nushell@sha256:c35933c78369ee4a9936041c75a3363414c5fd332d95a2b2c7c4cb1b179cd176",
@@ -23,7 +28,7 @@
         "ghcr.io/devcontainers-contrib/features/apt-get-packages:1"
       ]
     },
-    "ghcr.io/schlich/devcontainer-features/rye:1.1.8": {
+    "ghcr.io/schlich/devcontainer-features/rye:1": {
       "version": "1.1.8",
       "resolved": "ghcr.io/schlich/devcontainer-features/rye@sha256:047516048f29772a762482706c6b265ee2e9e22db31d6f49b773fdfc7ada9dd6",
       "integrity": "sha256:047516048f29772a762482706c6b265ee2e9e22db31d6f49b773fdfc7ada9dd6"

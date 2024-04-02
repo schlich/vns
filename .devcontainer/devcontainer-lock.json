@@ -5,22 +5,27 @@
       "resolved": "ghcr.io/devcontainers-contrib/features/apt-get-packages@sha256:e978f0cd0b621d9ad5efec334408e5a6d3d2a65c99a9a60613115168e186d2c9",
       "integrity": "sha256:e978f0cd0b621d9ad5efec334408e5a6d3d2a65c99a9a60613115168e186d2c9"
     },
-    "ghcr.io/devcontainers/features/github-cli:1": {
+    "ghcr.io/devcontainers/features/common-utils": {
+      "version": "2.4.2",
+      "resolved": "ghcr.io/devcontainers/features/common-utils@sha256:bebfdcd6097a35506bf0f064a31e52ad4205467d9d7a226a688f51b851c88b65",
+      "integrity": "sha256:bebfdcd6097a35506bf0f064a31e52ad4205467d9d7a226a688f51b851c88b65"
+    },
+    "ghcr.io/devcontainers/features/github-cli": {
       "version": "1.0.11",
       "resolved": "ghcr.io/devcontainers/features/github-cli@sha256:464564228ccdd6028f01f8a62a3cfbaf76e9ba7953b29ac0e53ba2c262604312",
       "integrity": "sha256:464564228ccdd6028f01f8a62a3cfbaf76e9ba7953b29ac0e53ba2c262604312"
     },
-    "ghcr.io/eitsupi/devcontainer-features/nushell:0": {
+    "ghcr.io/eitsupi/devcontainer-features/nushell": {
       "version": "0.1.1",
       "resolved": "ghcr.io/eitsupi/devcontainer-features/nushell@sha256:c35933c78369ee4a9936041c75a3363414c5fd332d95a2b2c7c4cb1b179cd176",
       "integrity": "sha256:c35933c78369ee4a9936041c75a3363414c5fd332d95a2b2c7c4cb1b179cd176"
     },
-    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
+    "ghcr.io/rocker-org/devcontainer-features/quarto-cli": {
       "version": "1.1.2",
       "resolved": "ghcr.io/rocker-org/devcontainer-features/quarto-cli@sha256:5974cce8e6859f55907ed01bbe32a9b0dc9704e398b4eabeaab846b6b6bf56da",
       "integrity": "sha256:5974cce8e6859f55907ed01bbe32a9b0dc9704e398b4eabeaab846b6b6bf56da"
     },
-    "ghcr.io/schlich/devcontainer-features/pigz:0": {
+    "ghcr.io/schlich/devcontainer-features/pigz": {
       "version": "0.1.0",
       "resolved": "ghcr.io/schlich/devcontainer-features/pigz@sha256:89d456c336b4aebd6a57684956da98f8787178b1adae9bb25e5fc7aa56c2b39c",
       "integrity": "sha256:89d456c336b4aebd6a57684956da98f8787178b1adae9bb25e5fc7aa56c2b39c",
@@ -28,12 +33,15 @@
         "ghcr.io/devcontainers-contrib/features/apt-get-packages:1"
       ]
     },
-    "ghcr.io/schlich/devcontainer-features/rye:1": {
-      "version": "1.1.8",
-      "resolved": "ghcr.io/schlich/devcontainer-features/rye@sha256:047516048f29772a762482706c6b265ee2e9e22db31d6f49b773fdfc7ada9dd6",
-      "integrity": "sha256:047516048f29772a762482706c6b265ee2e9e22db31d6f49b773fdfc7ada9dd6"
+    "ghcr.io/schlich/devcontainer-features/rye": {
+      "version": "1.2.0",
+      "resolved": "ghcr.io/schlich/devcontainer-features/rye@sha256:2028ac0ff1fc0a88b4d856b55297d5e836af75556459f0a54ce50ffeedf0344b",
+      "integrity": "sha256:2028ac0ff1fc0a88b4d856b55297d5e836af75556459f0a54ce50ffeedf0344b",
+      "dependsOn": [
+        "ghcr.io/devcontainers/features/common-utils"
+      ]
     },
-    "ghcr.io/schlich/devcontainer-features/starship:0": {
+    "ghcr.io/schlich/devcontainer-features/starship": {
       "version": "0.1.5",
       "resolved": "ghcr.io/schlich/devcontainer-features/starship@sha256:328c5de9cb33c1c410322730cf0d78a430bbfc120b3fa7d7435d604b2fc5fb4e",
       "integrity": "sha256:328c5de9cb33c1c410322730cf0d78a430bbfc120b3fa7d7435d604b2fc5fb4e"

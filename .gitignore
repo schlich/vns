@@ -49,6 +49,10 @@ node_modules
 # pixi environments
 .pixi
 
-tmp*
 
 nbs
+
+/.quarto/
+*.html
+vns_files
+app.py

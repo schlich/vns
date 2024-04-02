@@ -1,0 +1,144 @@
+---
+title: "VNS Analysis"
+author: Tyler C Schlichenmeyer
+format: 
+  dashboard:
+    orientation: columns
+server: shiny
+execute: 
+  keep-ipynb: true
+---
+
+```{python}
+
+from pathlib import Path
+from datetime import datetime
+from icecream import ic
+from shiny import render
+from shinywidgets import render_widget
+
+import plotly.express as px
+import polars as pl
+
+experiment_path = Path("data/BFINAC_VNS")
+
+session_paths = experiment_path.glob("*/")
+first_session = next(session_paths)
+
+trials = pl.scan_parquet(first_session / "trials.parquet").cast({"fractals": pl.String})
+first_trial = trials.first().collect().get_column("trialnumber")[0]
+
+
+
+def folder_size(folder: Path) -> float:
+    return sum(file.stat().st_size for file in Path(folder).rglob('*')) / 1_000_000
+
+def label_to_datetime(label: str):
+    return (
+        datetime.strptime(
+            str(label).split("_", maxsplit=1)[1],
+            "%d_%m_%Y_%H_%M",
+        )
+        .astimezone()
+    )
+
+sessions = pl.from_records(
+    [
+        {
+            "label": session.name,
+            "session start": label_to_datetime(session.name),
+            "n trials": len(list(session.glob("*.parquet"))),
+            "size": folder_size(session),
+        } for session in session_paths
+    ]
+).sort("session start")
+
+```
+
+## {.sidebar}
+
+```{python}
+
+from shiny import ui
+
+start_times = sessions.get_column("session start")
+
+ui.input_selectize(
+    id="session",
+    label="Session",
+    choices=[start.strftime("%Y-%M-%d %H:%m") for start in start_times],
+    selected=start_times[0].strftime("%Y-%M-%d %H:%m"),
+    multiple=True,  
+)  
+
+trial_numbers = trials.collect().get_column("trialnumber").to_list()
+
+```
+
+## Column {width=60%}
+
+
+
+```{python}
+
+from shinywidgets import output_widget
+
+trials_per_day = sessions.group_by_dynamic("session start", every="1d").agg(pl.sum("n trials"))
+
+
+@render_widget
+def sessions_table():
+    return px.scatter(
+        trials_per_day,
+        x="session start",
+        y="n trials",
+        template="plotly_white",
+    )
+```
+
+
+```{python}
+
+
+@render_widget
+def trials_table():
+    return px.bar(
+        trials.group_by("fractals").agg(pl.count("trialnumber")).collect(),
+        x="fractals",
+        y="trialnumber",
+        template="plotly_white",
+    )
+    
+
+```
+
+## Column {width=60%}
+
+### {.toolbar}
+
+```{python}
+ui.input_selectize(
+    id="trial",
+    label="Trial",
+    choices=trial_numbers,
+    selected=trial_numbers[0],
+    multiple=True,  
+)  
+```
+
+### Row
+
+```{python}
+from shiny import ui
+
+import vns
+
+@render.ui
+def animation():
+    return ui.HTML(
+        vns.Trial(
+            path = "data/BFINAC_VNS/BFnovelinac_01_02_2019_15_03/1.parquet"
+        ).animate().to_jshtml(fps=50)
+    )
+
+```

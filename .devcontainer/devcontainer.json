@@ -2,12 +2,12 @@
   "name": "VNS",
   "image": "mcr.microsoft.com/devcontainers/python",
   "features": {
-    "ghcr.io/schlich/devcontainer-features/rye:1": {},
-    "ghcr.io/eitsupi/devcontainer-features/nushell:0": {},
-    "ghcr.io/schlich/devcontainer-features/pigz:0": {},
-    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {},
-    "ghcr.io/schlich/devcontainer-features/starship:0": {},
-    "ghcr.io/devcontainers/features/github-cli:1": {}
+    "ghcr.io/schlich/devcontainer-features/rye": {},
+    "ghcr.io/eitsupi/devcontainer-features/nushell": {},
+    "ghcr.io/schlich/devcontainer-features/pigz": {},
+    "ghcr.io/rocker-org/devcontainer-features/quarto-cli": {},
+    "ghcr.io/schlich/devcontainer-features/starship": {},
+    "ghcr.io/devcontainers/features/github-cli": {}
   },
   "containerEnv": {
     "DAGSTER_HOME": "${containerWorkspaceFolder}/data/dagster"

@@ -23,7 +23,7 @@ argon2-cffi-bindings==21.2.0
     # via argon2-cffi
 arrow==1.3.0
     # via isoduration
-asgiref==3.8.0
+asgiref==3.8.1
     # via shiny
 asttokens==2.4.1
     # via stack-data
@@ -38,6 +38,8 @@ beautifulsoup4==4.12.3
     # via nbconvert
 bleach==6.1.0
     # via nbconvert
+bokeh==3.4.0
+    # via vns
 certifi==2024.2.2
     # via httpcore
     # via httpx
@@ -53,6 +55,7 @@ comm==0.2.2
     # via ipykernel
     # via ipywidgets
 contourpy==1.2.0
+    # via bokeh
     # via matplotlib
 cycler==0.12.1
     # via matplotlib
@@ -101,6 +104,7 @@ isoduration==20.11.0
 jedi==0.19.1
     # via ipython
 jinja2==3.1.3
+    # via bokeh
     # via jupyter-server
     # via jupyterlab
     # via jupyterlab-server
@@ -199,15 +203,18 @@ notebook-shim==0.2.4
     # via jupyterlab
     # via notebook
 numpy==1.26.4
+    # via bokeh
     # via contourpy
     # via matplotlib
     # via pandas
     # via pandera
+    # via pyarrow
     # via scipy
     # via xarray
 overrides==7.7.0
     # via jupyter-server
 packaging==24.0
+    # via bokeh
     # via htmltools
     # via ipykernel
     # via jupyter-server
@@ -221,6 +228,7 @@ packaging==24.0
     # via qtpy
     # via xarray
 pandas==2.2.1
+    # via bokeh
     # via pandera
     # via xarray
 pandera==0.19.0b0
@@ -229,9 +237,12 @@ pandocfilters==1.5.1
     # via nbconvert
 parso==0.8.3
     # via jedi
+patito==0.6.1
+    # via vns
 pexpect==4.9.0
     # via ipython
 pillow==10.2.0
+    # via bokeh
     # via matplotlib
 platformdirs==4.2.0
     # via jupyter-core
@@ -239,6 +250,7 @@ plotly==5.20.0
     # via vns
 polars==0.20.16
     # via pandera
+    # via patito
 prometheus-client==0.20.0
     # via jupyter-server
 prompt-toolkit==3.0.36
@@ -252,10 +264,13 @@ ptyprocess==0.7.0
     # via terminado
 pure-eval==0.2.2
     # via stack-data
+pyarrow==15.0.2
+    # via vns
 pycparser==2.21
     # via cffi
 pydantic==2.6.4
     # via pandera
+    # via patito
 pydantic-core==2.16.3
     # via pydantic
 pygments==2.17.2
@@ -278,6 +293,7 @@ python-multipart==0.0.9
 pytz==2024.1
     # via pandas
 pyyaml==6.0.1
+    # via bokeh
     # via jupyter-events
 pyzmq==25.1.2
     # via ipykernel
@@ -336,6 +352,7 @@ terminado==0.18.1
 tinycss2==1.2.1
     # via nbconvert
 tornado==6.4
+    # via bokeh
     # via ipykernel
     # via jupyter-client
     # via jupyter-server
@@ -358,15 +375,17 @@ traitlets==5.14.2
     # via nbconvert
     # via nbformat
     # via qtconsole
-typeguard==4.1.5
+typeguard==4.2.1
     # via pandera
 types-python-dateutil==2.9.0.20240316
     # via arrow
 typing-extensions==4.10.0
     # via htmltools
+    # via patito
     # via pydantic
     # via pydantic-core
     # via shiny
+    # via typeguard
     # via typing-inspect
 typing-inspect==0.9.0
     # via pandera
@@ -399,3 +418,5 @@ wrapt==1.16.0
     # via pandera
 xarray==2024.2.0
     # via vns
+xyzservices==2023.10.1
+    # via bokeh

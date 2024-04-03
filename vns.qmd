@@ -7,18 +7,24 @@ format:
 server: shiny
 execute: 
   keep-ipynb: true
+  cache: true
+jupyter: python3
+
 ---
 
 ```{python}
+#| context: setup
 
 from pathlib import Path
 from datetime import datetime
 from icecream import ic
-from shiny import render
+from shiny import render, ui
 from shinywidgets import render_widget
 
 import plotly.express as px
 import polars as pl
+
+import vns
 
 experiment_path = Path("data/BFINAC_VNS")
 
@@ -55,11 +61,29 @@ sessions = pl.from_records(
 
 ```
 
+
+
 ## {.sidebar}
 
 ```{python}
-
 from shiny import ui
+
+ui.input_slider(
+    id="fps",
+    label="Animation frame rate (fps)",
+    min=10,
+    max=100,
+    value=60,
+)
+
+```
+
+## Column {width=40%}
+
+### {.toolbar}
+
+```{python}
+
 
 start_times = sessions.get_column("session start")
 
@@ -68,16 +92,13 @@ ui.input_selectize(
     label="Session",
     choices=[start.strftime("%Y-%M-%d %H:%m") for start in start_times],
     selected=start_times[0].strftime("%Y-%M-%d %H:%m"),
-    multiple=True,  
 )  
 
 trial_numbers = trials.collect().get_column("trialnumber").to_list()
 
 ```
 
-## Column {width=60%}
-
-
+### Row
 
 ```{python}
 
@@ -96,6 +117,7 @@ def sessions_table():
     )
 ```
 
+### Row
 
 ```{python}
 
@@ -112,7 +134,7 @@ def trials_table():
 
 ```
 
-## Column {width=60%}
+## Column
 
 ### {.toolbar}
 
@@ -122,7 +144,6 @@ ui.input_selectize(
     label="Trial",
     choices=trial_numbers,
     selected=trial_numbers[0],
-    multiple=True,  
 )  
 ```
 
@@ -136,9 +157,10 @@ import vns
 @render.ui
 def animation():
     return ui.HTML(
-        vns.Trial(
+        vns.trials.Trial(
             path = "data/BFINAC_VNS/BFnovelinac_01_02_2019_15_03/1.parquet"
-        ).animate().to_jshtml(fps=50)
+        )
+        .animate().to_jshtml(fps=input.fps())
     )
 
 ```

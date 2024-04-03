@@ -11,6 +11,10 @@ import polars as pl
 import scipy
 from dagster import Definitions, asset
 
+from vns import sessions, trials
+
+__all__ = ["trials", "sessions"]
+
 
 @asset
 def raw_data():
@@ -31,12 +35,12 @@ def matlab_files(raw_data):
 
 
 @asset
-def trials() -> pl.DataFrame:
+def trials_asset() -> pl.DataFrame:
     return pl.read_parquet("data/trials.parquet")
 
 
 @asset
-def sessions() -> pl.DataFrame:
+def sessions_asset() -> pl.DataFrame:
     return pl.concat(
         [
             pl.read_parquet(session / "trials.parquet")
@@ -45,4 +49,4 @@ def sessions() -> pl.DataFrame:
     )
 
 
-definitions = Definitions(assets=[raw_data, matlab_files, trials, sessions])
+definitions = Definitions(assets=[raw_data, matlab_files, trials_asset, sessions_asset])

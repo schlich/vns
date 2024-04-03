@@ -12,6 +12,7 @@
   "containerEnv": {
     "DAGSTER_HOME": "${containerWorkspaceFolder}/data/dagster"
   },
+  // "postCreateCommand": "python -m devtools print-code >> ${containerWorkspaceFolder}/.venv/lib/python3.12/site-packages/sitecustomize.py",
   "customizations": {
     "vscode": {
       "extensions": [

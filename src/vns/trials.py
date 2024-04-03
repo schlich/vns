@@ -56,7 +56,7 @@ class Trial(BaseModel):
             pl.scan_parquet(
                 self.path.with_suffix(".parquet"),
             )
-            .gather_every(100)
+            .gather_every(20)
             .select("x", "y", "t")
             .collect()
         )
@@ -84,35 +84,29 @@ class Trial(BaseModel):
         )
 
     def animate(self):
-        fig, (axis_left, axis_right) = plt.subplots(ncols=2)
+        fig, axes = plt.subplots()
 
-        cursor = self.trim_trailing_zeros()
+        axes.set_xlim(left=-6, right=6)
+        axes.set_ylim(bottom=-6, top=6)
 
-        axis_left.set_xlim(left=-6, right=6)
-        axis_left.set_ylim(bottom=-6, top=6)
-        axis_right.set_xlim(left=0, right=len(cursor))
-        axis_right.set_ylim(bottom=-6, top=6)
+        cursor = self.cursor()
 
-        cursor_sample = axis_left.scatter(
-            x=cursor[0, "x"],
-            y=cursor[0, "y"],
-        )
+        cursor_sample = axes.plot(
+            cursor[0, "x"],
+            cursor[0, "y"],
+        )[0]
+
         time_fp_on = self.get_field("timefpon")
         time_fp_off = self.get_field("timefpoff")
         time_target_off = self.get_field("timetargetoff")
-        time_fp_abort = self.get_field("timefpabort")
+        # time_fp_abort = self.get_field("timefpabort")
 
-        axis_right.fill(
+        axes.fill(
             [time_fp_on] * 2 + [time_fp_off] * 2, [-0.5, 0.5, 0.5, -0.5], color="0.9"
         )
 
-        axis_right.plot([time_target_off] * 2, [-6, 6], color="0.5")
-        axis_right.plot([time_fp_abort] * 2, [-6, 6], color="r")
-
-        axis_right.plot(
-            range(len(cursor)),
-            cursor[["x", "y"]],
-        )
+        # axes.plot([time_fp_abort] * 2, [-6, 6], color="r")
+        axes.plot([time_target_off] * 2, [-6, 6], color="0.5")
 
         fixation_point = Rectangle(
             xy=(-0.5, -0.5),
@@ -120,14 +114,17 @@ class Trial(BaseModel):
             height=0,
         )
 
-        axis_left.add_patch(fixation_point)
+        axes.add_patch(fixation_point)
 
-        def update(frame) -> tuple[Artist, Artist]:
-            cursor_sample.set_offsets(
-                (
-                    cursor[frame, "x"],
-                    cursor[frame, "y"],
-                ),
+        def update(
+            frame,
+        ) -> tuple[
+            Artist,
+            Artist,
+        ]:
+            cursor_sample.set_data(
+                cursor[max(0, frame - 30) : frame, "x"],
+                cursor[max(0, frame - 30) : frame, "y"],
             )
 
             fp_on = int(time_fp_on < frame / 10 < time_fp_off)
@@ -135,7 +132,10 @@ class Trial(BaseModel):
             fixation_point.set_width(fp_on)
             fixation_point.set_height(fp_on)
 
-            return (cursor_sample, fixation_point)
+            return (
+                cursor_sample,
+                fixation_point,
+            )
 
         return animation.FuncAnimation(
             fig,

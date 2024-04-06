@@ -25,6 +25,7 @@ dependencies = [
     "param>=2.1.0",
     "pillow>=10.3.0",
     "panel>=1.4.0",
+    "nbconvert>=7.16.3",
     "jupyter-bokeh>=4.0.1",
 ]
 
@@ -38,11 +39,7 @@ dev-dependencies = [
 ]
 
 [tool.rye.scripts]
-dashboard = "quarto preview vns.qmd"
-dag = "dagster dev"
-it = "lumen serve vns.yaml --show --autoreload"
-ojs = "quarto preview ojs.qmd"
-hv = "quarto preview hv.qmd"
+dashboard = "panel serve app.ipynb --autoreload"
 
 [tool.ruff]
 ignore = [

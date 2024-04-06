@@ -31,7 +31,6 @@
         "GoogleCloudTools.cloudcode",
         "GitHub.copilot-chat",
         "ms-vscode.vscode-speech",
-        "quarto.quarto",
         "ritwickdey.LiveServer",
         "ms-python.debugpy"
       ],

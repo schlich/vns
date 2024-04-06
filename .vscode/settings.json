@@ -3,5 +3,18 @@
     "editor.fontFamily": "'MonaspiceNe Nerd Font Mono'",
     "editor.experimentalInlineEdit.fontFamily": "'Monaspace Radon'",
     "terminal.integrated.fontFamily": "'MonaspiceKr Nerd Font'",
-    "chat.editor.fontFamily": "'Monaspace Radon'"
+    "chat.editor.fontFamily": "'Monaspace Radon'",
+    "jupyter.widgetScriptSources": ["jsdelivr.com", "unpkg.com"],
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/.jupyter_cache": true,
+        "**/.pytest_cache": true,
+        "**/.venv": true,
+        "**/__pycache__": true,
+    }
 }

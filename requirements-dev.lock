@@ -23,7 +23,12 @@ asttokens==2.4.1
     # via stack-data
 attrs==23.2.0
     # via aiohttp
+    # via jsonschema
+    # via referencing
+beautifulsoup4==4.12.3
+    # via nbconvert
 bleach==6.1.0
+    # via nbconvert
     # via panel
 bokeh==3.4.0
     # via dask
@@ -66,12 +71,16 @@ debugpy==1.8.1
 decorator==5.1.1
     # via gcsfs
     # via ipython
+defusedxml==0.7.1
+    # via nbconvert
 devtools==0.12.2
 distributed==2024.4.0
     # via dask
 executing==2.0.1
     # via devtools
     # via stack-data
+fastjsonschema==2.19.1
+    # via nbformat
 fonttools==4.50.0
     # via matplotlib
 frozenlist==1.4.1
@@ -136,16 +145,27 @@ jinja2==3.1.3
     # via dask
     # via distributed
     # via lumen
+    # via nbconvert
+jsonschema==4.21.1
+    # via nbformat
+jsonschema-specifications==2023.12.1
+    # via jsonschema
 jupyter-bokeh==4.0.1
     # via vns
 jupyter-client==8.6.1
     # via ipykernel
     # via jupyter-console
+    # via nbclient
 jupyter-console==6.6.3
 jupyter-core==5.7.2
     # via ipykernel
     # via jupyter-client
     # via jupyter-console
+    # via nbclient
+    # via nbconvert
+    # via nbformat
+jupyterlab-pygments==0.3.0
+    # via nbconvert
 jupyterlab-widgets==3.0.10
     # via ipywidgets
 kiwisolver==1.4.5
@@ -166,6 +186,7 @@ markdown-it-py==3.0.0
     # via panel
 markupsafe==2.1.5
     # via jinja2
+    # via nbconvert
 matplotlib==3.8.4
     # via vns
 matplotlib-inline==0.1.6
@@ -175,6 +196,8 @@ mdit-py-plugins==0.4.0
     # via panel
 mdurl==0.1.2
     # via markdown-it-py
+mistune==3.0.2
+    # via nbconvert
 msgpack==1.0.8
     # via distributed
 multidict==6.0.5
@@ -184,6 +207,13 @@ multimethod==1.10
     # via pandera
 mypy-extensions==1.0.0
     # via typing-inspect
+nbclient==0.10.0
+    # via nbconvert
+nbconvert==7.16.3
+    # via vns
+nbformat==5.10.4
+    # via nbclient
+    # via nbconvert
 nest-asyncio==1.6.0
     # via ipykernel
 numpy==1.26.4
@@ -209,6 +239,7 @@ packaging==23.2
     # via ipykernel
     # via lumen
     # via matplotlib
+    # via nbconvert
     # via pandera
     # via plotly
     # via pytest
@@ -223,6 +254,8 @@ pandas==2.2.1
     # via panel
 pandera==0.19.0b0
     # via vns
+pandocfilters==1.5.1
+    # via nbconvert
 panel==1.4.0
     # via holoviews
     # via hvplot
@@ -292,6 +325,7 @@ pygments==2.17.2
     # via devtools
     # via ipython
     # via jupyter-console
+    # via nbconvert
 pyparsing==3.1.2
     # via matplotlib
 pytest==8.1.1
@@ -313,6 +347,9 @@ pyzmq==25.1.2
     # via ipykernel
     # via jupyter-client
     # via jupyter-console
+referencing==0.34.0
+    # via jsonschema
+    # via jsonschema-specifications
 requests==2.31.0
     # via gcsfs
     # via google-api-core
@@ -321,6 +358,9 @@ requests==2.31.0
     # via requests-oauthlib
 requests-oauthlib==2.0.0
     # via google-auth-oauthlib
+rpds-py==0.18.0
+    # via jsonschema
+    # via referencing
 rsa==4.9
     # via google-auth
 scipy==1.12.0
@@ -333,12 +373,16 @@ sniffio==1.3.1
     # via anyio
 sortedcontainers==2.4.0
     # via distributed
+soupsieve==2.5
+    # via beautifulsoup4
 stack-data==0.6.3
     # via ipython
 tblib==3.0.0
     # via distributed
 tenacity==8.2.3
     # via plotly
+tinycss2==1.2.1
+    # via nbconvert
 toolz==0.12.1
     # via dask
     # via distributed
@@ -359,6 +403,9 @@ traitlets==5.14.2
     # via jupyter-console
     # via jupyter-core
     # via matplotlib-inline
+    # via nbclient
+    # via nbconvert
+    # via nbformat
 typeguard==4.2.1
     # via pandera
 typing-extensions==4.10.0
@@ -382,6 +429,7 @@ wcwidth==0.2.13
     # via prompt-toolkit
 webencodings==0.5.1
     # via bleach
+    # via tinycss2
 widgetsnbextension==4.0.10
     # via ipywidgets
 wrapt==1.16.0

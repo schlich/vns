@@ -56,5 +56,4 @@ nbs
 /.quarto/
 *.html
 vns_files
-app.py
 .env

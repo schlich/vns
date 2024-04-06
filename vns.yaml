@@ -1,0 +1,14 @@
+sources:
+  thesis:
+    type: file
+    tables:
+      cursor:
+        data/BFINAC_VNS/BFnovelinac_01_02_2019_15_03/1.parquet
+
+layouts:
+  - title: Cursor Path
+    source: thesis
+    views:
+      - type: hvplot
+        table: cursor
+

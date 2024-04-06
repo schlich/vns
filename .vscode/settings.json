@@ -1,9 +1,7 @@
 {
-    "python.testing.pytestArgs": [
-        "tests"
-    ],
-    "python.testing.pytestPath": "/workspaces/vns/.hatch/test/bin/pytest",
-    "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true,
-    "python.defaultInterpreterPath": ".pixi/env/bin/python"
+    "editor.inlineSuggest.fontFamily": "'Monaspace Radon'",
+    "editor.fontFamily": "'MonaspiceNe Nerd Font Mono'",
+    "editor.experimentalInlineEdit.fontFamily": "'Monaspace Radon'",
+    "terminal.integrated.fontFamily": "'MonaspiceKr Nerd Font'",
+    "chat.editor.fontFamily": "'Monaspace Radon'"
 }

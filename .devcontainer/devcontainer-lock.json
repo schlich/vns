@@ -15,7 +15,12 @@
       "resolved": "ghcr.io/devcontainers/features/github-cli@sha256:464564228ccdd6028f01f8a62a3cfbaf76e9ba7953b29ac0e53ba2c262604312",
       "integrity": "sha256:464564228ccdd6028f01f8a62a3cfbaf76e9ba7953b29ac0e53ba2c262604312"
     },
-    "ghcr.io/eitsupi/devcontainer-features/nushell": {
+    "ghcr.io/dhoeric/features/google-cloud-cli": {
+      "version": "1.0.1",
+      "resolved": "ghcr.io/dhoeric/features/google-cloud-cli@sha256:fa5d894718825c5ad8009ac8f2c9f0cea3d1661eb108a9d465cba9f3fc48965f",
+      "integrity": "sha256:fa5d894718825c5ad8009ac8f2c9f0cea3d1661eb108a9d465cba9f3fc48965f"
+    },
+    "ghcr.io/eitsupi/devcontainer-features/nushell:0": {
       "version": "0.1.1",
       "resolved": "ghcr.io/eitsupi/devcontainer-features/nushell@sha256:c35933c78369ee4a9936041c75a3363414c5fd332d95a2b2c7c4cb1b179cd176",
       "integrity": "sha256:c35933c78369ee4a9936041c75a3363414c5fd332d95a2b2c7c4cb1b179cd176"
@@ -34,9 +39,9 @@
       ]
     },
     "ghcr.io/schlich/devcontainer-features/rye": {
-      "version": "1.2.0",
-      "resolved": "ghcr.io/schlich/devcontainer-features/rye@sha256:2028ac0ff1fc0a88b4d856b55297d5e836af75556459f0a54ce50ffeedf0344b",
-      "integrity": "sha256:2028ac0ff1fc0a88b4d856b55297d5e836af75556459f0a54ce50ffeedf0344b",
+      "version": "1.2.2",
+      "resolved": "ghcr.io/schlich/devcontainer-features/rye@sha256:d2c8db609691ec727fa6416d57436f12fa8abc44d3802a172b51078d82089666",
+      "integrity": "sha256:d2c8db609691ec727fa6416d57436f12fa8abc44d3802a172b51078d82089666",
       "dependsOn": [
         "ghcr.io/devcontainers/features/common-utils"
       ]

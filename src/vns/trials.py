@@ -3,11 +3,12 @@ from pathlib import Path
 from typing import Any
 
 import matplotlib.animation as animation
-import matplotlib.pyplot as plt
 import patito as pt
 import polars as pl
 import scipy
 from matplotlib.artist import Artist
+from matplotlib.axes import Axes
+from matplotlib.figure import Figure
 from matplotlib.patches import Rectangle
 from pandera.api.polars.model import DataFrameModel
 from pydantic import BaseModel
@@ -57,8 +58,7 @@ class Trial(BaseModel):
                 self.path.with_suffix(".parquet"),
             )
             .gather_every(20)
-            .select("x", "y", "t")
-            .collect()
+            .select("x", "y")
         )
 
     def mat2parquet(self):
@@ -83,8 +83,9 @@ class Trial(BaseModel):
             pl.col("t") != 0.0,
         )
 
-    def animate(self):
-        fig, axes = plt.subplots()
+    def animate(self, cursor_tail: float):
+        fig = Figure()
+        axes: Axes = fig.add_subplot()
 
         axes.set_xlim(left=-6, right=6)
         axes.set_ylim(bottom=-6, top=6)
@@ -99,13 +100,11 @@ class Trial(BaseModel):
         time_fp_on = self.get_field("timefpon")
         time_fp_off = self.get_field("timefpoff")
         time_target_off = self.get_field("timetargetoff")
-        # time_fp_abort = self.get_field("timefpabort")
 
         axes.fill(
             [time_fp_on] * 2 + [time_fp_off] * 2, [-0.5, 0.5, 0.5, -0.5], color="0.9"
         )
 
-        # axes.plot([time_fp_abort] * 2, [-6, 6], color="r")
         axes.plot([time_target_off] * 2, [-6, 6], color="0.5")
 
         fixation_point = Rectangle(
@@ -123,8 +122,8 @@ class Trial(BaseModel):
             Artist,
         ]:
             cursor_sample.set_data(
-                cursor[max(0, frame - 30) : frame, "x"],
-                cursor[max(0, frame - 30) : frame, "y"],
+                cursor[max(0, frame - cursor_tail) : frame, "x"],
+                cursor[max(0, frame - cursor_tail) : frame, "y"],
             )
 
             fp_on = int(time_fp_on < frame / 10 < time_fp_off)

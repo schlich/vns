@@ -88,3 +88,6 @@ class Experiment(BaseModel):
 
     def plot(self):
         return px.bar(self.sessions(), x="session start", y=["size", "n trials"])
+
+    def scan_data(self):
+        return pl.scan_parquet("https://storage.cloud.google.com/watch9224/parquet/BFnovelinac_07_12_2018_09_21/1.parquet")

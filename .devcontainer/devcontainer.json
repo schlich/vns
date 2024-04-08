@@ -4,7 +4,6 @@
   "features": {
     "ghcr.io/schlich/devcontainer-features/rye": {},
     "ghcr.io/schlich/devcontainer-features/pigz": {},
-    "ghcr.io/rocker-org/devcontainer-features/quarto-cli": {},
     "ghcr.io/schlich/devcontainer-features/starship": {},
     "ghcr.io/devcontainers/features/github-cli": {},
     "ghcr.io/dhoeric/features/google-cloud-cli": {},
@@ -45,17 +44,17 @@
         },
         "python.defaultInterpreterPath": ".venv/bin/python",
         "python.analysis.typeCheckingMode": "basic",
-        "notebook.formatOnCellExecution": true,
-        "notebook.formatOnSave.enabled": true,
+        // "notebook.formatOnCellExecution": true,
+        // "notebook.formatOnSave.enabled": true,
         "notebook.scrolling.revealNextCellOnExecute": "firstLine",
         "notebook.lineNumbers": "on",
-        "notebook.codeActionsOnSave": {
-          "notebook.source.fixAll": true,
-          "notebook.source.organizeImports": true
-        },
+        // "notebook.codeActionsOnSave": {
+        //   "notebook.source.fixAll": true,
+        //   "notebook.source.organizeImports": true
+        // },
         "jupyter.notebookFileRoot": "${containerWorkspaceFolder}",
-        "jupyter.disableJupyterAutoStart": true,
-        "jupyter.runStartupCommands": "%load_ext autoreload %autoreload 2",
+        // "jupyter.disableJupyterAutoStart": true,
+        // "jupyter.runStartupCommands": "%load_ext autoreload %autoreload 2",
         "yaml.schemas": {
           "https://squidfunk.github.io/mkdocs-material/schema.json": "mkdocs.yml"
         },

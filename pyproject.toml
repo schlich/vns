@@ -26,7 +26,8 @@ dependencies = [
     "pillow>=10.3.0",
     "panel>=1.4.0",
     "nbconvert>=7.16.3",
-    "jupyter-bokeh>=4.0.1",
+    "altair[all]>=5.3.0",
+    "ruff>=0.3.5",
 ]
 
 [tool.rye]
@@ -39,7 +40,7 @@ dev-dependencies = [
 ]
 
 [tool.rye.scripts]
-dashboard = "panel serve app.ipynb --autoreload"
+dashboard = "panel serve app.py --autoreload"
 
 [tool.ruff]
 ignore = [
@@ -54,11 +55,12 @@ ignore = [
     "D107",
     "S101",
 ]
-extend-include = ["*.ipynb"]
+# extend-include = ["*.ipynb"]
 fix = true
 
 [tool.pyright]
 python.pythonPath = ".venv/bin/python"
+exclude = ["app.py"]
 
 [build-system]
 requires = ["hatchling"]
